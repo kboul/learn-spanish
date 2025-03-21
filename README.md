@@ -34,6 +34,13 @@ d. Create prisma migrations
 npx prisma migrate dev
 ```
 
+3. Seed the db with entries (optional)
+   Set prisma object on package.json and seed command and run
+
+```
+npx prisma db seed
+```
+
 ## View the db
 
 ```
