@@ -32,7 +32,7 @@ export default function Home() {
     await addWord({ spanish, english, greek, learned: false });
     const updatedWords = await getWords(); // Fetch updated list
     setState({
-      words: updatedWords as any,
+      words: updatedWords,
       english: "",
       greek: "",
       spanish: "",

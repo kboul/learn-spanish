@@ -3,9 +3,9 @@ import { Word } from "@prisma/client";
 import prisma from "./lib/prisma";
 
 // Add a new word
-async function addWord(params: any): Promise<void> {
+async function addWord(payload: any): Promise<void> {
   try {
-    await prisma.word.create({ data: params });
+    await prisma.word.create({ data: payload });
   } catch (error) {
     console.error("Error adding word:", error);
   }
