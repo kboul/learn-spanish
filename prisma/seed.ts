@@ -1,4 +1,4 @@
-import { PrismaClient } from "@prisma/client";
+import { PrismaClient, Word } from "@prisma/client";
 import fs from "fs";
 import path from "path";
 
@@ -21,7 +21,7 @@ async function main() {
     }
 
     // Ensure every entry has the required fields
-    const words = (data as any).words.map((word: any, index: number) => {
+    const words = (data as any).words.map((word: Word, index: number) => {
       if (!word.spanish || !word.english || !word.greek) {
         console.error(`❌ Missing required fields in entry ${index}:`, word);
         throw new Error(`Entry at index ${index} is missing required fields.`);
@@ -29,7 +29,8 @@ async function main() {
 
       return {
         ...word,
-        learned: word.learned ?? false // Ensure 'learned' is present
+        learned: word.learned ?? false, // Ensure 'learned' is present
+        forget: word.forget ?? false // Ensure 'forget' is present
       };
     });
 

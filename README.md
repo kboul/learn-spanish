@@ -42,7 +42,7 @@ npx prisma migrate dev
 npx prisma db seed
 ```
 
-## View the db
+## View the db locally (http://localhost:5555)
 
 ```
 npx prisma studio
