@@ -35,9 +35,7 @@ async function markAsLearned(id: number) {
 // Delete a word
 async function deleteWord(id: number) {
   try {
-    await prisma.word.delete({
-      where: { id },
-    });
+    await prisma.word.delete({ where: { id } });
   } catch (error) {
     console.error("Error deleting word:", error);
   }

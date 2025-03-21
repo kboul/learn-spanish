@@ -1,5 +1,7 @@
 # Learn Spanish
 
+## Installation
+
 1. Create a .env and include your **DATABASE_URL** from **neon**
 
 ```
@@ -30,4 +32,10 @@ d. Create prisma migrations
 
 ```
 npx prisma migrate dev
+```
+
+## View the db
+
+```
+npx prisma studio
 ```
