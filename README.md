@@ -3,6 +3,7 @@
 ## Installation
 
 1. Create a .env and include your **DATABASE_URL** from **neon**
+   Visit neon and create a new project with a new db, then go to **Dashboard -> connect** button and take the **connection string**
 
 ```
 DATABASE_URL=...
