@@ -25,7 +25,7 @@ async function markAsLearned(id: number) {
   try {
     await prisma.word.update({
       where: { id },
-      data: { learned: true },
+      data: { learned: true }
     });
   } catch (error) {
     console.error("Error marking as learned:", error);
