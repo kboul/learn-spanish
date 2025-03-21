@@ -1,4 +1,5 @@
 "use server";
+import { Word } from "@prisma/client";
 import prisma from "./lib/prisma";
 
 // Add a new word
@@ -41,12 +42,4 @@ async function deleteWord(id: number) {
   }
 }
 
-interface Word {
-  id: number;
-  spanish: string;
-  english: string;
-  greek: string;
-  learned: boolean;
-}
-
-export { addWord, getWords, markAsLearned, deleteWord, type Word };
+export { addWord, getWords, markAsLearned, deleteWord };

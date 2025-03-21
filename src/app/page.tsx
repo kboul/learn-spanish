@@ -2,7 +2,8 @@
 
 import { useEffect, useState } from "react";
 
-import { addWord, getWords, markAsLearned, deleteWord, Word } from "../actions";
+import { addWord, getWords, markAsLearned, deleteWord } from "../actions";
+import { Word } from "@prisma/client";
 
 export default function Home() {
   const [state, setState] = useState({
@@ -18,7 +19,6 @@ export default function Home() {
   useEffect(() => {
     async function fetchWords() {
       const data = await getWords();
-      console.log(data);
       setValue("words", data);
     }
     fetchWords();
@@ -58,7 +58,6 @@ export default function Home() {
     <main className="flex flex-col items-center min-h-screen p-5">
       <h1 className="text-2xl font-bold mb-4">📖 Spanish Vocabulary</h1>
 
-      {/* Input fields */}
       <div className="flex gap-2 mb-4">
         <input
           className="border p-2"
@@ -83,7 +82,6 @@ export default function Home() {
         </button>
       </div>
 
-      {/* Table */}
       <table className="border-collapse w-full text-center border">
         <thead>
           <tr className="bg-gray-200">
@@ -95,7 +93,9 @@ export default function Home() {
         </thead>
         <tbody>
           {words.map((word) => (
-            <tr key={word.id} className="border">
+            <tr
+              key={word.id}
+              className={`border-b ${word.forget ? "bg-yellow-100" : "bg-white"} transition-colors duration-300`}>
               <td className="border p-2">{word.spanish}</td>
               <td className="border p-2">{word.english}</td>
               <td className="border p-2">{word.greek}</td>
