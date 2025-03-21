@@ -14,7 +14,9 @@ datasource db {
 }
 
 model Word {
-  id      Int     @id @default(autoincrement())
-  word    String  @unique
-  learned Boolean @default(false)
+  id       Int     @id @default(autoincrement())
+  spanish  String  @unique
+  english  String
+  greek    String
+  learned  Boolean @default(false) // Ensure this field is here
 }
