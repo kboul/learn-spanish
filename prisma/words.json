@@ -1,0 +1,640 @@
+{
+  "words": [
+    {
+      "id": 1,
+      "spanish": "casado",
+      "greek": "παντρεμένος",
+      "english": "married"
+    },
+    {
+      "id": 2,
+      "spanish": "soltero",
+      "greek": "εργένης",
+      "english": "single"
+    },
+    {
+      "id": 3,
+      "spanish": "derramar",
+      "greek": "χύνω",
+      "english": "spill"
+    },
+    {
+      "id": 4,
+      "spanish": "un par de aretes",
+      "greek": "ένα ζευγάρι σκουλαρίκια",
+      "english": "a pair of earrings"
+    },
+    {
+      "id": 5,
+      "spanish": "el lavamanos",
+      "greek": "ο νιπτήρας",
+      "english": "the sink"
+    },
+    {
+      "id": 6,
+      "spanish": "el pasillo",
+      "greek": "ο διάδρομος",
+      "english": "the hallway"
+    },
+    {
+      "id": 7,
+      "spanish": "el arete",
+      "greek": "το σκουλαρίκι",
+      "english": "the earring"
+    },
+    {
+      "id": 8,
+      "spanish": "rosado",
+      "greek": "ροζ",
+      "english": "pink"
+    },
+    {
+      "id": 9,
+      "spanish": "el portón",
+      "greek": "η πόρτα",
+      "english": "the gate"
+    },
+    {
+      "id": 10,
+      "spanish": "recién",
+      "greek": "πρόσφατα, μολις",
+      "english": "recently, just"
+    },
+    {
+      "id": 11,
+      "spanish": "gritar",
+      "greek": "φωνάζω",
+      "english": "shout"
+    },
+    {
+      "id": 12,
+      "spanish": "el fregadero",
+      "greek": "ο νεροχύτης",
+      "english": "the sink"
+    },
+    {
+      "id": 13,
+      "spanish": "la estantería",
+      "greek": "η βιβλιοθήκη",
+      "english": "the bookshelf"
+    },
+    {
+      "id": 14,
+      "spanish": "descargar",
+      "greek": "κατεβάζω",
+      "english": "download"
+    },
+    {
+      "id": 15,
+      "spanish": "las galletas",
+      "greek": "τα μπισκότα",
+      "english": "the cookies"
+    },
+    {
+      "id": 16,
+      "spanish": "enterar",
+      "greek": "μαθαίνω, πληροφορω",
+      "english": "find out, inform"
+    },
+    {
+      "id": 17,
+      "spanish": "el formulario",
+      "greek": "το έντυπο, η φορμα",
+      "english": "the form"
+    },
+    {
+      "id": 18,
+      "spanish": "añadir",
+      "greek": "προσθέτω",
+      "english": "add"
+    },
+    {
+      "id": 19,
+      "spanish": "la receta",
+      "greek": "η συνταγή",
+      "english": "the recipe"
+    },
+    {
+      "id": 20,
+      "spanish": "el peine",
+      "greek": "η χτένα",
+      "english": "the comb"
+    },
+    {
+      "id": 21,
+      "spanish": "crecer",
+      "greek": "μεγαλώνω",
+      "english": "grow"
+    },
+    {
+      "id": 22,
+      "spanish": "graduado",
+      "greek": "αποφοιτος",
+      "english": "graduate"
+    },
+    {
+      "id": 23,
+      "spanish": "el miembro",
+      "greek": "το μέλος",
+      "english": "the member"
+    },
+    {
+      "id": 24,
+      "spanish": "llevar bien",
+      "greek": "περναω καλά, τα παω καλα",
+      "english": "get along well"
+    },
+    {
+      "id": 25,
+      "spanish": "aconsejar",
+      "greek": "συμβουλεύω",
+      "english": "advise"
+    },
+    {
+      "id": 26,
+      "spanish": "la caja",
+      "greek": "το κουτί",
+      "english": "the box"
+    },
+    {
+      "id": 27,
+      "spanish": "el buho",
+      "greek": "η κουκουβάγια",
+      "english": "the owl"
+    },
+    {
+      "id": 28,
+      "spanish": "el horoscopo",
+      "greek": "το ζώδιο",
+      "english": "the horoscope"
+    },
+    {
+      "id": 29,
+      "spanish": "el anillo",
+      "greek": "το δαχτυλίδι",
+      "english": "the ring"
+    },
+    {
+      "id": 30,
+      "spanish": "el espia",
+      "greek": "ο κατάσκοπος",
+      "english": "the spy"
+    },
+    {
+      "id": 31,
+      "spanish": "escapar",
+      "greek": "δραπετεύω",
+      "english": "escape"
+    },
+    {
+      "id": 32,
+      "spanish": "el portatil",
+      "greek": "το laptop",
+      "english": "the laptop"
+    },
+    {
+      "id": 33,
+      "spanish": "el sobre",
+      "greek": "ο φάκελος",
+      "english": "the envelope"
+    },
+    {
+      "id": 34,
+      "spanish": "el asunto",
+      "greek": "το θέμα",
+      "english": "the subject"
+    },
+    {
+      "id": 35,
+      "spanish": "el hecho",
+      "greek": "το γεγονός",
+      "english": "the fact"
+    },
+    {
+      "id": 36,
+      "spanish": "alquilar",
+      "greek": "νοικιάζω",
+      "english": "rent"
+    },
+    {
+      "id": 37,
+      "spanish": "la multitud",
+      "greek": "ο κοσμος",
+      "english": "the crowd"
+    },
+    {
+      "id": 38,
+      "spanish": "tales cosas",
+      "greek": "τέτοια πράγματα",
+      "english": "such things"
+    },
+    {
+      "id": 39,
+      "spanish": "el guia",
+      "greek": "ο ξεναγός",
+      "english": "the guide"
+    },
+    {
+      "id": 40,
+      "spanish": "por cierto",
+      "greek": "παρεπιμπτοντως, πραγματι",
+      "english": "by the way, indeed"
+    },
+    {
+      "id": 41,
+      "spanish": "la ruta",
+      "greek": "η διαδρομή",
+      "english": "the route"
+    },
+    {
+      "id": 42,
+      "spanish": "el sonido",
+      "greek": "ο ήχος",
+      "english": "the sound"
+    },
+    {
+      "id": 43,
+      "spanish": "la meta",
+      "greek": "ο στόχος",
+      "english": "the goal"
+    },
+    {
+      "id": 44,
+      "spanish": "escoger",
+      "greek": "επιλέγω",
+      "english": "choose"
+    },
+    {
+      "id": 45,
+      "spanish": "la mesera",
+      "greek": "η σερβιτόρα",
+      "english": "the waitress"
+    },
+    {
+      "id": 46,
+      "spanish": "la pasante",
+      "greek": "η δοκιμος",
+      "english": "the intern"
+    },
+    {
+      "id": 47,
+      "spanish": "la jalea",
+      "greek": "η μαρμελάδα",
+      "english": "the jelly"
+    },
+    {
+      "id": 49,
+      "spanish": "la manta",
+      "greek": "η κουβερτα",
+      "english": "the blanket"
+    },
+    {
+      "id": 50,
+      "spanish": "el collar",
+      "greek": "ο γιακάς",
+      "english": "the collar"
+    },
+    {
+      "id": 51,
+      "spanish": "estupendo",
+      "greek": "υπέροχο",
+      "english": "wonderful"
+    },
+    {
+      "id": 52,
+      "spanish": "el pesca",
+      "greek": "το ψαρεμα",
+      "english": "fishing"
+    },
+    {
+      "id": 53,
+      "spanish": "asqueroso",
+      "greek": "αηδιαστικο",
+      "english": "disgusting"
+    },
+    {
+      "id": 54,
+      "spanish": "adivinar",
+      "greek": "μαντεύω",
+      "english": "guess"
+    },
+    {
+      "id": 55,
+      "spanish": "la lata de frijoles",
+      "greek": "κονσερβα με φασόλια",
+      "english": "the can of beans"
+    },
+    {
+      "id": 56,
+      "spanish": "las carteras de cuero",
+      "greek": "τα δερμάτινα πορτοφόλια",
+      "english": "the leather wallets"
+    },
+    {
+      "id": 57,
+      "spanish": "la toalla",
+      "greek": "η πετσέτα",
+      "english": "the towel"
+    },
+    {
+      "id": 58,
+      "spanish": "el cuero",
+      "greek": "το δέρμα",
+      "english": "the leather"
+    },
+    {
+      "id": 59,
+      "spanish": "el ferrocarril",
+      "greek": "ο σιδηρόδρομος",
+      "english": "the railway"
+    },
+    {
+      "id": 60,
+      "spanish": "ancha",
+      "greek": "φαρδιά, πλατιά",
+      "english": "wide"
+    },
+    {
+      "id": 61,
+      "spanish": "subirse al autobus",
+      "greek": "ανεβαίνω στο λεωφορείο",
+      "english": "get on the bus"
+    },
+    {
+      "id": 62,
+      "spanish": "el retraso",
+      "greek": "η καθυστέρηση",
+      "english": "the delay"
+    },
+    {
+      "id": 63,
+      "spanish": "el sur",
+      "greek": "ο νότος",
+      "english": "the south"
+    },
+    {
+      "id": 64,
+      "spanish": "el norte",
+      "greek": "ο βορράς",
+      "english": "the north"
+    },
+    {
+      "id": 65,
+      "spanish": "el este",
+      "greek": "η ανατολή",
+      "english": "the east"
+    },
+    {
+      "id": 66,
+      "spanish": "el oeste",
+      "greek": "η δύση",
+      "english": "the west"
+    },
+    {
+      "id": 67,
+      "spanish": "tomarse al autobus",
+      "greek": "παίρνω το λεωφορείο",
+      "english": "take the bus"
+    },
+    {
+      "id": 68,
+      "spanish": "empacar",
+      "greek": "συσκευάζω",
+      "english": "pack"
+    },
+    {
+      "id": 69,
+      "spanish": "la oveja",
+      "greek": "το πρόβατο",
+      "english": "the sheep"
+    },
+    {
+      "id": 70,
+      "spanish": "el guante",
+      "greek": "το γάντι",
+      "english": "the glove"
+    },
+    {
+      "id": 71,
+      "spanish": "apurar",
+      "greek": "βιάζομαι",
+      "english": "hurry"
+    },
+    {
+      "id": 72,
+      "spanish": "incluso",
+      "greek": "ακόμα",
+      "english": "even"
+    },
+    {
+      "id": 73,
+      "spanish": "el dedo",
+      "greek": "το δάχτυλο",
+      "english": "the finger"
+    },
+    {
+      "id": 74,
+      "spanish": "el cuadrado",
+      "greek": "το τετράγωνο",
+      "english": "the square",
+      "forget": true
+    },
+    {
+      "id": 75,
+      "spanish": "deletrear",
+      "greek": "συλλαβιζω, προφερω",
+      "english": "spell",
+      "forget": true
+    },
+    {
+      "id": 76,
+      "spanish": "los guantes",
+      "greek": "τα γάντια",
+      "english": "the gloves"
+    },
+    {
+      "id": 77,
+      "spanish": "reprobar",
+      "greek": "αποτυγχάνω",
+      "english": "fail"
+    },
+    {
+      "id": 78,
+      "spanish": "la estanteria",
+      "greek": "η βιβλιοθήκη",
+      "english": "the bookshelf"
+    },
+    {
+      "id": 79,
+      "spanish": "dorado",
+      "greek": "χρυσό",
+      "english": "golden"
+    },
+    {
+      "id": 80,
+      "spanish": "el vestibulo del hotel",
+      "greek": "η είσοδος του ξενοδοχείου",
+      "english": "the hotel lobby"
+    },
+    {
+      "id": 81,
+      "spanish": "la carrera",
+      "greek": "η καριέρα",
+      "english": "the career"
+    },
+    {
+      "id": 82,
+      "spanish": "andar",
+      "greek": "περπατώ",
+      "english": "walk"
+    },
+    {
+      "id": 83,
+      "spanish": "diseñar",
+      "greek": "σχεδιάζω",
+      "english": "design"
+    },
+    {
+      "id": 84,
+      "spanish": "la carpeta",
+      "greek": "o φάκελος",
+      "english": "the folder"
+    },
+    {
+      "id": 85,
+      "spanish": "tumbarse",
+      "greek": "κοιμάμαι",
+      "english": "lie down"
+    },
+    {
+      "id": 86,
+      "spanish": "la lana",
+      "greek": "το μαλλί",
+      "english": "the wool"
+    },
+    {
+      "id": 87,
+      "spanish": "sin embargo",
+      "greek": "παρόλα αυτά",
+      "english": "however",
+      "forget": true
+    },
+    {
+      "id": 88,
+      "spanish": "la propina",
+      "greek": "το φιλοδωρημα",
+      "english": "the tip"
+    },
+    {
+      "id": 89,
+      "spanish": "la reseña",
+      "greek": "η κριτική",
+      "english": "the review"
+    },
+    {
+      "id": 90,
+      "spanish": "secar",
+      "greek": "στεγνώνω",
+      "english": "dry"
+    },
+    {
+      "id": 91,
+      "spanish": "prestar",
+      "greek": "δανείζω",
+      "english": "lend"
+    },
+    {
+      "id": 92,
+      "spanish": "el sillón",
+      "greek": "η πολυθρόνα",
+      "english": "the armchair"
+    },
+    {
+      "id": 93,
+      "spanish": "la mantequilla",
+      "greek": "το βούτυρο",
+      "english": "the butter"
+    },
+    {
+      "id": 94,
+      "spanish": "acostarme",
+      "greek": "κοιμάμαι",
+      "english": "go to bed"
+    },
+    {
+      "id": 95,
+      "spanish": "el obrero",
+      "greek": "ο εργάτης",
+      "english": "the worker"
+    },
+    {
+      "id": 96,
+      "spanish": "el anuncio",
+      "greek": "η αγγελία, η ανακοινωση",
+      "english": "the advertisement, the announcement"
+    },
+    {
+      "id": 97,
+      "spanish": "la nube",
+      "greek": "η συννεφιά",
+      "english": "the cloud",
+      "forget": true
+    },
+    {
+      "id": 98,
+      "spanish": "la niebla",
+      "greek": "η ομίχλη",
+      "english": "the fog",
+      "forget": true
+    },
+    {
+      "id": 99,
+      "spanish": "la nieve",
+      "greek": "το χιόνι",
+      "english": "the snow",
+      "forget": true
+    },
+    {
+      "id": 100,
+      "spanish": "disparar",
+      "greek": "πυροβολώ",
+      "english": "shoot"
+    },
+    {
+      "id": 101,
+      "spanish": "elegir",
+      "greek": "επιλέγω",
+      "english": "choose"
+    },
+    {
+      "id": 102,
+      "spanish": "la gorra",
+      "greek": "το γάντι",
+      "english": "the glove"
+    },
+    {
+      "id": 103,
+      "spanish": "grabar",
+      "greek": "ηχογραφώ",
+      "english": "record"
+    },
+    {
+      "id": 104,
+      "spanish": "lanzar",
+      "greek": "ρίχνω",
+      "english": "throw"
+    },
+    {
+      "id": 105,
+      "spanish": "empujar",
+      "greek": "σπρώχνω",
+      "english": "push"
+    },
+    {
+      "id": 106,
+      "spanish": "la parilla",
+      "greek": "η ψησταριά",
+      "english": "the grill"
+    }
+  ]
+}

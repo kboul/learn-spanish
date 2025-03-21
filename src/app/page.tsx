@@ -78,7 +78,7 @@ export default function Home() {
           value={greek}
           onChange={(e) => setValue("greek", e.target.value)}
         />
-        <button className="bg-blue-500 text-white px-4 py-2 rounded" onClick={handleAddWord}>
+        <button className="bg-blue-500 text-white px-4 py-2 rounded cursor-pointer" onClick={handleAddWord}>
           Add
         </button>
       </div>
@@ -100,7 +100,9 @@ export default function Home() {
               <td className="border p-2">{word.english}</td>
               <td className="border p-2">{word.greek}</td>
               <td className="border p-2">
-                <button className="bg-red-500 text-white px-3 py-1 rounded" onClick={() => handleDeleteWord(word.id)}>
+                <button
+                  className="bg-red-500 text-white px-3 py-1 rounded cursor-pointer"
+                  onClick={() => handleDeleteWord(word.id)}>
                   ❌ Delete
                 </button>
               </td>
