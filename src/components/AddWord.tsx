@@ -23,8 +23,6 @@ export function AddWord() {
     setWordsStoreValue({ newWord: { ...newWord, [name]: finalValue } });
   };
 
-  console.log(newWord);
-
   return (
     <div className="flex gap-2 mb-4">
       <input className="border p-2" name="spanish" onChange={changeInputValue} placeholder="Spanish" value={spanish} />

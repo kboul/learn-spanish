@@ -32,7 +32,19 @@ async function markAsLearned(word: Word): Promise<void> {
       where: { id: word.id },
       data: { learned: newLearnedValue, highlight: newLearnedValue ? false : word.highlight }
     });
-    console.log(`word marked as ${newLearnedValue ? "not " : ""}learned successfully`);
+    console.log(`word marked as ${newLearnedValue ? "" : "not "}learned successfully`);
+  } catch (error) {
+    console.error("Error marking as learned:", error);
+  }
+}
+
+async function highlighWord({ id, highlight }: Pick<Word, "id" | "highlight">): Promise<void> {
+  try {
+    await prisma.word.update({
+      where: { id },
+      data: { highlight: !highlight }
+    });
+    console.log(`word ${highlight ? "un" : ""}highlighted successfully`);
   } catch (error) {
     console.error("Error marking as learned:", error);
   }
@@ -48,4 +60,4 @@ async function deleteWord(id: string) {
   }
 }
 
-export { addWord, getWords, markAsLearned, deleteWord };
+export { addWord, getWords, markAsLearned, highlighWord, deleteWord };
