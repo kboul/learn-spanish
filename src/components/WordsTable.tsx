@@ -23,7 +23,7 @@ export const WordsTable = memo(({ onDeleteWord, onMarkAsLearned }: WordsTablePro
         {words.map((word) => (
           <tr
             key={word.id}
-            className={`border-b ${word.forget ? "bg-yellow-100" : "bg-white"} transition-colors duration-300`}>
+            className={`border-b ${word.highlight ? "bg-yellow-100" : "bg-white"} transition-colors duration-300`}>
             <td className="border p-2">{word.spanish}</td>
             <td className="border p-2">{word.english}</td>
             <td className="border p-2">{word.greek}</td>

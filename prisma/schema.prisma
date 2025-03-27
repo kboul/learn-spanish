@@ -18,6 +18,6 @@ model Word {
   spanish  String  @unique
   english  String
   greek    String
-  learned  Boolean @default(false) // Ensure this field is here
-  forget  Boolean @default(false) 
+  learned  Boolean @default(false) 
+  highlight  Boolean @default(false) 
 }

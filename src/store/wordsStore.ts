@@ -9,7 +9,7 @@ type StoreState = {
   setWordsStoreValue: (keyValuePair: Partial<StoreState>) => void;
 };
 
-export const initialNewWord = { spanish: "", greek: "", english: "", learned: false, forget: false };
+export const initialNewWord = { spanish: "", greek: "", english: "", learned: false, highlight: false };
 
 export const useWordsStore = create<StoreState>((set) => ({
   words: [],

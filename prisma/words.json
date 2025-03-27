@@ -437,14 +437,14 @@
       "spanish": "el cuadrado",
       "greek": "το τετράγωνο",
       "english": "the square",
-      "forget": true
+      "highlight": true
     },
     {
       "id": 75,
       "spanish": "deletrear",
       "greek": "συλλαβιζω, προφερω",
       "english": "spell",
-      "forget": true
+      "highlight": true
     },
     {
       "id": 76,
@@ -517,7 +517,7 @@
       "spanish": "sin embargo",
       "greek": "παρόλα αυτά",
       "english": "however",
-      "forget": true
+      "highlight": true
     },
     {
       "id": 88,
@@ -578,21 +578,21 @@
       "spanish": "la nube",
       "greek": "η συννεφιά",
       "english": "the cloud",
-      "forget": true
+      "highlight": true
     },
     {
       "id": 98,
       "spanish": "la niebla",
       "greek": "η ομίχλη",
       "english": "the fog",
-      "forget": true
+      "highlight": true
     },
     {
       "id": 99,
       "spanish": "la nieve",
       "greek": "το χιόνι",
       "english": "the snow",
-      "forget": true
+      "highlight": true
     },
     {
       "id": 100,

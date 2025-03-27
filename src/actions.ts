@@ -8,6 +8,7 @@ import { NewWord } from "./types";
 async function addWord(payload: NewWord): Promise<void> {
   try {
     await prisma.word.create({ data: payload });
+    console.log("word added successfully");
   } catch (error) {
     console.error("Error adding word:", error);
   }
@@ -39,6 +40,7 @@ async function markAsLearned(id: number) {
 async function deleteWord(id: number) {
   try {
     await prisma.word.delete({ where: { id } });
+    console.log("word deleted successfully");
   } catch (error) {
     console.error("Error deleting word:", error);
   }
