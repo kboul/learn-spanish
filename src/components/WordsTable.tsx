@@ -44,10 +44,16 @@ export const WordsTable = memo(({}: WordsTableProps) => {
           const trBg = highlight ? "bg-yellow-100" : learned ? "bg-[#04AA6D]" : "bg-white";
           const trColor = learned ? "text-white" : "text-black";
           return (
-            <tr key={word.id} className={`border-b ${trBg} ${trColor} transition-colors duration-300`}>
-              <td className="border p-2">{word.spanish}</td>
-              <td className="border p-2">{word.english}</td>
-              <td className="border p-2">{word.greek}</td>
+            <tr key={word.id} className="border-b transition-colors duration-300">
+              <td className={`border p-2 ${trBg}`}>
+                <p className={trColor}>{word.spanish}</p>
+              </td>
+              <td className={`border p-2 ${trBg}`}>
+                <p className={trColor}>{word.english}</p>
+              </td>
+              <td className={`border p-2 ${trBg}`}>
+                <p className={trColor}>{word.greek}</p>
+              </td>
               <td className="border p-2 ">
                 <div className="flex justify-center space-x-2">
                   <div
