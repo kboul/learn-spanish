@@ -25,12 +25,10 @@ async function getWords(): Promise<Word[]> {
 }
 
 // Mark a word as learned
-async function markAsLearned(id: string) {
+async function markAsLearned({ id, learned }: Pick<Word, "id" | "learned">): Promise<void> {
   try {
-    await prisma.word.update({
-      where: { id },
-      data: { learned: true }
-    });
+    await prisma.word.update({ where: { id }, data: { learned: !learned } });
+    console.log(`word marked as ${!learned ? "not " : ""}learned successfully`);
   } catch (error) {
     console.error("Error marking as learned:", error);
   }

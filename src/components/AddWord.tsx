@@ -1,12 +1,10 @@
 import { useShallow } from "zustand/react/shallow";
 
-import { addWord, getWords, markAsLearned } from "@/actions";
+import { addWord, getWords } from "@/actions";
 import { initialNewWord, useWordsStore } from "@/store";
 
 export function AddWord() {
-  const [words, newWord, setWordsStoreValue] = useWordsStore(
-    useShallow((state) => [state.words, state.newWord, state.setWordsStoreValue])
-  );
+  const [newWord, setWordsStoreValue] = useWordsStore(useShallow((state) => [state.newWord, state.setWordsStoreValue]));
   const { spanish, english, greek, learned, highlight } = newWord;
 
   const addBtnDisabled = !spanish.trim() || !english.trim() || !greek.trim();
@@ -14,16 +12,9 @@ export function AddWord() {
   const handleAddWord = async () => {
     if (addBtnDisabled) return;
 
-    console.log(newWord);
     await addWord(newWord);
     const updatedWords = await getWords(); // Fetch updated list
-    console.log(updatedWords);
     setWordsStoreValue({ words: updatedWords, newWord: initialNewWord });
-  };
-
-  const handleMarkAsLearned = async (id: string) => {
-    await markAsLearned(id);
-    setWordsStoreValue({ words: words.map((w) => (w.id === id ? { ...w, learned: true } : w)) });
   };
 
   const changeInputValue = (e: React.ChangeEvent<HTMLInputElement>) => {

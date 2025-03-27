@@ -1,14 +1,29 @@
 import { memo } from "react";
+import { useShallow } from "zustand/shallow";
+
 import { useWordsStore } from "@/store";
+import { deleteWord, getWords, markAsLearned } from "@/actions";
+import { Word } from "@prisma/client";
 
-type WordsTableProps = {
-  onDeleteWord: (id: string) => void;
-  onMarkAsLearned?: (id: string) => void;
-};
+type WordsTableProps = {};
 
-export const WordsTable = memo(({ onDeleteWord, onMarkAsLearned }: WordsTableProps) => {
-  const words = useWordsStore((state) => state.words);
-  console.log("render");
+export const WordsTable = memo(({}: WordsTableProps) => {
+  const [words, setWordsStoreValue] = useWordsStore(useShallow((state) => [state.words, state.setWordsStoreValue]));
+
+  const handleMarkAsLearned = async (word: Word) => {
+    const { id, learned } = word;
+    await markAsLearned({ id, learned });
+    const updatedWords = await getWords();
+    setWordsStoreValue({ words: updatedWords });
+  };
+
+  const handleDeleteWord = async (id: string) => {
+    await deleteWord(id);
+    const updatedWords = await getWords();
+    setWordsStoreValue({ words: updatedWords });
+  };
+
+  console.log(words);
   return (
     <table className="border-collapse w-full text-center border">
       <thead>
@@ -20,22 +35,27 @@ export const WordsTable = memo(({ onDeleteWord, onMarkAsLearned }: WordsTablePro
         </tr>
       </thead>
       <tbody>
-        {words.map((word) => (
-          <tr
-            key={word.id}
-            className={`border-b ${word.highlight ? "bg-yellow-100" : "bg-white"} transition-colors duration-300`}>
-            <td className="border p-2">{word.spanish}</td>
-            <td className="border p-2">{word.english}</td>
-            <td className="border p-2">{word.greek}</td>
-            <td className="border p-2">
-              <button
-                className="bg-red-500 text-white px-3 py-1 rounded cursor-pointer"
-                onClick={() => onDeleteWord(word.id)}>
-                ❌ Delete
-              </button>
-            </td>
-          </tr>
-        ))}
+        {words.map((word) => {
+          const trBg = word.highlight ? "bg-yellow-100" : word.learned ? "bg-[#04AA6D]" : "bg-white";
+          const trColor = word.learned ? "text-white" : "text-black";
+          return (
+            <tr key={word.id} className={`border-b ${trBg} ${trColor} transition-colors duration-300`}>
+              <td className="border p-2">{word.spanish}</td>
+              <td className="border p-2">{word.english}</td>
+              <td className="border p-2">{word.greek}</td>
+              <td className="border p-2 ">
+                <div className="flex justify-center space-x-2">
+                  <div className="cursor-pointer" onClick={() => handleMarkAsLearned(word)} title="Mark as learned">
+                    ✅
+                  </div>
+                  <div className="cursor-pointer" onClick={() => handleDeleteWord(word.id)} title="Delete word">
+                    ❌
+                  </div>
+                </div>
+              </td>
+            </tr>
+          );
+        })}
       </tbody>
     </table>
   );
