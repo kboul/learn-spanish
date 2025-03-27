@@ -14,10 +14,10 @@ datasource db {
 }
 
 model Word {
-  id       Int     @id @default(autoincrement())
+  id       String @id @default(uuid())
   spanish  String  @unique
   english  String
   greek    String
-  learned  Boolean @default(false) // Ensure this field is here
-  forget  Boolean @default(false) 
+  learned  Boolean @default(false) 
+  highlight  Boolean @default(false) 
 }

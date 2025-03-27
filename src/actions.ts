@@ -1,10 +1,14 @@
 "use server";
+import { Word } from "@prisma/client";
+
 import prisma from "./lib/prisma";
+import { NewWord } from "./types";
 
 // Add a new word
-async function addWord(params: any): Promise<void> {
+async function addWord(newWord: NewWord): Promise<void> {
   try {
-    await prisma.word.create({ data: params });
+    await prisma.word.create({ data: newWord });
+    console.log("word added successfully");
   } catch (error) {
     console.error("Error adding word:", error);
   }
@@ -13,7 +17,7 @@ async function addWord(params: any): Promise<void> {
 // Get all words
 async function getWords(): Promise<Word[]> {
   try {
-    return await prisma.word.findMany();
+    return await prisma.word.findMany({ orderBy: { id: "asc" } });
   } catch (error) {
     console.error("Error fetching words:", error);
     return [];
@@ -21,32 +25,39 @@ async function getWords(): Promise<Word[]> {
 }
 
 // Mark a word as learned
-async function markAsLearned(id: number) {
+async function markAsLearned(word: Word): Promise<void> {
+  const newLearnedValue = !word.learned;
+  try {
+    await prisma.word.update({
+      where: { id: word.id },
+      data: { learned: newLearnedValue, highlight: newLearnedValue ? false : word.highlight }
+    });
+    console.log(`word marked as ${newLearnedValue ? "" : "not "}learned successfully`);
+  } catch (error) {
+    console.error("Error marking as learned:", error);
+  }
+}
+
+async function highlighWord({ id, highlight }: Pick<Word, "id" | "highlight">): Promise<void> {
   try {
     await prisma.word.update({
       where: { id },
-      data: { learned: true }
+      data: { highlight: !highlight }
     });
+    console.log(`word ${highlight ? "un" : ""}highlighted successfully`);
   } catch (error) {
     console.error("Error marking as learned:", error);
   }
 }
 
 // Delete a word
-async function deleteWord(id: number) {
+async function deleteWord(id: string) {
   try {
     await prisma.word.delete({ where: { id } });
+    console.log("word deleted successfully");
   } catch (error) {
     console.error("Error deleting word:", error);
   }
 }
 
-interface Word {
-  id: number;
-  spanish: string;
-  english: string;
-  greek: string;
-  learned: boolean;
-}
-
-export { addWord, getWords, markAsLearned, deleteWord, type Word };
+export { addWord, getWords, markAsLearned, highlighWord, deleteWord };

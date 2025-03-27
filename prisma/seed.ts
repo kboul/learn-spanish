@@ -30,7 +30,7 @@ async function main() {
       return {
         ...word,
         learned: word.learned ?? false, // Ensure 'learned' is present
-        forget: word.forget ?? false // Ensure 'forget' is present
+        highlight: word.highlight ?? false // Ensure 'highlight' is present
       };
     });
 
