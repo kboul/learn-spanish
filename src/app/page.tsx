@@ -1,9 +1,10 @@
 "use client";
 
 import { useEffect, useState } from "react";
-
-import { addWord, getWords, markAsLearned, deleteWord } from "../actions";
 import { Word } from "@prisma/client";
+
+import { WordsTable } from "@/components";
+import { addWord, getWords, markAsLearned, deleteWord } from "../actions";
 
 const initialState = {
   spanish: "",
@@ -79,34 +80,7 @@ export default function Home() {
         </button>
       </div>
 
-      <table className="border-collapse w-full text-center border">
-        <thead>
-          <tr className="bg-gray-200">
-            <th className="border p-2">🇪🇸 Spanish</th>
-            <th className="border p-2">🇬🇧 English</th>
-            <th className="border p-2">🇬🇷 Greek</th>
-            <th className="border p-2">Actions</th>
-          </tr>
-        </thead>
-        <tbody>
-          {words.map((word) => (
-            <tr
-              key={word.id}
-              className={`border-b ${word.forget ? "bg-yellow-100" : "bg-white"} transition-colors duration-300`}>
-              <td className="border p-2">{word.spanish}</td>
-              <td className="border p-2">{word.english}</td>
-              <td className="border p-2">{word.greek}</td>
-              <td className="border p-2">
-                <button
-                  className="bg-red-500 text-white px-3 py-1 rounded cursor-pointer"
-                  onClick={() => handleDeleteWord(word.id)}>
-                  ❌ Delete
-                </button>
-              </td>
-            </tr>
-          ))}
-        </tbody>
-      </table>
+      <WordsTable words={words} onDeleteWord={handleDeleteWord} />
     </main>
   );
 }
