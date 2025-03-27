@@ -5,14 +5,17 @@ import { useEffect, useState } from "react";
 import { addWord, getWords, markAsLearned, deleteWord } from "../actions";
 import { Word } from "@prisma/client";
 
+const initialState = {
+  spanish: "",
+  greek: "",
+  english: "",
+  learned: false,
+  forget: false,
+  words: [] as Word[]
+};
+
 export default function Home() {
-  const [state, setState] = useState({
-    spanish: "",
-    greek: "",
-    english: "",
-    learned: false,
-    words: [] as Word[]
-  });
+  const [state, setState] = useState(initialState);
 
   const setValue = (key: string, value: any) => setState((prev) => ({ ...prev, [key]: value }));
 
@@ -29,15 +32,9 @@ export default function Home() {
   const handleAddWord = async () => {
     if (!spanish.trim() || !english.trim() || !greek.trim()) return;
 
-    await addWord({ spanish, english, greek, learned: false });
+    await addWord({ spanish, english, greek, learned: false, forget: false, id: 123456 });
     const updatedWords = await getWords(); // Fetch updated list
-    setState({
-      words: updatedWords,
-      english: "",
-      greek: "",
-      spanish: "",
-      learned: false
-    });
+    setState({ ...initialState, words: updatedWords });
   };
 
   const handleMarkAsLearned = async (id: number) => {
