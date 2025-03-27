@@ -11,8 +11,7 @@ export const WordsTable = memo(({}: WordsTableProps) => {
   const [words, setWordsStoreValue] = useWordsStore(useShallow((state) => [state.words, state.setWordsStoreValue]));
 
   const handleMarkAsLearned = async (word: Word) => {
-    const { id, learned } = word;
-    await markAsLearned({ id, learned });
+    await markAsLearned(word);
     const updatedWords = await getWords();
     setWordsStoreValue({ words: updatedWords });
   };
@@ -23,7 +22,6 @@ export const WordsTable = memo(({}: WordsTableProps) => {
     setWordsStoreValue({ words: updatedWords });
   };
 
-  console.log(words);
   return (
     <table className="border-collapse w-full text-center border">
       <thead>
