@@ -2,8 +2,8 @@ import { memo } from "react";
 import { useWordsStore } from "@/store";
 
 type WordsTableProps = {
-  onDeleteWord: (id: number) => void;
-  onMarkAsLearned?: (id: number) => void;
+  onDeleteWord: (id: string) => void;
+  onMarkAsLearned?: (id: string) => void;
 };
 
 export const WordsTable = memo(({ onDeleteWord, onMarkAsLearned }: WordsTableProps) => {

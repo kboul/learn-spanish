@@ -21,7 +21,7 @@ export function AddWord() {
     setWordsStoreValue({ words: updatedWords, newWord: initialNewWord });
   };
 
-  const handleMarkAsLearned = async (id: number) => {
+  const handleMarkAsLearned = async (id: string) => {
     await markAsLearned(id);
     setWordsStoreValue({ words: words.map((w) => (w.id === id ? { ...w, learned: true } : w)) });
   };

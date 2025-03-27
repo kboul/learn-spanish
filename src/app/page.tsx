@@ -18,7 +18,7 @@ export default function Home() {
     fetchWords();
   }, []);
 
-  const handleDeleteWord = async (id: number) => {
+  const handleDeleteWord = async (id: string) => {
     await deleteWord(id);
     const updatedWords = await getWords();
     setWordsStoreValue({ words: updatedWords });

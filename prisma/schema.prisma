@@ -14,7 +14,7 @@ datasource db {
 }
 
 model Word {
-  id       Int     @id @default(autoincrement())
+  id       String @id @default(uuid())
   spanish  String  @unique
   english  String
   greek    String

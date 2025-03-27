@@ -25,7 +25,7 @@ async function getWords(): Promise<Word[]> {
 }
 
 // Mark a word as learned
-async function markAsLearned(id: number) {
+async function markAsLearned(id: string) {
   try {
     await prisma.word.update({
       where: { id },
@@ -37,7 +37,7 @@ async function markAsLearned(id: number) {
 }
 
 // Delete a word
-async function deleteWord(id: number) {
+async function deleteWord(id: string) {
   try {
     await prisma.word.delete({ where: { id } });
     console.log("word deleted successfully");
