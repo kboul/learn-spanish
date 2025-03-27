@@ -17,7 +17,7 @@ async function addWord(newWord: NewWord): Promise<void> {
 // Get all words
 async function getWords(): Promise<Word[]> {
   try {
-    return await prisma.word.findMany();
+    return await prisma.word.findMany({ orderBy: { id: "asc" } });
   } catch (error) {
     console.error("Error fetching words:", error);
     return [];
