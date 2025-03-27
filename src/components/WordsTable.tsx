@@ -1,13 +1,14 @@
 import { memo } from "react";
-import { Word } from "@prisma/client";
+import { useWordsStore } from "@/store";
 
 type WordsTableProps = {
-  words: Word[];
   onDeleteWord: (id: number) => void;
   onMarkAsLearned?: (id: number) => void;
 };
 
-export const WordsTable = memo(({ words, onDeleteWord, onMarkAsLearned }: WordsTableProps) => {
+export const WordsTable = memo(({ onDeleteWord, onMarkAsLearned }: WordsTableProps) => {
+  const words = useWordsStore((state) => state.words);
+  console.log("render");
   return (
     <table className="border-collapse w-full text-center border">
       <thead>
