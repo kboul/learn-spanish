@@ -60,14 +60,14 @@ export const WordsTable = memo(({}: WordsTableProps) => {
                     className="cursor-pointer"
                     onClick={() => handleMarkAsLearned(word)}
                     title={`Mark as ${learned ? "not " : ""}learned`}>
-                    ✅
+                    {learned ? "👎" : "👍"}
                   </div>
                   {!word.learned && (
                     <div
                       className="cursor-pointer"
                       onClick={() => handleHighlightWord(word)}
                       title={`${highlight ? "Un" : "H"}ighlight word`}>
-                      ⭐
+                      {highlight ? "🌟" : "⭐"}
                     </div>
                   )}
                   <div className="cursor-pointer" onClick={() => handleDeleteWord(word.id)} title="Delete word">
