@@ -14,13 +14,14 @@ export function AddWord() {
 
   const addBtnDisabled = !spanish.trim() || !english.trim() || !greek.trim();
 
+  const handleClearWord = () => setNewWordValue(initialNewWord);
+
   const handleAddWord = async () => {
     if (addBtnDisabled) return;
 
     const { message, error } = await addWord(newWord);
-    console.log({ message, error });
     toast[error ? "error" : "success"](message || error);
-    if (!error) setNewWordValue(initialNewWord);
+    if (!error) handleClearWord();
   };
 
   const changeInputValue = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -67,6 +68,11 @@ export function AddWord() {
         className={`bg-blue-500 text-white px-4 py-2 rounded ${!addBtnDisabled && "cursor-pointer"}`}
         onClick={handleAddWord}>
         Add
+      </button>
+      <button
+        className={`bg-red-500 text-white px-4 py-2 rounded ${!addBtnDisabled && "cursor-pointer"}`}
+        onClick={handleClearWord}>
+        Clear
       </button>
     </div>
   );
