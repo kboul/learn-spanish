@@ -1,8 +1,11 @@
-import { AddWord, Metrics, WordsTable } from "@/components";
+import { AddWord, Metrics, Pagination, WordsTable } from "@/components";
 import { getMetrics, getWords } from "@/actions";
 
-export default async function Home() {
-  const { words, error } = await getWords();
+export default async function Home({ searchParams }: { searchParams: { page: string } }) {
+  const { page: paramsPage } = await searchParams;
+  const page = paramsPage ? parseInt(paramsPage) : 1;
+
+  const { words, error } = await getWords(page);
   const { metrics, error: metricsError } = await getMetrics();
 
   return (
@@ -15,6 +18,7 @@ export default async function Home() {
       </div>
 
       <WordsTable words={words} error={error} />
+      {metrics && <Pagination page={page} total={metrics?.totalWords} />}
     </main>
   );
 }
