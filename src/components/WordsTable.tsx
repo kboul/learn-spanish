@@ -5,6 +5,16 @@ import { Word } from "@prisma/client";
 import { toast } from "react-toastify";
 
 export function WordsTable({ words, error }: { words?: Word[]; error?: WordResponse["error"] }) {
+  const handleWordMarkedAsLearned = async (word: Word) => {
+    const { message, error } = await markAsLearned(word);
+    toast[error ? "error" : "success"](message || error);
+  };
+
+  const handleWordHighlight = async (word: Word) => {
+    const { message, error } = await highlighWord(word);
+    toast[error ? "error" : "success"](message || error);
+  };
+
   const handleWordDelete = async (id: string) => {
     const confirmed = window.confirm("Are you sure you want to delete this word?");
     if (!confirmed) return;
@@ -44,14 +54,14 @@ export function WordsTable({ words, error }: { words?: Word[]; error?: WordRespo
                   <div className="flex justify-center space-x-2">
                     <div
                       className="cursor-pointer"
-                      onClick={() => markAsLearned(word)}
+                      onClick={() => handleWordMarkedAsLearned(word)}
                       title={`Mark as ${learned ? "not " : ""}learned`}>
                       {learned ? "👎" : "👍"}
                     </div>
                     {!word.learned && (
                       <div
                         className="cursor-pointer"
-                        onClick={() => highlighWord(word)}
+                        onClick={() => handleWordHighlight(word)}
                         title={`${highlight ? "Un" : "H"}ighlight word`}>
                         {highlight ? "🌟" : "⭐"}
                       </div>

@@ -41,21 +41,22 @@ async function markAsLearned(word: Word): Promise<WordResponse> {
     });
     revalidatePath("/");
 
-    return { message: `Word marked as ${newLearnedValue ? "" : "not"} learned successfully` };
+    return { message: `${word.spanish} marked as ${newLearnedValue ? "" : "not"} learned successfully` };
   } catch (error) {
     return { error: getErrorMessage("marking the word as learned") };
   }
 }
 
-async function highlighWord({ id, highlight }: Pick<Word, "id" | "highlight">): Promise<WordResponse> {
+async function highlighWord(word: Word): Promise<WordResponse> {
+  const newHighlightValue = !word.highlight;
   try {
     await prisma.word.update({
-      where: { id },
-      data: { highlight: !highlight }
+      where: { id: word.id },
+      data: { highlight: newHighlightValue }
     });
     revalidatePath("/");
 
-    return { message: `Word ${highlight ? "un" : ""}highlighted successfully` };
+    return { message: `${word.spanish} ${newHighlightValue ? "" : "un"}highlighted successfully` };
   } catch (error) {
     return { error: getErrorMessage("highlighting the word") };
   }
@@ -65,7 +66,6 @@ async function highlighWord({ id, highlight }: Pick<Word, "id" | "highlight">): 
 async function deleteWord(id: string): Promise<WordResponse> {
   try {
     await prisma.word.delete({ where: { id } });
-    console.log("word deleted successfully");
     revalidatePath("/");
     return { message: "Word deleted successfully" };
   } catch (error) {
