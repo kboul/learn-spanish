@@ -73,4 +73,4 @@ async function deleteWord(id: string): Promise<WordResponse> {
   }
 }
 
-export { addWord, getWords, markAsLearned, highlighWord, deleteWord };
+export { addWord, getWords, markAsLearned, highlighWord, deleteWord, type WordResponse };

@@ -1,9 +1,18 @@
 "use client";
 
-import { deleteWord, highlighWord, markAsLearned } from "@/actions";
+import { deleteWord, highlighWord, markAsLearned, WordResponse } from "@/actions";
 import { Word } from "@prisma/client";
+import { toast } from "react-toastify";
 
-export function WordsTable({ words, error }: { words?: Word[]; error?: string }) {
+export function WordsTable({ words, error }: { words?: Word[]; error?: WordResponse["error"] }) {
+  const handleWordDelete = async (id: string) => {
+    const confirmed = window.confirm("Are you sure you want to delete this word?");
+    if (!confirmed) return;
+
+    const { message, error } = await deleteWord(id);
+    toast[error ? "error" : "success"](message || error);
+  };
+
   return (
     <>
       <table className="border-collapse w-full text-center border">
@@ -47,7 +56,7 @@ export function WordsTable({ words, error }: { words?: Word[]; error?: string })
                         {highlight ? "🌟" : "⭐"}
                       </div>
                     )}
-                    <div className="cursor-pointer" onClick={() => deleteWord(word.id)} title="Delete word">
+                    <div className="cursor-pointer" onClick={() => handleWordDelete(word.id)} title="Delete word">
                       ❌
                     </div>
                   </div>
