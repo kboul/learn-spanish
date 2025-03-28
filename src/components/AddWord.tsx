@@ -1,26 +1,32 @@
-import { useShallow } from "zustand/react/shallow";
+"use client";
+import { useState } from "react";
+import { toast } from "react-toastify";
 
-import { addWord, getWords } from "@/actions";
-import { initialNewWord, useWordsStore } from "@/store";
+import { addWord } from "@/actions";
+
+const initialNewWord = { spanish: "", greek: "", english: "", learned: false, highlight: false };
 
 export function AddWord() {
-  const [newWord, setWordsStoreValue] = useWordsStore(useShallow((state) => [state.newWord, state.setWordsStoreValue]));
-  const { spanish, english, greek, learned, highlight } = newWord;
+  const [newWord, setNewWord] = useState(initialNewWord);
+
+  const { spanish, greek, english, learned, highlight } = newWord;
+  const setNewWordValue = (keyValuePair: Partial<typeof newWord>) => setNewWord({ ...newWord, ...keyValuePair });
 
   const addBtnDisabled = !spanish.trim() || !english.trim() || !greek.trim();
 
   const handleAddWord = async () => {
     if (addBtnDisabled) return;
 
-    await addWord(newWord);
-    const updatedWords = await getWords(); // Fetch updated list
-    setWordsStoreValue({ words: updatedWords, newWord: initialNewWord });
+    const { message, error } = await addWord(newWord);
+    console.log({ message, error });
+    toast[error ? "error" : "success"](message || error);
+    if (!error) setNewWordValue(initialNewWord);
   };
 
   const changeInputValue = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { checked, name, type, value } = e.target;
     const finalValue = type === "checkbox" ? checked : value;
-    setWordsStoreValue({ newWord: { ...newWord, [name]: finalValue } });
+    setNewWordValue({ [name]: finalValue });
   };
 
   return (

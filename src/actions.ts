@@ -1,62 +1,75 @@
 "use server";
 import { Word } from "@prisma/client";
+import { revalidatePath } from "next/cache";
 
 import prisma from "./lib/prisma";
 import { NewWord } from "./types";
 
+type WordResponse = { message?: string; error?: string };
+
+const getErrorMessage = (submessage: string) => `There was an error while ${submessage}`;
+
 // Add a new word
-async function addWord(newWord: NewWord): Promise<void> {
+async function addWord(newWord: NewWord): Promise<WordResponse> {
   try {
     await prisma.word.create({ data: newWord });
-    console.log("word added successfully");
+    revalidatePath("/");
+
+    return { message: "Word added successfully" };
   } catch (error) {
-    console.error("Error adding word:", error);
+    return { error: `${getErrorMessage("adding the word")}. The word might already exists on the table.` };
   }
 }
 
 // Get all words
-async function getWords(): Promise<Word[]> {
+async function getWords(): Promise<{ words?: Word[]; error?: string }> {
   try {
-    return await prisma.word.findMany({ orderBy: { id: "asc" } });
+    const words = await prisma.word.findMany({ orderBy: { id: "asc" } });
+    return { words };
   } catch (error) {
-    console.error("Error fetching words:", error);
-    return [];
+    return { error: getErrorMessage("fetching the words") };
   }
 }
 
 // Mark a word as learned
-async function markAsLearned(word: Word): Promise<void> {
+async function markAsLearned(word: Word): Promise<WordResponse> {
   const newLearnedValue = !word.learned;
   try {
     await prisma.word.update({
       where: { id: word.id },
       data: { learned: newLearnedValue, highlight: newLearnedValue ? false : word.highlight }
     });
-    console.log(`word marked as ${newLearnedValue ? "" : "not "}learned successfully`);
+    revalidatePath("/");
+
+    return { message: `Word marked as ${newLearnedValue ? "" : "not"} learned successfully` };
   } catch (error) {
-    console.error("Error marking as learned:", error);
+    return { error: getErrorMessage("marking the word as learned") };
   }
 }
 
-async function highlighWord({ id, highlight }: Pick<Word, "id" | "highlight">): Promise<void> {
+async function highlighWord({ id, highlight }: Pick<Word, "id" | "highlight">): Promise<WordResponse> {
   try {
     await prisma.word.update({
       where: { id },
       data: { highlight: !highlight }
     });
-    console.log(`word ${highlight ? "un" : ""}highlighted successfully`);
+    revalidatePath("/");
+
+    return { message: `Word ${highlight ? "un" : ""}highlighted successfully` };
   } catch (error) {
-    console.error("Error marking as learned:", error);
+    return { error: getErrorMessage("highlighting the word") };
   }
 }
 
 // Delete a word
-async function deleteWord(id: string) {
+async function deleteWord(id: string): Promise<WordResponse> {
   try {
     await prisma.word.delete({ where: { id } });
     console.log("word deleted successfully");
+    revalidatePath("/");
+    return { message: "Word deleted successfully" };
   } catch (error) {
-    console.error("Error deleting word:", error);
+    return { error: getErrorMessage("deleting the word") };
   }
 }
 

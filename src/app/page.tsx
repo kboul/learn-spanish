@@ -1,22 +1,8 @@
-"use client";
-
-import { useEffect } from "react";
-import { useShallow } from "zustand/shallow";
-
 import { AddWord, WordsTable } from "@/components";
 import { getWords } from "@/actions";
-import { useWordsStore } from "@/store";
 
-export default function Home() {
-  const [setWordsStoreValue] = useWordsStore(useShallow((state) => [state.setWordsStoreValue]));
-
-  useEffect(() => {
-    async function fetchWords() {
-      const data = await getWords();
-      setWordsStoreValue({ words: data });
-    }
-    fetchWords();
-  }, []);
+export default async function Home() {
+  const { words, error } = await getWords();
 
   return (
     <main className="flex flex-col items-center min-h-screen p-5">
@@ -24,7 +10,7 @@ export default function Home() {
 
       <AddWord />
 
-      <WordsTable />
+      <WordsTable words={words} error={error} />
     </main>
   );
 }
