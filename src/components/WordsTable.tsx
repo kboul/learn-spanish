@@ -76,7 +76,7 @@ export function WordsTable({ words, error }: { words?: Word[]; error?: WordRespo
           })}
         </tbody>
       </table>
-      {error && <p className="text-red-500">{error}</p>}
+      {error && <p className="flex justify-center border-x-1 border-b-1 p-2 w-full">{error}</p>}
     </>
   );
 }
