@@ -7,6 +7,12 @@ import { NewWord } from "../types";
 
 type WordResponse = { message?: string; error?: string };
 
+type Metrics = {
+  totalWords: number;
+  learnedWords: number;
+  highlightedWords: number;
+};
+
 const getErrorMessage = (submessage: string) => `There was an error while ${submessage}`;
 
 // Add a new word
@@ -73,4 +79,17 @@ async function deleteWord(id: string): Promise<WordResponse> {
   }
 }
 
-export { addWord, getWords, markAsLearned, highlighWord, deleteWord, type WordResponse };
+async function getMetrics(): Promise<{ metrics?: Metrics; error?: string }> {
+  try {
+    const [totalWords, learnedWords, highlightedWords] = await Promise.all([
+      prisma.word.count(), // Total words
+      prisma.word.count({ where: { learned: true } }), // Learned words
+      prisma.word.count({ where: { highlight: true } }) // Highlighted words
+    ]);
+    return { metrics: { totalWords, learnedWords, highlightedWords } };
+  } catch (error) {
+    return { error: getErrorMessage("getting the metrics") };
+  }
+}
+
+export { addWord, getWords, markAsLearned, highlighWord, deleteWord, type WordResponse, type Metrics, getMetrics };
