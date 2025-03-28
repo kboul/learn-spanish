@@ -26,7 +26,7 @@ export function WordsTable({ words, error }: { words?: Word[]; error?: WordRespo
   return (
     <>
       <table className="border-collapse w-full text-center border">
-        <thead>
+        <thead className="sticky top-0 z-2">
           <tr className="bg-gray-200">
             <th className="border p-2">🇪🇸 Spanish</th>
             <th className="border p-2">🇬🇧 English</th>
