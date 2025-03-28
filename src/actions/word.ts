@@ -2,8 +2,8 @@
 import { Word } from "@prisma/client";
 import { revalidatePath } from "next/cache";
 
-import prisma from "./lib/prisma";
-import { NewWord } from "./types";
+import { prisma } from "../lib";
+import { NewWord } from "../types";
 
 type WordResponse = { message?: string; error?: string };
 
