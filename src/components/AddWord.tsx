@@ -31,7 +31,7 @@ export function AddWord() {
   };
 
   return (
-    <div className="flex gap-2 mb-4">
+    <div className="flex gap-2">
       <input className="border p-2" name="spanish" onChange={changeInputValue} placeholder="Spanish" value={spanish} />
 
       <input className="border p-2" name="english" onChange={changeInputValue} placeholder="English" value={english} />
