@@ -24,7 +24,7 @@ async function addWord(newWord: NewWord): Promise<WordResponse> {
 
     return { message: `${newWord.spanish} added successfully` };
   } catch (error) {
-    return { error: `${getErrorMessage("adding the word")}. The word might already exists on the table.` };
+    return { error: `${getErrorMessage("adding the word")}. The word might already exist on the table.` };
   }
 }
 
