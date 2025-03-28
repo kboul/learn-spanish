@@ -1,84 +1,82 @@
-import { memo } from "react";
-import { useShallow } from "zustand/shallow";
+"use client";
 
-import { useWordsStore } from "@/store";
-import { deleteWord, getWords, highlighWord, markAsLearned } from "@/actions";
+import { deleteWord, highlighWord, markAsLearned, WordResponse } from "@/actions";
 import { Word } from "@prisma/client";
+import { toast } from "react-toastify";
 
-type WordsTableProps = {};
-
-export const WordsTable = memo(({}: WordsTableProps) => {
-  const [words, setWordsStoreValue] = useWordsStore(useShallow((state) => [state.words, state.setWordsStoreValue]));
-
-  const handleMarkAsLearned = async (word: Word) => {
-    await markAsLearned(word);
-    const updatedWords = await getWords();
-    setWordsStoreValue({ words: updatedWords });
+export function WordsTable({ words, error }: { words?: Word[]; error?: WordResponse["error"] }) {
+  const handleWordMarkedAsLearned = async (word: Word) => {
+    const { message, error } = await markAsLearned(word);
+    toast[error ? "error" : "success"](message || error);
   };
 
-  const handleHighlightWord = async (word: Word) => {
-    await highlighWord({ id: word.id, highlight: word.highlight });
-    const updatedWords = await getWords();
-    setWordsStoreValue({ words: updatedWords });
+  const handleWordHighlight = async (word: Word) => {
+    const { message, error } = await highlighWord(word);
+    toast[error ? "error" : "success"](message || error);
   };
 
-  const handleDeleteWord = async (id: string) => {
-    await deleteWord(id);
-    const updatedWords = await getWords();
-    setWordsStoreValue({ words: updatedWords });
+  const handleWordDelete = async (id: string) => {
+    const confirmed = window.confirm("Are you sure you want to delete this word?");
+    if (!confirmed) return;
+
+    const { message, error } = await deleteWord(id);
+    toast[error ? "error" : "success"](message || error);
   };
 
   return (
-    <table className="border-collapse w-full text-center border">
-      <thead>
-        <tr className="bg-gray-200">
-          <th className="border p-2">🇪🇸 Spanish</th>
-          <th className="border p-2">🇬🇧 English</th>
-          <th className="border p-2">🇬🇷 Greek</th>
-          <th className="border p-2">Actions</th>
-        </tr>
-      </thead>
-      <tbody>
-        {words.map((word) => {
-          const { highlight, learned } = word;
-          const trBg = highlight ? "bg-yellow-100" : learned ? "bg-[#04AA6D]" : "bg-white";
-          const trColor = learned ? "text-white" : "text-black";
-          return (
-            <tr key={word.id} className="border-b transition-colors duration-300">
-              <td className={`border p-2 ${trBg}`}>
-                <p className={trColor}>{word.spanish}</p>
-              </td>
-              <td className={`border p-2 ${trBg}`}>
-                <p className={trColor}>{word.english}</p>
-              </td>
-              <td className={`border p-2 ${trBg}`}>
-                <p className={trColor}>{word.greek}</p>
-              </td>
-              <td className="border p-2 ">
-                <div className="flex justify-center space-x-2">
-                  <div
-                    className="cursor-pointer"
-                    onClick={() => handleMarkAsLearned(word)}
-                    title={`Mark as ${learned ? "not " : ""}learned`}>
-                    {learned ? "👎" : "👍"}
-                  </div>
-                  {!word.learned && (
+    <>
+      <table className="border-collapse w-full text-center border">
+        <thead>
+          <tr className="bg-gray-200">
+            <th className="border p-2">🇪🇸 Spanish</th>
+            <th className="border p-2">🇬🇧 English</th>
+            <th className="border p-2">🇬🇷 Greek</th>
+            <th className="border p-2">Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+          {words?.map((word: Word) => {
+            const { highlight, learned } = word;
+            const trBg = highlight ? "bg-yellow-100" : learned ? "bg-[#04AA6D]" : "bg-white";
+            const trColor = learned ? "text-white" : "text-black";
+            return (
+              <tr key={word.id} className="border-b transition-colors duration-300">
+                <td className={`border p-2 ${trBg}`}>
+                  <p className={trColor}>{word.spanish}</p>
+                </td>
+                <td className={`border p-2 ${trBg}`}>
+                  <p className={trColor}>{word.english}</p>
+                </td>
+                <td className={`border p-2 ${trBg}`}>
+                  <p className={trColor}>{word.greek}</p>
+                </td>
+                <td className="border p-2 ">
+                  <div className="flex justify-center space-x-2">
                     <div
                       className="cursor-pointer"
-                      onClick={() => handleHighlightWord(word)}
-                      title={`${highlight ? "Un" : "H"}ighlight word`}>
-                      {highlight ? "🌟" : "⭐"}
+                      onClick={() => handleWordMarkedAsLearned(word)}
+                      title={`Mark as ${learned ? "not " : ""}learned`}>
+                      {learned ? "👎" : "👍"}
                     </div>
-                  )}
-                  <div className="cursor-pointer" onClick={() => handleDeleteWord(word.id)} title="Delete word">
-                    ❌
+                    {!word.learned && (
+                      <div
+                        className="cursor-pointer"
+                        onClick={() => handleWordHighlight(word)}
+                        title={`${highlight ? "Un" : "H"}ighlight word`}>
+                        {highlight ? "🌟" : "⭐"}
+                      </div>
+                    )}
+                    <div className="cursor-pointer" onClick={() => handleWordDelete(word.id)} title="Delete word">
+                      ❌
+                    </div>
                   </div>
-                </div>
-              </td>
-            </tr>
-          );
-        })}
-      </tbody>
-    </table>
+                </td>
+              </tr>
+            );
+          })}
+        </tbody>
+      </table>
+      {error && <p className="flex justify-center border-x-1 border-b-1 p-2 w-full">{error}</p>}
+    </>
   );
-});
+}
