@@ -4,6 +4,7 @@ import { revalidatePath } from "next/cache";
 
 import { prisma } from "../lib";
 import { NewWord } from "../types";
+import { itemsPerPage } from "@/constants";
 
 type WordResponse = { message?: string; error?: string };
 
@@ -21,16 +22,20 @@ async function addWord(newWord: NewWord): Promise<WordResponse> {
     await prisma.word.create({ data: newWord });
     revalidatePath("/");
 
-    return { message: "Word added successfully" };
+    return { message: `${newWord.spanish} added successfully` };
   } catch (error) {
-    return { error: `${getErrorMessage("adding the word")}. The word might already exists on the table.` };
+    return { error: `${getErrorMessage("adding the word")}. The word might already exist on the table.` };
   }
 }
 
 // Get all words
-async function getWords(): Promise<{ words?: Word[]; error?: string }> {
+async function getWords(page: number): Promise<{ words?: Word[]; error?: string }> {
   try {
-    const words = await prisma.word.findMany({ orderBy: { id: "asc" } });
+    const words = await prisma.word.findMany({
+      orderBy: { id: "asc" },
+      take: itemsPerPage,
+      skip: itemsPerPage * (page - 1)
+    });
     return { words };
   } catch (error) {
     return { error: getErrorMessage("fetching the words") };
