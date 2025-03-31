@@ -27,7 +27,7 @@ export function SearchWord({ q }: { q: string }) {
   };
 
   return (
-    <form onSubmit={(e) => e.preventDefault()}>
+    <form className="flex items-center" onSubmit={(e) => e.preventDefault()}>
       <div className="relative">
         <div className="absolute inset-y-0 start-0 flex items-center ps-3 pointer-events-none">
           <GoSearch className="w-5 h-5 text-gray-500" />

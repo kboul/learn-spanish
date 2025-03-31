@@ -33,21 +33,21 @@ export function AddWord() {
   };
 
   return (
-    <div className="flex gap-2">
+    <form className="flex gap-2 items-center">
       <Input name="spanish" onChange={changeInputValue} placeholder="Spanish" value={spanish} />
 
       <Input name="english" onChange={changeInputValue} placeholder="English" value={english} />
 
       <Input name="greek" onChange={changeInputValue} placeholder="Greek" value={greek} />
 
-      <div className="flex flex-col gap-2">
+      <div className="flex flex-col gap-2 ">
         <div className="flex gap-2">
-          <label className="text-sm flex items-center">Learned</label>
+          <label className="text-sm flex ">Learned</label>
           <Input name="learned" onChange={changeInputValue} placeholder="Learned" type="checkbox" checked={learned} />
         </div>
 
         <div className="flex gap-1">
-          <label className="text-sm flex items-center">Highlight</label>
+          <label className="text-sm flex">Highlight</label>
           <Input
             name="highlight"
             onChange={changeInputValue}
@@ -64,6 +64,6 @@ export function AddWord() {
       <Button color="red" className={!addBtnDisabled ? "cursor-pointer" : ""} onClick={handleWordClear}>
         Clear
       </Button>
-    </div>
+    </form>
   );
 }
