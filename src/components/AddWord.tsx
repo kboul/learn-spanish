@@ -2,6 +2,8 @@
 import { useState } from "react";
 import { toast } from "react-toastify";
 
+import Button from "./ui/Button";
+import { Input } from "./ui/Input";
 import { addWord } from "@/actions";
 
 const initialNewWord = { spanish: "", greek: "", english: "", learned: false, highlight: false };
@@ -32,29 +34,21 @@ export function AddWord() {
 
   return (
     <div className="flex gap-2">
-      <input className="border p-2" name="spanish" onChange={changeInputValue} placeholder="Spanish" value={spanish} />
+      <Input name="spanish" onChange={changeInputValue} placeholder="Spanish" value={spanish} />
 
-      <input className="border p-2" name="english" onChange={changeInputValue} placeholder="English" value={english} />
+      <Input name="english" onChange={changeInputValue} placeholder="English" value={english} />
 
-      <input className="border p-2" name="greek" onChange={changeInputValue} placeholder="Greek" value={greek} />
+      <Input name="greek" onChange={changeInputValue} placeholder="Greek" value={greek} />
 
       <div className="flex flex-col gap-2">
         <div className="flex gap-2">
           <label className="text-sm flex items-center">Learned</label>
-          <input
-            className="border p-2"
-            name="learned"
-            onChange={changeInputValue}
-            placeholder="Learned"
-            type="checkbox"
-            checked={learned}
-          />
+          <Input name="learned" onChange={changeInputValue} placeholder="Learned" type="checkbox" checked={learned} />
         </div>
 
         <div className="flex gap-1">
           <label className="text-sm flex items-center">Highlight</label>
-          <input
-            className="border p-2"
+          <Input
             name="highlight"
             onChange={changeInputValue}
             placeholder="Highlight"
@@ -64,16 +58,12 @@ export function AddWord() {
         </div>
       </div>
 
-      <button
-        className={`bg-blue-500 text-white px-4 py-2 rounded ${!addBtnDisabled && "cursor-pointer"}`}
-        onClick={handleWordAdd}>
+      <Button className={!addBtnDisabled ? "cursor-pointer" : ""} onClick={handleWordAdd}>
         Add
-      </button>
-      <button
-        className={`bg-red-500 text-white px-4 py-2 rounded ${!addBtnDisabled && "cursor-pointer"}`}
-        onClick={handleWordClear}>
+      </Button>
+      <Button color="red" className={!addBtnDisabled ? "cursor-pointer" : ""} onClick={handleWordClear}>
         Clear
-      </button>
+      </Button>
     </div>
   );
 }
