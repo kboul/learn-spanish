@@ -23,7 +23,7 @@ async function addWord(formData: FormData): Promise<WordResponse> {
   const learned = formData.get("learned") === "on" ? true : false;
   const highlight = formData.get("highlight") === "on" ? true : false;
 
-  if (!spanish || !english || !greek) return { error: "Spanish, english & greek words is required" };
+  if (!spanish || !english || !greek) return { error: "Spanish, english & greek words are required" };
 
   try {
     await prisma.word.create({ data: { spanish, english, greek, learned, highlight } });
