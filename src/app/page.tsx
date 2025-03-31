@@ -9,7 +9,7 @@ export default async function Home({ searchParams }: { searchParams: { page: str
   const { words, error } = await getWords(page);
   const { metrics, error: metricsError } = await getMetrics();
   const { searchedWords } = await searchWord(q);
-  const finalWords = q ? searchedWords : words;
+  const showPagination = q ? searchedWords && searchedWords.length > itemsPerPage - 1 : true;
 
   return (
     <main className="flex flex-col items-center min-h-screen p-5 gap-4">
@@ -21,10 +21,8 @@ export default async function Home({ searchParams }: { searchParams: { page: str
         <AddWord />
       </div>
 
-      <WordsTable words={finalWords} error={error} />
-      {finalWords && finalWords.length > itemsPerPage - 1 && metrics && (
-        <Pagination page={page} total={metrics?.totalWords} />
-      )}
+      <WordsTable words={q ? searchedWords : words} error={error} />
+      {showPagination && metrics && <Pagination page={page} total={metrics?.totalWords} />}
     </main>
   );
 }

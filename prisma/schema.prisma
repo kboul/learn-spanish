@@ -20,4 +20,5 @@ model Word {
   greek    String
   learned  Boolean @default(false) 
   highlight  Boolean @default(false) 
+  createdAt    DateTime @default(now())
 }
