@@ -32,7 +32,7 @@ npx prisma generate
 d. Create prisma migrations
 
 ```
-npx prisma migrate dev
+npx prisma migrate dev --name migration-name
 ```
 
 3. Seed the db with entries (optional)
