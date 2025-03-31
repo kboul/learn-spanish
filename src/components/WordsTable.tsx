@@ -77,6 +77,7 @@ export function WordsTable({ words, error }: { words?: Word[]; error?: WordRespo
           })}
         </tbody>
       </table>
+      {words?.length === 0 && <p className="flex justify-center border-x-1 border-b-1 p-2 w-full">No words found</p>}
       {error && <p className="flex justify-center border-x-1 border-b-1 p-2 w-full">{error}</p>}
     </>
   );

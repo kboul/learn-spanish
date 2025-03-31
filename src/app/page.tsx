@@ -9,7 +9,7 @@ export default async function Home({ searchParams }: { searchParams: { page: str
   const { words, error } = await getWords(page);
   const { metrics, error: metricsError } = await getMetrics();
   const { searchedWords } = await searchWord(q);
-  const finalWords = searchedWords && searchedWords?.length > 0 ? searchedWords : words;
+  const finalWords = q ? searchedWords : words;
 
   return (
     <main className="flex flex-col items-center min-h-screen p-5 gap-4">
