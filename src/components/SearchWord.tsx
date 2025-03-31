@@ -15,13 +15,14 @@ export function SearchWord({ q }: { q: string }) {
   const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
     if (e.key !== "Enter") return;
     const params = new URLSearchParams(window.location.search);
+    params.delete("page");
     params.set("q", searchWord);
     router.push(`${window.location.pathname}?${params}`);
   };
 
   const handleClear = () => {
     const params = new URLSearchParams(window.location.search);
-    params.delete("q", searchWord);
+    params.delete("q");
     router.push(`${window.location.pathname}?${params}`);
     setSearchWord("");
   };
