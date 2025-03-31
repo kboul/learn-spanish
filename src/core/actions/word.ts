@@ -2,9 +2,9 @@
 import { Word } from "@prisma/client";
 import { revalidatePath } from "next/cache";
 
-import { prisma } from "../lib";
+import { prisma } from "..";
 import { NewWord } from "../types";
-import { itemsPerPage } from "@/constants";
+import { itemsPerPage } from "../constants";
 
 type WordResponse = { message?: string; error?: string };
 
@@ -97,4 +97,27 @@ async function getMetrics(): Promise<{ metrics?: Metrics; error?: string }> {
   }
 }
 
-export { addWord, getWords, markAsLearned, highlighWord, deleteWord, type WordResponse, type Metrics, getMetrics };
+async function searchWord(word: string): Promise<{ searchedWords?: Word[]; error?: string }> {
+  try {
+    const searchedWords = await prisma.word.findMany({
+      where: {
+        OR: [{ spanish: { contains: word, mode: "insensitive" } }, { english: { contains: word, mode: "insensitive" } }]
+      }
+    });
+    return { searchedWords };
+  } catch (error) {
+    return { error: getErrorMessage("searching the word") };
+  }
+}
+
+export {
+  addWord,
+  getWords,
+  markAsLearned,
+  highlighWord,
+  deleteWord,
+  searchWord,
+  type WordResponse,
+  type Metrics,
+  getMetrics
+};

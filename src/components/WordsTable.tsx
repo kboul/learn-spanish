@@ -1,8 +1,9 @@
 "use client";
-
-import { deleteWord, highlighWord, markAsLearned, WordResponse } from "@/actions";
-import { Word } from "@prisma/client";
 import { toast } from "react-toastify";
+import { Word } from "@prisma/client";
+
+import { deleteWord, highlighWord, markAsLearned, WordResponse } from "@/core/actions";
+import { cn } from "@/core/utils";
 
 export function WordsTable({ words, error }: { words?: Word[]; error?: WordResponse["error"] }) {
   const handleWordMarkedAsLearned = async (word: Word) => {
@@ -37,7 +38,7 @@ export function WordsTable({ words, error }: { words?: Word[]; error?: WordRespo
         <tbody>
           {words?.map((word: Word) => {
             const { highlight, learned } = word;
-            const trBg = highlight ? "bg-yellow-100" : learned ? "bg-[#04AA6D]" : "bg-white";
+            const trBg = cn("bg-white", { "bg-yellow-100": highlight, "bg-[var(--learned)]": learned });
             const trColor = learned ? "text-white" : "text-black";
             return (
               <tr key={word.id} className="border-b transition-colors duration-300">
@@ -76,6 +77,7 @@ export function WordsTable({ words, error }: { words?: Word[]; error?: WordRespo
           })}
         </tbody>
       </table>
+      {words?.length === 0 && <p className="flex justify-center border-x-1 border-b-1 p-2 w-full">No words found</p>}
       {error && <p className="flex justify-center border-x-1 border-b-1 p-2 w-full">{error}</p>}
     </>
   );
