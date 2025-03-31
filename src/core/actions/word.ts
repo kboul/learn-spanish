@@ -97,4 +97,17 @@ async function getMetrics(): Promise<{ metrics?: Metrics; error?: string }> {
   }
 }
 
+async function searchWord(word: string): Promise<{ words?: Word[]; error?: string }> {
+  try {
+    const words = await prisma.word.findMany({
+      where: {
+        OR: [{ spanish: { contains: word, mode: "insensitive" } }, { english: { contains: word, mode: "insensitive" } }]
+      }
+    });
+    return { words };
+  } catch (error) {
+    return { error: getErrorMessage("searching the word") };
+  }
+}
+
 export { addWord, getWords, markAsLearned, highlighWord, deleteWord, type WordResponse, type Metrics, getMetrics };
