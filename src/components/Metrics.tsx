@@ -1,4 +1,4 @@
-import { type Metrics } from "@/actions";
+import { type Metrics } from "@/core/actions";
 
 export function Metrics({ metrics, error }: { metrics?: Metrics; error?: string }) {
   if (error) return <div className="text-red-500">{error}</div>;

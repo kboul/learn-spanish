@@ -1,5 +1,5 @@
 import { AddWord, Metrics, Pagination, SearchWord, WordsTable } from "@/components";
-import { getMetrics, getWords } from "@/actions";
+import { getMetrics, getWords } from "@/core/actions";
 
 export default async function Home({ searchParams }: { searchParams: { page: string } }) {
   const { page: paramsPage } = await searchParams;

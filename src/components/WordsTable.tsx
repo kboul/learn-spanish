@@ -1,6 +1,6 @@
 "use client";
 
-import { deleteWord, highlighWord, markAsLearned, WordResponse } from "@/actions";
+import { deleteWord, highlighWord, markAsLearned, WordResponse } from "@/core/actions";
 import { Word } from "@prisma/client";
 import { toast } from "react-toastify";
 
