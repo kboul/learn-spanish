@@ -17,12 +17,20 @@ type Metrics = {
 const getErrorMessage = (submessage: string) => `There was an error while ${submessage}`;
 
 // Add a new word
-async function addWord(newWord: NewWord): Promise<WordResponse> {
+async function addWord(formData: FormData): Promise<WordResponse> {
+  const spanish = formData.get("spanish")?.toString();
+  const english = formData.get("english")?.toString();
+  const greek = formData.get("greek")?.toString();
+  const learned = formData.get("learned") === "on" ? true : false;
+  const highlight = formData.get("highlight") === "on" ? true : false;
+
+  if (!spanish || !english || !greek) return { error: "Spanish, english & greek words is required" };
+
   try {
-    await prisma.word.create({ data: newWord });
+    await prisma.word.create({ data: { spanish, english, greek, learned, highlight } });
     revalidatePath("/");
 
-    return { message: `${newWord.spanish} added successfully` };
+    return { message: `${spanish} added successfully` };
   } catch (error) {
     return { error: `${getErrorMessage("adding the word")}. The word might already exist on the table.` };
   }
