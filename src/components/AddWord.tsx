@@ -20,7 +20,7 @@ export function AddWord() {
 
   return (
     <form action={clientAction} className="flex gap-2 items-center" ref={formRef}>
-      <Input id="spanish" name="spanish" placeholder="Spanish" />
+      <Input name="spanish" placeholder="Spanish" />
 
       <Input name="english" placeholder="English" />
 
