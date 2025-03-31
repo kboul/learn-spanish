@@ -3,7 +3,6 @@ import { Word } from "@prisma/client";
 import { revalidatePath } from "next/cache";
 
 import { prisma } from "..";
-import { NewWord } from "../types";
 import { itemsPerPage } from "../constants";
 
 type WordResponse = { message?: string; error?: string };
