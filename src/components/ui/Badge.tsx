@@ -11,7 +11,7 @@ type BadgeProps = ComponentProps<"span"> & {
 export default function Badge({ children, className = "", color = "default", size = "xs", ...otherProps }: BadgeProps) {
   return (
     <span
-      className={cn("font-medium me-2 px-2.5 py-0.5 rounded-sm", {
+      className={cn("font-medium px-2.5 py-0.5 rounded-sm", {
         "text-xs": size === "xs",
         "text-sm": size === "sm",
         "bg-blue-100 text-blue-800": color === "default",

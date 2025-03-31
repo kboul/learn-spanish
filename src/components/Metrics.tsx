@@ -6,7 +6,7 @@ export function Metrics({ metrics, error }: { metrics?: Metrics; error?: string 
   if (error) return <div className="text-red-500">{error}</div>;
   if (metrics)
     return (
-      <div className="flex gap-1 items-center">
+      <div className="flex gap-2 items-center">
         <Badge size="sm">{metrics.totalWords}</Badge>
         <Badge size="sm" style={{ backgroundColor: "var(--learned)", color: "white" }}>
           {metrics.learnedWords}

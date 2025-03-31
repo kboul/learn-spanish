@@ -110,4 +110,14 @@ async function searchWord(word: string): Promise<{ words?: Word[]; error?: strin
   }
 }
 
-export { addWord, getWords, markAsLearned, highlighWord, deleteWord, type WordResponse, type Metrics, getMetrics };
+export {
+  addWord,
+  getWords,
+  markAsLearned,
+  highlighWord,
+  deleteWord,
+  searchWord,
+  type WordResponse,
+  type Metrics,
+  getMetrics
+};
