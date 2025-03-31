@@ -40,7 +40,7 @@ async function addWord(formData: FormData): Promise<WordResponse> {
 async function getWords(page: number): Promise<{ words?: Word[]; error?: string }> {
   try {
     const words = await prisma.word.findMany({
-      orderBy: { id: "asc" },
+      orderBy: { createdAt: "asc" },
       take: itemsPerPage,
       skip: itemsPerPage * (page - 1)
     });
