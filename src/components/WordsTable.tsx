@@ -65,7 +65,7 @@ export function WordsTable({ words, error }: { words?: Word[]; error?: WordRespo
                       className="cursor-pointer"
                       onClick={() => handleWordMarkedAsLearned(word)}
                       title={`Mark as ${learned ? "not " : ""}learned`}>
-                      {learned ? <MdClear className={iconsClassName} /> : <FcCheckmark className={iconsClassName} />}
+                      {learned ? <MdClear className={"w-6 h-6"} /> : <FcCheckmark className={"w-6 h-6"} />}
                     </div>
                     {!word.learned && (
                       <div
