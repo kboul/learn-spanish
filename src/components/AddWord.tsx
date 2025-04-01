@@ -26,7 +26,7 @@ export function AddWord() {
 
       <Input name="greek" placeholder="Greek" />
 
-      <div className="flex flex-col gap-2 ">
+      <div className="flex flex-col gap-2 mx-1">
         <div className="flex gap-2">
           <label className="text-sm flex ">Learned</label>
           <Input name="learned" placeholder="Learned" type="checkbox" />
