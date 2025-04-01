@@ -7,3 +7,4 @@ export * from "./ui/Badge";
 export * from "./ui/Button";
 export * from "./ui/Input";
 export * from "./ui/Pagination";
+export * from "./ui/Table";
