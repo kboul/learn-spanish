@@ -34,7 +34,7 @@ export function WordsTable({ words, error }: { words?: Word[]; error?: WordRespo
   };
 
   return (
-    <div className="w-full max-w-4xl">
+    <div className="w-full max-w-5xl">
       <Table
         data={words}
         errorMsg={error}
@@ -47,6 +47,7 @@ export function WordsTable({ words, error }: { words?: Word[]; error?: WordRespo
             "bg-[var(--learned)]": learned
           });
           const trColor = learned ? "text-white" : "text-black";
+
           return (
             <tr key={word.id} className="bg-white border-b border-gray-200">
               <td className={`px-6 py-3 ${trBg}`}>
