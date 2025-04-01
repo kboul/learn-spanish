@@ -1,7 +1,7 @@
 type TableProps<T> = {
   data?: T[];
   errorMsg?: string;
-  headers: string[];
+  headers: { name: string; className?: string }[];
   noItemsMsg?: string;
   renderRow: (item: T) => React.ReactNode;
 };
@@ -20,9 +20,9 @@ export default function Table<T>({ data, errorMsg = "", headers, noItemsMsg = ""
       <table className="w-full text-sm text-left rtl:text-right text-gray-500">
         <thead className="text-xs text-gray-700 uppercase bg-gray-50">
           <tr>
-            {headers.map((header) => (
-              <th scope="col" className="px-6 py-3" key={header}>
-                {header}
+            {headers.map(({ name, className }) => (
+              <th scope="col" className={`px-6 py-3 ${className ?? ""}`} key={name}>
+                {name}
               </th>
             ))}
           </tr>

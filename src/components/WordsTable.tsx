@@ -12,7 +12,12 @@ import { deleteWord, highlighWord, markAsLearned, WordResponse } from "@/core/ac
 import { cn } from "@/core/utils";
 
 const iconsClassName = "w-5 h-5";
-const headers = ["🇪🇸 Spanish", "🇬🇧 English", "🇬🇷 Greek", "Actions"];
+const headers = [
+  { name: "🇪🇸 Spanish" },
+  { name: "🇬🇧 English" },
+  { name: "🇬🇷 Greek" },
+  { name: "Actions", className: "text-center" }
+];
 
 export function WordsTable({ words, error }: { words?: Word[]; error?: WordResponse["error"] }) {
   const handleWordMarkedAsLearned = async (word: Word) => {
