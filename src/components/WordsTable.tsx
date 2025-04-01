@@ -1,7 +1,7 @@
 "use client";
 import { toast } from "react-toastify";
 import { Word } from "@prisma/client";
-import { FcCheckmark } from "react-icons/fc";
+import { MdCheck } from "react-icons/md";
 import { IoTrashOutline } from "react-icons/io5";
 import { IoFlashlightSharp } from "react-icons/io5";
 import { MdFlashlightOff } from "react-icons/md";
@@ -65,7 +65,11 @@ export function WordsTable({ words, error }: { words?: Word[]; error?: WordRespo
                       className="cursor-pointer"
                       onClick={() => handleWordMarkedAsLearned(word)}
                       title={`Mark as ${learned ? "not " : ""}learned`}>
-                      {learned ? <MdClear className={"w-6 h-6"} /> : <FcCheckmark className={"w-6 h-6"} />}
+                      {learned ? (
+                        <MdClear className="w-6 h-6 text-red-700" />
+                      ) : (
+                        <MdCheck className="w-6 h-6 text-green-700" />
+                      )}
                     </div>
                     {!word.learned && (
                       <div
