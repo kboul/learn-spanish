@@ -53,7 +53,7 @@ export function WordForm() {
         </div>
       </div>
 
-      <div className="flex items-center p-6 space-x-3 rtl:space-x-reverse border-t border-gray-200 rounded-b">
+      <div className="flex items-center justify-end p-6 space-x-3 rtl:space-x-reverse border-t border-gray-200 rounded-b">
         <Button type="submit">Add</Button>
         <Button color="red" onClick={clearForm} type="button">
           Clear
