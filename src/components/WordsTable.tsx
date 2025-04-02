@@ -59,7 +59,7 @@ export function WordsTable({ q, words, error }: WordsTableProps) {
       <div className="w-full max-w-5xl">
         <div className="flex justify-between mb-2">
           <Button color="light" size="sm" onClick={() => setModal("add")}>
-            Add Word
+            Add
           </Button>
           <SearchWord q={q} />
         </div>
@@ -70,23 +70,20 @@ export function WordsTable({ q, words, error }: WordsTableProps) {
           noItemsMsg="No words found"
           renderRow={(word) => {
             const { highlight, learned } = word;
-            const trBg = cn("bg-white", {
-              "bg-yellow-100": highlight,
-              "bg-[var(--learned)]": learned
-            });
-            const trColor = learned ? "text-white" : "text-black";
-
             return (
-              <tr key={word.id} className="bg-white border-b border-gray-200">
-                <td className={`px-6 py-3 ${trBg}`}>
-                  <p className={trColor}>{word.spanish}</p>
-                </td>
-                <td className={`px-6 py-3 ${trBg}`}>
-                  <p className={trColor}>{word.english}</p>
-                </td>
-                <td className={`px-6 py-3 ${trBg}`}>
-                  <p className={trColor}>{word.greek}</p>
-                </td>
+              <tr
+                key={word.id}
+                className={cn(
+                  "bg-white border-b dark:bg-gray-800 dark:border-gray-700 border-gray-200 dark:text-white",
+                  {
+                    "!bg-yellow-100": highlight,
+                    "!bg-[var(--learned)]": learned,
+                    "!text-black": highlight
+                  }
+                )}>
+                <td className="px-6 py-3">{word.spanish}</td>
+                <td className="px-6 py-3">{word.english}</td>
+                <td className="px-6 py-3">{word.greek}</td>
                 <td className="px-6 py-3">
                   <div className="flex justify-center space-x-2 items-center">
                     <div
