@@ -71,16 +71,18 @@ export function WordsTable({ q, words, error }: WordsTableProps) {
           noItemsMsg="No words found"
           renderRow={(word) => {
             const { highlight, learned } = word;
-            const iconsClassName = cn("w-5 h-5 text-gray-700 dark:text-white", { "!text-yellow-800": highlight });
+            const iconsClassName = cn("w-5 h-5 text-gray-700 dark:text-white", {
+              "!text-yellow-800": highlight,
+              "!text-white": learned
+            });
             return (
               <tr
                 key={word.id}
                 className={cn(
-                  "bg-white border-b dark:bg-gray-800 dark:border-gray-700 border-gray-200 dark:text-white",
+                  "bg-white border-b text-gray-900 dark:bg-gray-800 dark:border-gray-700 border-gray-200 dark:text-white",
                   {
-                    "!bg-yellow-100": highlight,
-                    "!bg-[var(--learned)]": learned,
-                    "!text-yellow-800": highlight
+                    "!bg-yellow-100 !text-yellow-800": highlight,
+                    "!bg-[var(--learned)] !text-white": learned
                   }
                 )}>
                 <td className="px-6 py-3">{word.spanish}</td>
