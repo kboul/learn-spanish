@@ -5,7 +5,7 @@ type InputProps = React.InputHTMLAttributes<HTMLInputElement> & {
   label?: string;
 };
 
-export function Input({ className, ...otherProps }: InputProps) {
+export function Input({ className = "", ...otherProps }: InputProps) {
   const type = otherProps.type || "text";
   return (
     <input

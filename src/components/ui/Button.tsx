@@ -7,7 +7,7 @@ type ButtonProps = React.ButtonHTMLAttributes<HTMLButtonElement> & {
   size?: "xs" | "sm" | "md" | "lg" | "xl";
 };
 
-export function Button({ children, className, color = "default", size = "md", ...otherProps }: ButtonProps) {
+export function Button({ children, className = "", color = "default", size = "md", ...otherProps }: ButtonProps) {
   return (
     <button
       type="button"

@@ -6,6 +6,9 @@ import { toast } from "react-toastify";
 import { Button } from "./ui/Button";
 import { Input } from "./ui/Input";
 import { addWord } from "@/core/actions";
+import { Label } from "./ui/Label";
+
+const textInputClassName = "shadow-xs dark:bg-gray-600 dark:border-gray-500";
 
 export function WordForm() {
   const formRef = useRef<HTMLFormElement>(null);
@@ -23,31 +26,25 @@ export function WordForm() {
       <div className="p-6 space-y-6">
         <div className="grid grid-cols-6 gap-6">
           <div className="col-span-6 sm:col-span-3">
-            <label htmlFor="spanish" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
-              Spanish
-            </label>
-            <Input className="shadow-xs dark:bg-gray-600 dark:border-gray-500" name="spanish" placeholder="Spanish" />
+            <Label>Spanish</Label>
+            <Input className={textInputClassName} name="spanish" placeholder="Spanish" />
           </div>
           <div className="col-span-6 sm:col-span-3">
-            <label htmlFor="last-name" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
-              English
-            </label>
-            <Input className="shadow-xs dark:bg-gray-600 dark:border-gray-500" name="english" placeholder="English" />
+            <Label>English</Label>
+            <Input className={textInputClassName} name="english" placeholder="English" />
           </div>
           <div className="col-span-6 sm:col-span-3">
-            <label htmlFor="email" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
-              Greek
-            </label>
-            <Input className="shadow-xs dark:bg-gray-600 dark:border-gray-500" name="greek" placeholder="Greek" />
+            <Label>Greek</Label>
+            <Input className={textInputClassName} name="greek" placeholder="Greek" />
           </div>
           <div className="flex flex-col justify-center mt-7">
             <div className="flex items-center">
               <Input name="learned" placeholder="Learned" type="checkbox" />
-              <label className="ms-2 text-sm font-medium text-gray-900 dark:text-gray-300">Learned</label>
+              <Label className="ms-2">Learned</Label>
             </div>
             <div className="flex items-center">
               <Input name="highlight" placeholder="Highlight" type="checkbox" />
-              <label className="ms-2 text-sm font-medium text-gray-900 dark:text-gray-300">Highlight</label>
+              <Label className="ms-2">Highlight</Label>
             </div>
           </div>
         </div>
