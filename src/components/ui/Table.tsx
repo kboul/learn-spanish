@@ -7,7 +7,7 @@ type TableProps<T> = {
 };
 
 const TrWithColSpan = ({ colSpan, children }: { colSpan: number; children: React.ReactNode }) => (
-  <tr className="bg-white border-b border-gray-200">
+  <tr className="bg-white border-b dark:bg-gray-800 dark:border-gray-700 border-gray-200 dark:text-white">
     <td className="px-6 py-3 text-center" colSpan={colSpan}>
       {children}
     </td>
@@ -16,12 +16,12 @@ const TrWithColSpan = ({ colSpan, children }: { colSpan: number; children: React
 
 export default function Table<T>({ data, errorMsg = "", headers, noItemsMsg = "", renderRow }: TableProps<T>) {
   return (
-    <div className="relative overflow-x-auto">
-      <table className="w-full text-sm text-left rtl:text-right text-gray-500">
-        <thead className="text-xs text-gray-700 uppercase bg-gray-50">
+    <div className="relative overflow-x-auto shadow-md sm:rounded-lg">
+      <table className="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
+        <thead className="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
           <tr>
             {headers.map(({ name, className }) => (
-              <th scope="col" className={`px-6 py-3 ${className ?? ""}`} key={name}>
+              <th scope="col" className={`px-6 py-3 ${className ?? ""} dark:text-white`} key={name}>
                 {name}
               </th>
             ))}
