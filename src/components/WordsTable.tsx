@@ -18,7 +18,6 @@ import Table from "./ui/Table";
 import { deleteWord, highlighWord, markAsLearned, WordResponse } from "@/core/actions";
 import { cn } from "@/core/utils";
 
-const iconsClassName = "w-5 h-5";
 const headers = [
   { name: "🇪🇸 Spanish" },
   { name: "🇬🇧 English" },
@@ -54,6 +53,8 @@ export function WordsTable({ q, words, error }: WordsTableProps) {
     toast[error ? "error" : "success"](message || error);
   };
 
+  // h-[calc(100%-(40+24+38+32)px)]
+
   return (
     <>
       <div className="w-full max-w-5xl">
@@ -70,6 +71,7 @@ export function WordsTable({ q, words, error }: WordsTableProps) {
           noItemsMsg="No words found"
           renderRow={(word) => {
             const { highlight, learned } = word;
+            const iconsClassName = cn("w-5 h-5 text-gray-700 dark:text-white", { "!text-yellow-800": highlight });
             return (
               <tr
                 key={word.id}
@@ -78,7 +80,7 @@ export function WordsTable({ q, words, error }: WordsTableProps) {
                   {
                     "!bg-yellow-100": highlight,
                     "!bg-[var(--learned)]": learned,
-                    "!text-black": highlight
+                    "!text-yellow-800": highlight
                   }
                 )}>
                 <td className="px-6 py-3">{word.spanish}</td>
@@ -90,11 +92,7 @@ export function WordsTable({ q, words, error }: WordsTableProps) {
                       className="cursor-pointer"
                       onClick={() => handleWordMarkedAsLearned(word)}
                       title={`Mark as ${learned ? "not " : ""}learned`}>
-                      {learned ? (
-                        <MdClear className={`${iconsClassName} text-red-700`} />
-                      ) : (
-                        <MdCheck className={`${iconsClassName} text-green-700`} />
-                      )}
+                      {learned ? <MdClear className={iconsClassName} /> : <MdCheck className={iconsClassName} />}
                     </div>
                     {!word.learned && (
                       <div
@@ -102,17 +100,17 @@ export function WordsTable({ q, words, error }: WordsTableProps) {
                         onClick={() => handleWordHighlight(word)}
                         title={`${highlight ? "Un" : "H"}ighlight word`}>
                         {highlight ? (
-                          <MdFlashlightOff className={`${iconsClassName} text-blue-700`} />
+                          <MdFlashlightOff className={iconsClassName} />
                         ) : (
-                          <IoFlashlightSharp className={`${iconsClassName} text-blue-700`} />
+                          <IoFlashlightSharp className={iconsClassName} />
                         )}
                       </div>
                     )}
                     <div className="cursor-pointer" onClick={() => handleWordEdit(word)} title="Edit word">
-                      <MdEdit className={`${iconsClassName}`} />
+                      <MdEdit className={iconsClassName} />
                     </div>
                     <div className="cursor-pointer" onClick={() => handleWordDelete(word.id)} title="Delete word">
-                      <IoTrashOutline className={`${iconsClassName} text-red-700`} />
+                      <IoTrashOutline className={iconsClassName} />
                     </div>
                   </div>
                 </td>
