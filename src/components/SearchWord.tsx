@@ -31,7 +31,7 @@ export function SearchWord({ q }: { q: string }) {
     <form className="flex items-center" onSubmit={(e) => e.preventDefault()}>
       <div className="relative">
         <div className="absolute inset-y-0 start-0 flex items-center ps-3 pointer-events-none">
-          <GoSearch className="w-5 h-5 text-gray-500" />
+          <GoSearch className="w-5 h-5 text-gray-500 dark:text-gray-400" />
         </div>
         <Input
           onChange={(e) => setSearchWord(e.target.value)}
@@ -41,7 +41,7 @@ export function SearchWord({ q }: { q: string }) {
         />
         {searchWord.length > 0 && (
           <div className="absolute inset-y-0 end-0 flex items-center pr-3 cursor-pointer">
-            <MdClear className="w-5 h-5 text-gray-500 " onClick={handleClear} />
+            <MdClear className="w-5 h-5 text-gray-500 dark:text-gray-400" onClick={handleClear} />
           </div>
         )}
       </div>
