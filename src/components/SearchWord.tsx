@@ -34,6 +34,7 @@ export function SearchWord({ q }: { q: string }) {
           <GoSearch className="w-5 h-5 text-gray-500 dark:text-gray-400" />
         </div>
         <Input
+          className="p-2 ps-10 w-60"
           onChange={(e) => setSearchWord(e.target.value)}
           onKeyDown={handleKeyDown}
           placeholder="Search word..."

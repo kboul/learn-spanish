@@ -1,4 +1,4 @@
-export * from "./AddWord";
+export * from "./WordForm";
 export * from "./Metrics";
 export * from "./SearchWord";
 export * from "./WordsTable";

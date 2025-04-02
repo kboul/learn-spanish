@@ -1,4 +1,4 @@
-import { AddWord, Metrics, Pagination, SearchWord, WordsTable } from "@/components";
+import { Metrics, Pagination, WordsTable } from "@/components";
 import { getMetrics, getWords, searchWord } from "@/core/actions";
 import { itemsPerPage } from "@/core/constants";
 
@@ -17,11 +17,9 @@ export default async function Home({ searchParams }: { searchParams: { page: str
 
       <div className="flex space-x-2 w-full justify-between ">
         <Metrics metrics={metrics} error={metricsError} />
-        <SearchWord q={q} />
-        <AddWord />
       </div>
 
-      <WordsTable words={q ? searchedWords : words} error={error} />
+      <WordsTable q={q} words={q ? searchedWords : words} error={error} />
       {showPagination && metrics && <Pagination page={page} total={metrics?.totalWords} />}
     </main>
   );
