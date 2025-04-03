@@ -2,7 +2,9 @@ import { Metrics, Pagination, WordsTable } from "@/components";
 import { getMetrics, getWords, searchWord } from "@/core/actions";
 import { itemsPerPage } from "@/core/constants";
 
-export default async function Home({ searchParams }: { searchParams: { page: string; q: string } }) {
+type HomeProps = { searchParams: Promise<{ page: string; q: string }> };
+
+export default async function Home({ searchParams }: HomeProps) {
   const { page: paramsPage, q } = await searchParams;
   const page = paramsPage ? parseInt(paramsPage) : 1;
 

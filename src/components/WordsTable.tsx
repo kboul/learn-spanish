@@ -1,6 +1,7 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { useRouter, useSearchParams } from "next/navigation";
 import { toast } from "react-toastify";
 import { Word } from "@prisma/client";
 import { MdCheck } from "react-icons/md";
@@ -16,7 +17,7 @@ import { WordForm } from "./WordForm";
 import { SearchWord } from "./SearchWord";
 import Table from "./ui/Table";
 import { deleteWord, highlighWord, markAsLearned, WordResponse } from "@/core/actions";
-import { cn } from "@/core/utils";
+import { cn, getUrlParams } from "@/core/utils";
 
 const headers = [
   { name: "🇪🇸 Spanish" },
@@ -29,7 +30,15 @@ type ModalProps = "edit" | "add" | "";
 type WordsTableProps = { q: string; words?: Word[]; error?: WordResponse["error"] };
 
 export function WordsTable({ q, words, error }: WordsTableProps) {
+  const router = useRouter();
   const [modal, setModal] = useState<ModalProps>("");
+  const searchParams = useSearchParams();
+
+  const editWordId = searchParams.get("editWordId");
+
+  useEffect(() => {
+    if (searchParams.has("editWordId")) setModal("edit");
+  }, [searchParams]);
 
   const handleWordMarkedAsLearned = async (word: Word) => {
     const { message, error } = await markAsLearned(word);
@@ -41,8 +50,22 @@ export function WordsTable({ q, words, error }: WordsTableProps) {
     toast[error ? "error" : "success"](message || error);
   };
 
+  const deleteWordIdFromUrl = () => {
+    const params = getUrlParams();
+    params.delete("editWordId");
+    router.push(`${window.location.pathname}?${params.toString()}`);
+  };
+
+  const handleWordAdd = () => {
+    deleteWordIdFromUrl();
+    setModal("add");
+  };
+
   const handleWordEdit = (word: Word) => {
-    setModal("edit");
+    const params = getUrlParams();
+    params.set("editWordId", word.id);
+    router.push(`${window.location.pathname}?${params.toString()}`);
+    setTimeout(() => setModal("edit"), 1000);
   };
 
   const handleWordDelete = async (id: string) => {
@@ -59,7 +82,7 @@ export function WordsTable({ q, words, error }: WordsTableProps) {
     <>
       <div className="w-full max-w-5xl">
         <div className="flex justify-between mb-2">
-          <Button color="light" size="sm" onClick={() => setModal("add")}>
+          <Button color="light" size="sm" onClick={handleWordAdd}>
             Add
           </Button>
           <SearchWord q={q} />
@@ -122,8 +145,14 @@ export function WordsTable({ q, words, error }: WordsTableProps) {
         />
       </div>
       {modal && (
-        <Modal onClose={() => setModal("")} open={!!modal} title={`${modal === "add" ? "Add" : "Edit"} Word`}>
-          <WordForm />
+        <Modal
+          onClose={() => {
+            setModal("");
+            deleteWordIdFromUrl();
+          }}
+          open={!!modal}
+          title={`${modal === "add" ? "Add" : "Edit"} Word`}>
+          <WordForm wordToEdit={editWordId ? words?.find((word) => word.id === editWordId) : undefined} />
         </Modal>
       )}
     </>

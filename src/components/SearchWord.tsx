@@ -6,6 +6,7 @@ import { GoSearch } from "react-icons/go";
 import { MdClear } from "react-icons/md";
 
 import { Input } from "./ui/Input";
+import { getUrlParams } from "@/core/utils";
 
 export function SearchWord({ q }: { q: string }) {
   const router = useRouter();
@@ -14,14 +15,14 @@ export function SearchWord({ q }: { q: string }) {
 
   const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
     if (e.key !== "Enter") return;
-    const params = new URLSearchParams(window.location.search);
+    const params = getUrlParams();
     params.delete("page");
     params.set("q", searchWord);
     router.push(`${window.location.pathname}?${params}`);
   };
 
   const handleClear = () => {
-    const params = new URLSearchParams(window.location.search);
+    const params = getUrlParams();
     params.delete("q");
     router.push(`${window.location.pathname}?${params}`);
     setSearchWord("");
