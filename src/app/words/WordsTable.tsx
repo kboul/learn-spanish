@@ -11,11 +11,9 @@ import { MdFlashlightOff } from "react-icons/md";
 import { MdClear } from "react-icons/md";
 import { MdEdit } from "react-icons/md";
 
-import { Button } from "../../components/ui/Button";
-import { Modal } from "../../components/ui/Modal";
+import { Button, Modal, Table } from "@/components";
 import { WordForm } from "./WordForm";
 import { SearchWord } from "./SearchWord";
-import Table from "../../components/ui/Table";
 import { deleteWord, highlighWord, markAsLearned, WordResponse } from "./actions";
 import { cn, getUrlParams } from "@/core/utils";
 

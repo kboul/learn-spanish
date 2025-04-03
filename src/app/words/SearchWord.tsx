@@ -5,8 +5,8 @@ import { useRouter } from "next/navigation";
 import { GoSearch } from "react-icons/go";
 import { MdClear } from "react-icons/md";
 
-import { getUrlParams } from "@/core/utils";
 import { Input } from "@/components";
+import { getUrlParams } from "@/core/utils";
 
 export function SearchWord({ q }: { q: string }) {
   const router = useRouter();
