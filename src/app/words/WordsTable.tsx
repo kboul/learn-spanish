@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { ReactNode, useEffect, useState } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
 import { toast } from "react-toastify";
 import { Word } from "@prisma/client";
@@ -13,7 +13,6 @@ import { MdEdit } from "react-icons/md";
 
 import { Button, Modal, Table } from "@/components";
 import { WordForm } from "./WordForm";
-import { SearchWord } from "./SearchWord";
 import { deleteWord, highlighWord, markAsLearned, WordResponse } from "./actions";
 import { cn, getUrlParams } from "@/core/utils";
 
@@ -25,14 +24,15 @@ const headers = [
 ];
 
 type ModalProps = "edit" | "add" | "";
-type WordsTableProps = { q: string; words?: Word[]; error?: WordResponse["error"] };
+type WordsTableProps = { Header?: ReactNode; Footer?: ReactNode; words?: Word[]; error?: WordResponse["error"] };
 
-export function WordsTable({ q, words, error }: WordsTableProps) {
+export function WordsTable({ Header, Footer, words, error }: WordsTableProps) {
   const router = useRouter();
   const [modal, setModal] = useState<ModalProps>("");
   const searchParams = useSearchParams();
 
   const editWordId = searchParams.get("editWordId");
+  const wordToEdit = editWordId ? words?.find((word) => word.id === editWordId) : undefined;
 
   useEffect(() => {
     if (searchParams.has("editWordId")) setModal("edit");
@@ -83,7 +83,7 @@ export function WordsTable({ q, words, error }: WordsTableProps) {
           <Button color="light" size="sm" onClick={handleWordAdd}>
             Add
           </Button>
-          <SearchWord q={q} />
+          {Header}
         </div>
         <Table
           data={words}
@@ -142,6 +142,7 @@ export function WordsTable({ q, words, error }: WordsTableProps) {
           }}
         />
       </div>
+      {Footer}
       {modal && (
         <Modal
           onClose={() => {
@@ -150,7 +151,7 @@ export function WordsTable({ q, words, error }: WordsTableProps) {
           }}
           open={!!modal}
           title={`${modal === "add" ? "Add" : "Edit"} Word`}>
-          <WordForm wordToEdit={editWordId ? words?.find((word) => word.id === editWordId) : undefined} />
+          <WordForm wordToEdit={wordToEdit} />
         </Modal>
       )}
     </>
