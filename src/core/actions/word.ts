@@ -16,7 +16,7 @@ type Metrics = {
 const getErrorMessage = (submessage: string) => `There was an error while ${submessage}`;
 
 // Add a new word
-async function addWord(formData: FormData): Promise<WordResponse> {
+async function addEditWord(formData: FormData, wordToEditId = ""): Promise<WordResponse> {
   const spanish = formData.get("spanish")?.toString();
   const english = formData.get("english")?.toString();
   const greek = formData.get("greek")?.toString();
@@ -26,11 +26,28 @@ async function addWord(formData: FormData): Promise<WordResponse> {
   if (!spanish || !english || !greek) return { error: "Spanish, english & greek words are required" };
 
   try {
-    await prisma.word.create({ data: { spanish, english, greek, learned, highlight } });
-    revalidatePath("/");
+    if (wordToEditId) {
+      // Editing existing word
+      const existingWord = await prisma.word.findUnique({ where: { id: wordToEditId } });
 
-    return { message: `${spanish} added successfully` };
+      if (!existingWord) return { error: "Word not found." };
+
+      await prisma.word.update({
+        where: { id: wordToEditId },
+        data: { spanish, english, greek, learned, highlight }
+      });
+
+      revalidatePath("/");
+      return { message: `${spanish} updated successfully` };
+    } else {
+      // Adding new word
+      await prisma.word.create({ data: { spanish, english, greek, learned, highlight } });
+
+      revalidatePath("/");
+      return { message: `${spanish} added successfully` };
+    }
   } catch (error) {
+    if (wordToEditId) return { error: `${getErrorMessage("editing the word")}` };
     return { error: `${getErrorMessage("adding the word")}. The word might already exist on the table.` };
   }
 }
@@ -118,7 +135,7 @@ async function searchWord(word: string): Promise<{ searchedWords?: Word[]; error
 }
 
 export {
-  addWord,
+  addEditWord,
   getWords,
   markAsLearned,
   highlighWord,

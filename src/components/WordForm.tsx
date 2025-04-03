@@ -5,7 +5,7 @@ import { toast } from "react-toastify";
 
 import { Button } from "./ui/Button";
 import { Input } from "./ui/Input";
-import { addWord } from "@/core/actions";
+import { addEditWord } from "@/core/actions";
 import { Label } from "./ui/Label";
 import { Word } from "@prisma/client";
 
@@ -17,7 +17,7 @@ export function WordForm({ wordToEdit }: { wordToEdit?: Word }) {
   const clearForm = () => formRef.current?.reset();
 
   const clientAction = async (formData: FormData) => {
-    const { message, error } = await addWord(formData);
+    const { message, error } = await addEditWord(formData, wordToEdit?.id);
     toast[error ? "error" : "success"](message || error);
     if (!error) clearForm();
   };
