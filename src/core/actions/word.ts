@@ -58,7 +58,7 @@ async function getWords(page: number): Promise<{ words?: Word[]; error?: string 
     const words = await prisma.word.findMany({
       take: itemsPerPage,
       skip: itemsPerPage * (page - 1),
-      orderBy: { id: "asc" }
+      orderBy: { createdAt: "asc" }
     });
     return { words };
   } catch (error) {

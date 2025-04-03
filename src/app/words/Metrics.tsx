@@ -1,6 +1,6 @@
 import { type Metrics } from "@/core/actions";
 
-import Badge from "./ui/Badge";
+import { Badge } from "@/components";
 
 export function Metrics({ metrics, error }: { metrics?: Metrics; error?: string }) {
   if (error) return <div className="text-red-500">{error}</div>;

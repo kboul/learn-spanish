@@ -1,3 +1,5 @@
+"use client";
+
 type TableProps<T> = {
   data?: T[];
   errorMsg?: string;

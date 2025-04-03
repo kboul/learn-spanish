@@ -1,3 +1,5 @@
+"use client";
+
 import { cn } from "@/core/utils";
 
 export function Label({ children, className = "" }: { children?: React.ReactNode; className?: string }) {

@@ -3,10 +3,10 @@
 import { useRef } from "react";
 import { toast } from "react-toastify";
 
-import { Button } from "./ui/Button";
-import { Input } from "./ui/Input";
+import { Button } from "../../components/ui/Button";
+import { Input } from "../../components/ui/Input";
 import { addEditWord } from "@/core/actions";
-import { Label } from "./ui/Label";
+import { Label } from "../../components/ui/Label";
 import { Word } from "@prisma/client";
 
 const textInputClassName = "shadow-xs dark:bg-gray-600 dark:border-gray-500";

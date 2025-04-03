@@ -1,3 +1,5 @@
+"use client";
+
 import { cn } from "@/core/utils";
 import { ComponentProps } from "react";
 
@@ -8,7 +10,7 @@ type BadgeProps = ComponentProps<"span"> & {
   size?: "xs" | "sm";
 };
 
-export default function Badge({ children, className = "", color = "default", size = "xs", ...otherProps }: BadgeProps) {
+export function Badge({ children, className = "", color = "default", size = "xs", ...otherProps }: BadgeProps) {
   return (
     <span
       className={cn(

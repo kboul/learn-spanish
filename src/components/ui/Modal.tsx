@@ -1,3 +1,5 @@
+"use client";
+
 import { MdClear } from "react-icons/md";
 
 import { cn } from "@/core/utils";

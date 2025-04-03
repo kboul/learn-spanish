@@ -1,3 +1,5 @@
+"use client";
+
 import { cn } from "@/core/utils";
 
 type InputProps = React.InputHTMLAttributes<HTMLInputElement> & {
