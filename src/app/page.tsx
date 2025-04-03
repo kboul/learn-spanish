@@ -17,9 +17,7 @@ export default async function Home({ searchParams }: HomeProps) {
     <main className="flex flex-col items-center min-h-screen p-5 gap-4">
       <h1 className="text-2xl font-bold ">📖 Spanish Vocabulary</h1>
 
-      <div className="flex space-x-2 w-full justify-between ">
-        <Metrics metrics={metrics} error={metricsError} />
-      </div>
+      <Metrics metrics={metrics} error={metricsError} />
 
       <WordsTable q={q} words={q ? searchedWords : words} error={error} />
       {showPagination && metrics && <Pagination page={page} total={metrics?.totalWords} />}
