@@ -1,11 +1,8 @@
-import { Suspense } from "react";
-
-import { getMetrics, getWords, searchWord } from "@/core/actions";
-import { itemsPerPage } from "@/core/constants";
 import { Metrics } from "./Metrics";
 import { WordsTable } from "./WordsTable";
 import { Pagination } from "@/components";
-import Loading from "./loading";
+import { getMetrics, getWords, searchWord } from "./actions";
+import { itemsPerPage } from "@/core/constants";
 
 type HomeProps = { searchParams: Promise<{ page: string; q: string }> };
 

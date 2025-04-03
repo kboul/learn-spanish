@@ -16,7 +16,7 @@ import { Modal } from "../../components/ui/Modal";
 import { WordForm } from "./WordForm";
 import { SearchWord } from "./SearchWord";
 import Table from "../../components/ui/Table";
-import { deleteWord, highlighWord, markAsLearned, WordResponse } from "@/core/actions";
+import { deleteWord, highlighWord, markAsLearned, WordResponse } from "./actions";
 import { cn, getUrlParams } from "@/core/utils";
 
 const headers = [

@@ -2,8 +2,8 @@
 import { Word } from "@prisma/client";
 import { revalidatePath } from "next/cache";
 
-import { prisma } from "..";
-import { itemsPerPage } from "../constants";
+import { prisma } from "@/core/prisma";
+import { itemsPerPage } from "@/core/constants";
 
 type WordResponse = { message?: string; error?: string };
 
