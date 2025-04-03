@@ -48,14 +48,14 @@ export function WordForm({ wordToEdit }: { wordToEdit?: Word }) {
             <Label>Greek</Label>
             <Input className={textInputClassName} defaultValue={wordToEdit?.greek} name="greek" placeholder="Greek" />
           </div>
-          <div className="flex flex-col justify-center mt-5">
+          <div className="flex gap-2 mt-6">
             <div className="flex items-center">
               <Input defaultChecked={wordToEdit?.learned} name="learned" placeholder="Learned" type="checkbox" />
-              <Label className="ms-2">Learned</Label>
+              <Label className="m-2">Learned</Label>
             </div>
             <div className="flex items-center">
               <Input defaultChecked={wordToEdit?.highlight} name="highlight" placeholder="Highlight" type="checkbox" />
-              <Label className="ms-2">Highlight</Label>
+              <Label className="m-2">Highlight</Label>
             </div>
           </div>
         </div>
