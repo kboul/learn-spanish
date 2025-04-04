@@ -32,5 +32,5 @@ model Word {
   learned  Boolean @default(false) 
   highlight  Boolean @default(false) 
   createdAt    DateTime @default(now())
-  class    Class @default(VERB)
+  class    Class
 }

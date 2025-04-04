@@ -41,7 +41,9 @@ async function addEditWord(formData: FormData, selectedClass = "", wordToEditId 
       return { message: `${spanish} updated successfully` };
     } else {
       // Adding new word
-      await prisma.word.create({ data: { spanish, english, greek, learned, highlight } });
+      await prisma.word.create({
+        data: { spanish, english, greek, learned, highlight, class: selectedClass.toUpperCase() as Word["class"] }
+      });
 
       revalidatePath("/");
       return { message: `${spanish} added successfully` };

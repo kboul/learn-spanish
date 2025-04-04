@@ -1,6 +1,6 @@
 "use client";
 
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { toast } from "react-toastify";
 
 import { Button, Dropdown, Input, Label } from "@/components";
@@ -11,9 +11,16 @@ const textInputClassName = "shadow-xs dark:bg-gray-600 dark:border-gray-500";
 
 export function WordForm({ wordToEdit }: { wordToEdit?: Word }) {
   const formRef = useRef<HTMLFormElement>(null);
-  const [selectedClass, setSelectedClass] = useState<string | undefined>(wordToEdit?.class ?? "");
+  const [selectedClass, setSelectedClass] = useState<string | undefined>("");
 
-  const clearForm = () => formRef.current?.reset();
+  useEffect(() => {
+    setSelectedClass(wordToEdit?.class ?? "");
+  }, [wordToEdit?.id]);
+
+  const clearForm = () => {
+    formRef.current?.reset();
+    setSelectedClass("");
+  };
 
   const clientAction = async (formData: FormData) => {
     const { message, error } = await addEditWord(formData, selectedClass, wordToEdit?.id);

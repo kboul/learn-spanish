@@ -1,0 +1,2 @@
+-- AlterTable
+ALTER TABLE "Word" ALTER COLUMN "class" DROP DEFAULT;
