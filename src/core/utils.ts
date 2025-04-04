@@ -13,4 +13,8 @@ function debounce<T extends (...args: any[]) => void>(fn: T, delay: number) {
   };
 }
 
-export { cn, debounce };
+function getUrlParams() {
+  return new URLSearchParams(window.location.search);
+}
+
+export { cn, debounce, getUrlParams };

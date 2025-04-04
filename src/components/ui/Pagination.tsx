@@ -21,7 +21,7 @@ export function Pagination({ page, total }: { page: number; total: number }) {
       <ul className="inline-flex -space-x-px text-sm">
         <li>
           <button
-            className="flex items-center justify-center px-3 h-8 ms-0 leading-tight text-gray-500 bg-white border border-e-0 border-gray-300 rounded-s-lg hover:bg-gray-100 hover:text-gray-700 disabled:cursor-not-allowed cursor-pointer"
+            className="flex items-center justify-center px-3 h-8 ms-0 leading-tight text-gray-500 bg-white border border-e-0 border-gray-300 rounded-s-lg hover:bg-gray-100 hover:text-gray-700 disabled:cursor-not-allowed cursor-pointer dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white"
             disabled={!hasPrevious}
             onClick={() => changePage(page - 1)}>
             Previous
@@ -34,9 +34,9 @@ export function Pagination({ page, total }: { page: number; total: number }) {
             <li key={index}>
               <button
                 className={cn(
-                  "flex items-center justify-center px-3 h-8 leading-tight cursor-pointer border border-gray-300 hover:bg-gray-100 hover:text-gray-700",
+                  "flex items-center justify-center px-3 h-8 leading-tight cursor-pointer border border-gray-300 hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white",
                   {
-                    "text-blue-600  bg-blue-50 ": isActive,
+                    "text-blue-600 bg-blue-50 dark:bg-gray-700 dark:text-white": isActive,
                     "text-gray-500 bg-white": !isActive
                   }
                 )}
@@ -49,7 +49,7 @@ export function Pagination({ page, total }: { page: number; total: number }) {
 
         <li>
           <button
-            className="flex items-center justify-center px-3 h-8 leading-tight text-gray-500 bg-white border border-gray-300 rounded-e-lg hover:bg-gray-100 hover:text-gray-700 disabled:cursor-not-allowed cursor-pointer"
+            className="flex items-center justify-center px-3 h-8 leading-tight text-gray-500 bg-white border border-gray-300 rounded-e-lg hover:bg-gray-100 hover:text-gray-700 disabled:cursor-not-allowed cursor-pointer dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white"
             disabled={!hasNext}
             onClick={() => changePage(page + 1)}>
             Next

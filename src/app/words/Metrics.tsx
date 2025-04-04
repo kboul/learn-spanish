@@ -1,6 +1,6 @@
-import { type Metrics } from "@/core/actions";
+import { Badge } from "@/components";
 
-import Badge from "./ui/Badge";
+import { type Metrics } from "./actions";
 
 export function Metrics({ metrics, error }: { metrics?: Metrics; error?: string }) {
   if (error) return <div className="text-red-500">{error}</div>;
@@ -8,7 +8,7 @@ export function Metrics({ metrics, error }: { metrics?: Metrics; error?: string 
     return (
       <div className="flex gap-2 items-center">
         <Badge size="sm">{metrics.totalWords}</Badge>
-        <Badge size="sm" style={{ backgroundColor: "var(--learned)", color: "white" }}>
+        <Badge className="text-white bg-[var(--learned)]" size="sm">
           {metrics.learnedWords}
         </Badge>
         <Badge color="yellow" size="sm">
