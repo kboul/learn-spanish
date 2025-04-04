@@ -6,12 +6,13 @@ import { IoIosArrowDown } from "react-icons/io";
 import { cn } from "@/core/utils";
 
 type DropdownProps = {
+  placeholder?: string;
   value?: string;
   onChange: (newValue: string) => void;
   options: string[];
 };
 
-export function Dropdown({ value = "", onChange, options }: DropdownProps) {
+export function Dropdown({ placeholder = "Select an option", value = "", onChange, options }: DropdownProps) {
   const [open, setOpen] = useState(false);
 
   const handleOptionClick = (option: string) => {
@@ -26,7 +27,7 @@ export function Dropdown({ value = "", onChange, options }: DropdownProps) {
         onClick={() => setOpen(!open)}
         type="button">
         <div className="flex items-center justify-between w-full">
-          {value || "Select an option"}
+          {value || placeholder}
           <IoIosArrowDown className="w-4 h-4" />
         </div>
       </button>

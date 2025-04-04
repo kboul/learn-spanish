@@ -67,6 +67,7 @@ export function WordForm({ wordToEdit }: { wordToEdit?: Word }) {
           <div className="col-span-6 sm:col-span-3">
             <Label>Class</Label>
             <Dropdown
+              placeholder="Select a class"
               value={selectedClass}
               onChange={(value) => setSelectedClass(value)}
               options={["Verb", "Noun", "Adverb", "Adjective"]}
