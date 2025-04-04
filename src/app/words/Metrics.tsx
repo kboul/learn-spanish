@@ -10,10 +10,10 @@ export function Metrics({ metrics, error }: { metrics?: Metrics; error?: string 
         <Badge className="!text-white !bg-gray-800" size="sm">
           {metrics.totalWords}
         </Badge>
-        <Badge className="!text-white !bg-[var(--learned)]" size="sm">
+        <Badge className="learned" size="sm">
           {metrics.learnedWords}
         </Badge>
-        <Badge className="!bg-yellow-100 !text-yellow-800" size="sm">
+        <Badge className="highlight" size="sm">
           {metrics.highlightedWords}
         </Badge>
       </div>

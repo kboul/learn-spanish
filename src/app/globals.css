@@ -3,7 +3,7 @@
 :root {
   --background: #ffffff;
   --foreground: #171717;
-  --learned: #04aa6d;
+  --learnedBg: #04aa6d;
 }
 
 @theme inline {
@@ -24,4 +24,12 @@ body {
   /* background: var(--background);
   color: var(--foreground); */
   font-family: Arial, Helvetica, sans-serif;
+}
+
+.learned {
+  @apply bg-emerald-600 text-white;
+}
+
+.highlight {
+  @apply bg-yellow-100 text-yellow-800;
 }

@@ -115,10 +115,7 @@ export function WordsTable({ Header, Footer, words, error }: WordsTableProps) {
                 key={word.id}
                 className={cn(
                   "bg-white border-b text-gray-900 dark:bg-gray-800 dark:border-gray-700 border-gray-200 dark:text-white",
-                  {
-                    "!bg-yellow-100 !text-yellow-800": highlight,
-                    "!bg-[var(--learned)] !text-white": learned
-                  }
+                  { highlight, learned }
                 )}>
                 <td className="px-6 py-3">{word.spanish}</td>
                 <td className="px-6 py-3">{word.english}</td>
