@@ -10,6 +10,7 @@ import { IoFlashlightSharp } from "react-icons/io5";
 import { MdFlashlightOff } from "react-icons/md";
 import { MdClear } from "react-icons/md";
 import { MdEdit } from "react-icons/md";
+import { MdAdd } from "react-icons/md";
 
 import { Button, Modal, Table } from "@/components";
 import { WordForm } from "./WordForm";
@@ -78,7 +79,7 @@ export function WordsTable({ Header, Footer, words, error }: WordsTableProps) {
     <>
       <div className="w-full max-w-5xl">
         <div className="flex justify-between mb-2">
-          <Button color="light" size="sm" onClick={handleWordAdd}>
+          <Button color="light" iconBefore={<MdAdd />} size="sm" onClick={handleWordAdd}>
             Add
           </Button>
           {Header}

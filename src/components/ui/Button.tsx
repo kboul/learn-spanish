@@ -6,14 +6,24 @@ type ButtonProps = React.ButtonHTMLAttributes<HTMLButtonElement> & {
   children: React.ReactNode;
   color?: "default" | "alternative" | "red" | "green" | "yellow" | "blue" | "light" | "dark";
   className?: string;
+  iconAfter?: React.ReactNode;
+  iconBefore?: React.ReactNode;
   size?: "xs" | "sm" | "md" | "lg" | "xl";
 };
 
-export function Button({ children, className = "", color = "default", size = "md", ...otherProps }: ButtonProps) {
+export function Button({
+  children,
+  className = "",
+  color = "default",
+  iconAfter,
+  iconBefore,
+  size = "md",
+  ...otherProps
+}: ButtonProps) {
   return (
     <button
       type="button"
-      className={cn("text-white focus:ring-4 font-medium rounded-lg cursor-pointer", {
+      className={cn("text-white focus:ring-4 font-medium rounded-lg cursor-pointer inline-flex", {
         "bg-blue-700 hover:bg-blue-800 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800":
           color === "default",
         "bg-red-700 hover:bg-red-800 dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-900": color === "red",
@@ -31,7 +41,9 @@ export function Button({ children, className = "", color = "default", size = "md
         className
       })}
       {...otherProps}>
+      {iconBefore && <span className="w-5 h-5 flex items-center">{iconBefore}</span>}
       {children}
+      {iconAfter && <span className="w-5 h-5 flex items-center">{iconAfter}</span>}
     </button>
   );
 }
