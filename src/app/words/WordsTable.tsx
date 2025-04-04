@@ -74,8 +74,6 @@ export function WordsTable({ Header, Footer, words, error }: WordsTableProps) {
     toast[error ? "error" : "success"](message || error);
   };
 
-  // h-[calc(100%-(40+24+38+32)px)]
-
   return (
     <>
       <div className="w-full max-w-5xl">
@@ -89,6 +87,7 @@ export function WordsTable({ Header, Footer, words, error }: WordsTableProps) {
           data={words}
           errorMsg={error}
           headers={headers}
+          height={`h-full [@media(max-height:823px)]:h-[calc(100vh-200px)]`}
           noItemsMsg="No words found"
           renderRow={(word) => {
             const { highlight, learned } = word;
