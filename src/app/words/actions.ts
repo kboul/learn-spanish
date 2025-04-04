@@ -22,7 +22,6 @@ async function addEditWord(formData: FormData, selectedClass = "", wordToEditId 
   const greek = formData.get("greek")?.toString();
   const learned = formData.get("learned") === "on" ? true : false;
   const highlight = formData.get("highlight") === "on" ? true : false;
-  const wordClass = formData.get("class")?.toString().toUpperCase();
 
   if (!spanish || !english || !greek) return { error: "Spanish, english & greek words are required" };
 
@@ -35,7 +34,7 @@ async function addEditWord(formData: FormData, selectedClass = "", wordToEditId 
 
       await prisma.word.update({
         where: { id: wordToEditId },
-        data: { spanish, english, greek, learned, highlight, class: selectedClass as any }
+        data: { spanish, english, greek, learned, highlight, class: selectedClass.toUpperCase() as Word["class"] }
       });
 
       revalidatePath("/");

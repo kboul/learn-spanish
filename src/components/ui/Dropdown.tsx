@@ -38,7 +38,7 @@ export function Dropdown({ value = "", onChange, options }: DropdownProps) {
           block: open,
           hidden: !open
         })}>
-        <ul className="py-2 text-sm text-gray-700 dark:text-gray-200 absolute dark:bg-gray-700 w-full">
+        <ul className="py-2 text-sm text-gray-700 dark:text-gray-200 absolute dark:bg-gray-700 w-full rounded-lg">
           {options.map((option, index) => (
             <li
               className="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white cursor-pointer"
