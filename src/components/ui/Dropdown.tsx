@@ -19,8 +19,6 @@ export function Dropdown({ value = "", onChange, options }: DropdownProps) {
     setOpen(false);
   };
 
-  console.log(value);
-
   return (
     <div className="relative">
       <button
@@ -33,22 +31,20 @@ export function Dropdown({ value = "", onChange, options }: DropdownProps) {
         </div>
       </button>
 
-      <div
-        className={cn("z-1000 bg-white divide-y divide-gray-100 rounded-lg shadow-sm dark:bg-gray-700", {
-          block: open,
-          hidden: !open
-        })}>
-        <ul className="py-2 text-sm text-gray-700 dark:text-gray-200 absolute dark:bg-gray-700 w-full rounded-lg">
-          {options.map((option, index) => (
-            <li
-              className="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white cursor-pointer"
-              onClick={() => handleOptionClick(option)}
-              key={index}>
-              {option}
-            </li>
-          ))}
-        </ul>
-      </div>
+      <ul
+        className={cn(
+          "z-1000 py-2 text-sm text-gray-700 bg-white dark:text-gray-200 absolute dark:bg-gray-700 w-full rounded-lg shadow-sm",
+          { block: open, hidden: !open }
+        )}>
+        {options.map((option, index) => (
+          <li
+            className="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white cursor-pointer"
+            onClick={() => handleOptionClick(option)}
+            key={index}>
+            {option}
+          </li>
+        ))}
+      </ul>
     </div>
   );
 }
