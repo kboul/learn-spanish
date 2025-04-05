@@ -1,23 +1,32 @@
 "use client";
 
-import { useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import { toast } from "react-toastify";
 
-import { Button, Input, Label } from "@/components";
+import { Button, Dropdown, Input, Label } from "@/components";
 import { addEditWord } from "./actions";
 import { Word } from "@prisma/client";
+import { capitalizeFirstLetter } from "@/core/utils";
 
 const textInputClassName = "shadow-xs dark:bg-gray-600 dark:border-gray-500";
 
 export function WordForm({ wordToEdit }: { wordToEdit?: Word }) {
   const formRef = useRef<HTMLFormElement>(null);
+  const [selectedClass, setSelectedClass] = useState<string | undefined>("");
 
-  const clearForm = () => formRef.current?.reset();
+  useEffect(() => {
+    setSelectedClass(capitalizeFirstLetter(wordToEdit?.class ?? ""));
+  }, [wordToEdit?.id]);
+
+  const clearForm = () => {
+    formRef.current?.reset();
+    setSelectedClass("");
+  };
 
   const clientAction = async (formData: FormData) => {
-    const { message, error } = await addEditWord(formData, wordToEdit?.id);
+    const { message, error } = await addEditWord(formData, selectedClass, wordToEdit?.id);
     toast[error ? "error" : "success"](message || error);
-    if (!error) clearForm();
+    if (!error && !wordToEdit) clearForm();
   };
 
   return (
@@ -55,6 +64,15 @@ export function WordForm({ wordToEdit }: { wordToEdit?: Word }) {
               <Input defaultChecked={wordToEdit?.highlight} name="highlight" placeholder="Highlight" type="checkbox" />
               <Label className="m-2">Highlight</Label>
             </div>
+          </div>
+          <div className="col-span-6 sm:col-span-3">
+            <Label>Class</Label>
+            <Dropdown
+              placeholder="Select a class"
+              onChange={(value) => setSelectedClass(value)}
+              options={["Verb", "Noun", "Adverb", "Adjective", "Phrase"]}
+              value={selectedClass}
+            />
           </div>
         </div>
       </div>

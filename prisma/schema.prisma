@@ -13,6 +13,18 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
+enum Class {
+  NOUN
+  VERB
+  ADJECTIVE
+  ADVERB
+  PRONOUN
+  PREPOSITION
+  CONJUNCTION // a word used to connect clauses or sentences or to coordinate words in the same clause (e.g. and, but, if ).
+  INTERJECTION
+  PHRASE
+}
+
 model Word {
   id       String @id @default(uuid())
   spanish  String  @unique
@@ -21,4 +33,5 @@ model Word {
   learned  Boolean @default(false) 
   highlight  Boolean @default(false) 
   createdAt    DateTime @default(now())
+  class    Class
 }

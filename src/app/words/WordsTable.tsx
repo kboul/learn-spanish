@@ -12,7 +12,7 @@ import { MdClear } from "react-icons/md";
 import { MdEdit } from "react-icons/md";
 import { MdAdd } from "react-icons/md";
 
-import { Button, Modal, Table } from "@/components";
+import { Badge, Button, Modal, Table } from "@/components";
 import { WordForm } from "./WordForm";
 import { deleteWord, highlighWord, markAsLearned, WordResponse } from "./actions";
 import { cn, getUrlParams } from "@/core/utils";
@@ -21,8 +21,23 @@ const headers = [
   { name: "🇪🇸 Spanish" },
   { name: "🇬🇧 English" },
   { name: "🇬🇷 Greek" },
+  { name: "Class" },
   { name: "Actions", className: "text-center" }
 ];
+
+const getClassBadgeColor = (wordClass: Word["class"]) => {
+  return {
+    NOUN: "default",
+    VERB: "green",
+    ADJECTIVE: "red",
+    ADVERB: "yellow",
+    PHRASE: "indigo",
+    PRONOUN: "purple",
+    PREPOSITION: "purple",
+    CONJUNCTION: "pink",
+    INTERJECTION: "dark"
+  }[wordClass];
+};
 
 type ModalProps = "edit" | "add" | "";
 type WordsTableProps = { Header?: ReactNode; Footer?: ReactNode; words?: Word[]; error?: WordResponse["error"] };
@@ -101,14 +116,14 @@ export function WordsTable({ Header, Footer, words, error }: WordsTableProps) {
                 key={word.id}
                 className={cn(
                   "bg-white border-b text-gray-900 dark:bg-gray-800 dark:border-gray-700 border-gray-200 dark:text-white",
-                  {
-                    "!bg-yellow-100 !text-yellow-800": highlight,
-                    "!bg-[var(--learned)] !text-white": learned
-                  }
+                  { highlight, learned }
                 )}>
                 <td className="px-6 py-3">{word.spanish}</td>
                 <td className="px-6 py-3">{word.english}</td>
                 <td className="px-6 py-3">{word.greek}</td>
+                <td className="px-6 py-3">
+                  <Badge color={getClassBadgeColor(word.class)}>{word.class}</Badge>
+                </td>
                 <td className="px-6 py-3">
                   <div className="flex justify-center space-x-2 items-center">
                     <div

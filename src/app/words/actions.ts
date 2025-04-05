@@ -16,7 +16,7 @@ type Metrics = {
 const getErrorMessage = (submessage: string) => `There was an error while ${submessage}`;
 
 // Add a new word
-async function addEditWord(formData: FormData, wordToEditId = ""): Promise<WordResponse> {
+async function addEditWord(formData: FormData, selectedClass = "", wordToEditId = ""): Promise<WordResponse> {
   const spanish = formData.get("spanish")?.toString();
   const english = formData.get("english")?.toString();
   const greek = formData.get("greek")?.toString();
@@ -34,14 +34,16 @@ async function addEditWord(formData: FormData, wordToEditId = ""): Promise<WordR
 
       await prisma.word.update({
         where: { id: wordToEditId },
-        data: { spanish, english, greek, learned, highlight }
+        data: { spanish, english, greek, learned, highlight, class: selectedClass.toUpperCase() as Word["class"] }
       });
 
       revalidatePath("/");
       return { message: `${spanish} updated successfully` };
     } else {
       // Adding new word
-      await prisma.word.create({ data: { spanish, english, greek, learned, highlight } });
+      await prisma.word.create({
+        data: { spanish, english, greek, learned, highlight, class: selectedClass.toUpperCase() as Word["class"] }
+      });
 
       revalidatePath("/");
       return { message: `${spanish} added successfully` };

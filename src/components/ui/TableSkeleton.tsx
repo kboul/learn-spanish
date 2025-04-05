@@ -1,3 +1,5 @@
+"use client";
+
 export function TableSkeleton() {
   return (
     <div className="overflow-x-auto">

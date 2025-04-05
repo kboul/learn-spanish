@@ -17,4 +17,9 @@ function getUrlParams() {
   return new URLSearchParams(window.location.search);
 }
 
-export { cn, debounce, getUrlParams };
+function capitalizeFirstLetter(word: string) {
+  if (!word) return "";
+  return String(word).charAt(0).toUpperCase() + String(word).slice(1).toLocaleLowerCase();
+}
+
+export { capitalizeFirstLetter, cn, debounce, getUrlParams };
