@@ -6,6 +6,7 @@ import { toast } from "react-toastify";
 import { Button, Dropdown, Input, Label } from "@/components";
 import { addEditWord } from "./actions";
 import { Word } from "@prisma/client";
+import { capitalizeFirstLetter } from "@/core/utils";
 
 const textInputClassName = "shadow-xs dark:bg-gray-600 dark:border-gray-500";
 
@@ -14,7 +15,7 @@ export function WordForm({ wordToEdit }: { wordToEdit?: Word }) {
   const [selectedClass, setSelectedClass] = useState<string | undefined>("");
 
   useEffect(() => {
-    setSelectedClass(wordToEdit?.class ?? "");
+    setSelectedClass(capitalizeFirstLetter(wordToEdit?.class ?? ""));
   }, [wordToEdit?.id]);
 
   const clearForm = () => {
@@ -25,7 +26,7 @@ export function WordForm({ wordToEdit }: { wordToEdit?: Word }) {
   const clientAction = async (formData: FormData) => {
     const { message, error } = await addEditWord(formData, selectedClass, wordToEdit?.id);
     toast[error ? "error" : "success"](message || error);
-    if (!error) clearForm();
+    if (!error && !wordToEdit) clearForm();
   };
 
   return (
@@ -68,9 +69,9 @@ export function WordForm({ wordToEdit }: { wordToEdit?: Word }) {
             <Label>Class</Label>
             <Dropdown
               placeholder="Select a class"
-              value={selectedClass}
               onChange={(value) => setSelectedClass(value)}
               options={["Verb", "Noun", "Adverb", "Adjective"]}
+              value={selectedClass}
             />
           </div>
         </div>
