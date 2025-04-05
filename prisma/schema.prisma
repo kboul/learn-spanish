@@ -20,8 +20,9 @@ enum Class {
   ADVERB
   PRONOUN
   PREPOSITION
-  CONJUNCTION
+  CONJUNCTION // a word used to connect clauses or sentences or to coordinate words in the same clause (e.g. and, but, if ).
   INTERJECTION
+  PHRASE
 }
 
 model Word {

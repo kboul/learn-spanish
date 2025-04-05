@@ -31,7 +31,8 @@ const getClassBadgeColor = (wordClass: Word["class"]) => {
     VERB: "green",
     ADJECTIVE: "red",
     ADVERB: "yellow",
-    PRONOUN: "indigo",
+    PHRASE: "indigo",
+    PRONOUN: "purple",
     PREPOSITION: "purple",
     CONJUNCTION: "pink",
     INTERJECTION: "dark"
