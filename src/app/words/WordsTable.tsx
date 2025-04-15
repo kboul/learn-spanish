@@ -16,6 +16,7 @@ import { Badge, Button, Modal, Table } from "@/components";
 import { WordForm } from "./WordForm";
 import { deleteWord, highlighWord, markAsLearned, WordResponse } from "./actions";
 import { cn, getUrlParams } from "@/core/utils";
+import { itemsPerPage } from "@/core/constants";
 
 const headers = [
   { name: "🇪🇸 Spanish" },
@@ -90,6 +91,8 @@ export function WordsTable({ Header, Footer, words, error }: WordsTableProps) {
     toast[error ? "error" : "success"](message || error);
   };
 
+  const pageItemsSameAsWords = itemsPerPage === words?.length || 0;
+
   return (
     <>
       <div className="w-full max-w-5xl">
@@ -103,7 +106,7 @@ export function WordsTable({ Header, Footer, words, error }: WordsTableProps) {
           data={words}
           errorMsg={error}
           headers={headers}
-          height={`h-full [@media(max-height:823px)]:h-[calc(100vh-200px)]`}
+          height={`h-full ${pageItemsSameAsWords ? "[@media(max-height:823px)]:h-[calc(100vh-200px)]" : ""}`}
           noItemsMsg="No words found"
           renderRow={(word) => {
             const { highlight, learned } = word;
