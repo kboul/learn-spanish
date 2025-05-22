@@ -48,7 +48,7 @@ async function addEditWord(formData: FormData, selectedClass = "", wordToEditId 
       revalidatePath("/");
       return { message: `${spanish} added successfully` };
     }
-  } catch (error) {
+  } catch {
     if (wordToEditId) return { error: `${getErrorMessage("editing the word")}` };
     return { error: `${getErrorMessage("adding the word")}. The word might already exist on the table.` };
   }
@@ -63,7 +63,7 @@ async function getWords(page: number): Promise<{ words?: Word[]; error?: string 
       orderBy: { createdAt: "asc" }
     });
     return { words };
-  } catch (error) {
+  } catch {
     return { error: getErrorMessage("fetching the words") };
   }
 }
@@ -79,7 +79,7 @@ async function markAsLearned(word: Word): Promise<WordResponse> {
     revalidatePath("/");
 
     return { message: `${word.spanish} marked as ${newLearnedValue ? "" : "not"} learned successfully` };
-  } catch (error) {
+  } catch {
     return { error: getErrorMessage("marking the word as learned") };
   }
 }
@@ -94,7 +94,7 @@ async function highlighWord(word: Word): Promise<WordResponse> {
     revalidatePath("/");
 
     return { message: `${word.spanish} ${newHighlightValue ? "" : "un"}highlighted successfully` };
-  } catch (error) {
+  } catch {
     return { error: getErrorMessage("highlighting the word") };
   }
 }
@@ -105,7 +105,7 @@ async function deleteWord(id: string): Promise<WordResponse> {
     await prisma.word.delete({ where: { id } });
     revalidatePath("/");
     return { message: "Word deleted successfully" };
-  } catch (error) {
+  } catch {
     return { error: getErrorMessage("deleting the word") };
   }
 }
@@ -118,7 +118,7 @@ async function getMetrics(): Promise<{ metrics?: Metrics; error?: string }> {
       prisma.word.count({ where: { highlight: true } }) // Highlighted words
     ]);
     return { metrics: { totalWords, learnedWords, highlightedWords } };
-  } catch (error) {
+  } catch {
     return { error: getErrorMessage("getting the metrics") };
   }
 }
@@ -131,7 +131,7 @@ async function searchWord(word: string): Promise<{ searchedWords?: Word[]; error
       }
     });
     return { searchedWords };
-  } catch (error) {
+  } catch {
     return { error: getErrorMessage("searching the word") };
   }
 }
