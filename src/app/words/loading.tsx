@@ -1,4 +1,4 @@
-import { TableSkeleton } from "@/components/";
+// import { TableSkeleton } from "@/components/";
 
 export default function Loading() {
   return null;

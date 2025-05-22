@@ -35,9 +35,9 @@ export function TableSkeleton() {
         </thead>
         <tbody>
           {Array.from({ length: 14 }).map((_, index) => (
-            <tr>
+            <tr key={`tr-${index}`}>
               {Array.from({ length: 5 }).map((_, index) => (
-                <td className="px-4 py-2">
+                <td className="px-4 py-2" key={`td-${index}`}>
                   <div className="animate-pulse">
                     <div className="bg-gray-200 h-4 w-24 rounded"></div>
                   </div>
