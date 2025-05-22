@@ -16,7 +16,7 @@ export function WordForm({ wordToEdit }: { wordToEdit?: Word }) {
 
   useEffect(() => {
     setSelectedClass(capitalizeFirstLetter(wordToEdit?.class ?? ""));
-  }, [wordToEdit?.id]);
+  }, [wordToEdit?.id, wordToEdit?.class]);
 
   const clearForm = () => {
     formRef.current?.reset();
