@@ -38,9 +38,9 @@ export function SearchWord({ q }: { q: string }) {
             viewBox="0 0 20 20">
             <path
               stroke="currentColor"
-              stroke-linecap="round"
-              stroke-linejoin="round"
-              stroke-width="2"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              strokeWidth="2"
               d="m19 19-4-4m0-7A7 7 0 1 1 1 8a7 7 0 0 1 14 0Z"
             />
           </svg>
@@ -65,9 +65,9 @@ export function SearchWord({ q }: { q: string }) {
               viewBox="0 0 24 24">
               <path
                 stroke="currentColor"
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                stroke-width="2"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth="2"
                 d="M6 18 17.94 6M18 18 6.06 6"
               />
             </svg>
