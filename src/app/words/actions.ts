@@ -23,7 +23,8 @@ async function addEditWord(formData: FormData, selectedClass = "", wordToEditId 
   const learned = formData.get("learned") === "on" ? true : false;
   const highlight = formData.get("highlight") === "on" ? true : false;
 
-  if (!spanish || !english || !greek) return { error: "Spanish, english & greek words are required" };
+  if (!spanish || !english || !greek || !selectedClass)
+    return { error: "Spanish english, greek words and class are required" };
 
   try {
     if (wordToEditId) {
