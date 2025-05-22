@@ -1,7 +1,6 @@
 "use client";
 
 import { useState } from "react";
-import { IoIosArrowDown } from "react-icons/io";
 
 import { cn } from "@/core/utils";
 
@@ -28,7 +27,20 @@ export function Dropdown({ placeholder = "Select an option", value = "", onChang
         type="button">
         <div className="flex items-center justify-between w-full">
           {value || placeholder}
-          <IoIosArrowDown className="w-4 h-4" />
+          <svg
+            className="w-2.5 h-2.5 ms-3"
+            aria-hidden="true"
+            xmlns="http://www.w3.org/2000/svg"
+            fill="none"
+            viewBox="0 0 10 6">
+            <path
+              stroke="currentColor"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="2"
+              d="m1 1 4 4 4-4"
+            />
+          </svg>
         </div>
       </button>
 
