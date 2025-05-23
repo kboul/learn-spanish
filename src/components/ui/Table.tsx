@@ -8,7 +8,7 @@ type TableProps<T> = {
   headers: { name: string; className?: string }[];
   height?: string;
   noItemsMsg?: string;
-  renderRow: (item: T) => React.ReactNode;
+  renderRow: (item: T, index: number) => React.ReactNode;
 };
 
 const TrWithColSpan = ({ colSpan, children }: { colSpan: number; children: React.ReactNode }) => (
