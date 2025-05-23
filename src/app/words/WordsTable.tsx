@@ -11,20 +11,14 @@ import { MdFlashlightOff } from "react-icons/md";
 import { MdClear } from "react-icons/md";
 import { MdEdit } from "react-icons/md";
 
-import { Badge, Button, Modal, Table } from "@/components";
+import { Badge, Button, DropdownMenuIconButton, Modal, Table } from "@/components";
 import { AddIcon } from "@/icons";
 import { WordForm } from "./WordForm";
 import { deleteWord, highlighWord, markAsLearned, WordResponse } from "./actions";
 import { cn, getUrlParams } from "@/core/utils";
 import { itemsPerPage } from "@/core/constants";
 
-const headers = [
-  { name: "🇪🇸 Spanish" },
-  { name: "🇬🇧 English" },
-  { name: "🇬🇷 Greek" },
-  { name: "Class" },
-  { name: "Actions", className: "text-center" }
-];
+const headers = [{ name: "🇪🇸 Spanish" }, { name: "🇬🇧 English" }, { name: "🇬🇷 Greek" }, { name: "Class" }, { name: "" }];
 
 const getClassBadgeColor = (wordClass: Word["class"]) => {
   return {
@@ -47,6 +41,9 @@ export function WordsTable({ Header, Footer, words, error }: WordsTableProps) {
   const router = useRouter();
   const [modal, setModal] = useState<ModalProps>("");
   const searchParams = useSearchParams();
+
+  const [wordId, setWordId] = useState("");
+  const changeWordId = (id: string) => setWordId(wordId === id ? "" : id);
 
   const editWordId = searchParams.get("editWordId");
   const wordToEdit = editWordId ? words?.find((word) => word.id === editWordId) : undefined;
@@ -108,12 +105,8 @@ export function WordsTable({ Header, Footer, words, error }: WordsTableProps) {
           headers={headers}
           height={`h-full ${pageItemsSameAsWords ? "[@media(max-height:823px)]:h-[calc(100vh-200px)]" : ""}`}
           noItemsMsg="No words found"
-          renderRow={(word) => {
+          renderRow={(word, index) => {
             const { highlight, learned } = word;
-            const iconsClassName = cn("w-5 h-5 text-gray-700 dark:text-white", {
-              "!text-yellow-800": highlight,
-              "!text-white": learned
-            });
             return (
               <tr
                 key={word.id}
@@ -128,31 +121,40 @@ export function WordsTable({ Header, Footer, words, error }: WordsTableProps) {
                   <Badge color={getClassBadgeColor(word.class)}>{word.class}</Badge>
                 </td>
                 <td className="px-6 py-3">
-                  <div className="flex justify-center space-x-2 items-center">
-                    <div
-                      className="cursor-pointer"
-                      onClick={() => handleWordMarkedAsLearned(word)}
-                      title={`Mark as ${learned ? "not " : ""}learned`}>
-                      {learned ? <MdClear className={iconsClassName} /> : <MdCheck className={iconsClassName} />}
-                    </div>
-                    {!word.learned && (
-                      <div
-                        className="cursor-pointer"
-                        onClick={() => handleWordHighlight(word)}
-                        title={`${highlight ? "Un" : "H"}ighlight word`}>
-                        {highlight ? (
-                          <MdFlashlightOff className={iconsClassName} />
-                        ) : (
-                          <IoFlashlightSharp className={iconsClassName} />
-                        )}
-                      </div>
-                    )}
-                    <div className="cursor-pointer" onClick={() => handleWordEdit(word)} title="Edit word">
-                      <MdEdit className={iconsClassName} />
-                    </div>
-                    <div className="cursor-pointer" onClick={() => handleWordDelete(word.id)} title="Delete word">
-                      <IoTrashOutline className={iconsClassName} />
-                    </div>
+                  <div className="flex justify-end space-x-2 items-center">
+                    <DropdownMenuIconButton
+                      index={index}
+                      isOpen={word.id === wordId}
+                      itemId={wordId}
+                      setItemId={() => changeWordId(word.id)}
+                      options={[
+                        {
+                          Icon: learned ? <MdClear /> : <MdCheck />,
+                          label: `Mark as ${learned ? "not " : ""}learned`,
+                          callback: () => handleWordMarkedAsLearned(word)
+                        },
+                        ...(!learned
+                          ? [
+                              {
+                                Icon: highlight ? <MdFlashlightOff /> : <IoFlashlightSharp />,
+                                label: `${highlight ? "Un" : "H"}ighlight word`,
+                                callback: () => handleWordHighlight(word)
+                              }
+                            ]
+                          : []),
+                        {
+                          Icon: <MdEdit />,
+                          label: "Edit",
+                          callback: () => handleWordEdit(word)
+                        },
+                        {
+                          Icon: <IoTrashOutline />,
+                          label: "Delete",
+                          callback: () => handleWordDelete(word.id),
+                          hasDivider: true
+                        }
+                      ]}
+                    />
                   </div>
                 </td>
               </tr>
