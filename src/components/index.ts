@@ -5,6 +5,7 @@ export * from "./ui/DropdownMenuIconButton";
 export * from "./ui/Input";
 export * from "./ui/Label";
 export * from "./ui/Modal";
+export * from "./ui/Navbar";
 export * from "./ui/Pagination";
 export * from "./ui/Table";
 export * from "./ui/TableSkeleton";
