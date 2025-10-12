@@ -9,7 +9,7 @@ import { cn } from "@/core/utils";
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 const getUserInitials = (user: any) => {
   if (!user) return null;
-  return `${user.firstName.charAt(0)}${user.lastName.charAt(0)}`.toUpperCase();
+  return `${user.firstName.charAt(0)}${user.lastName?.charAt(0) ?? ""}`.toUpperCase();
 };
 
 export function Navbar() {
