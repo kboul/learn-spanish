@@ -1,12 +1,29 @@
 "use client";
 
 import { useState } from "react";
+import { useAuth, useClerk, useUser } from "@clerk/nextjs";
+import { usePathname } from "next/navigation";
 
 import { cn } from "@/core/utils";
 
+const getUserInitials = (user: any) => {
+  if (!user) return null;
+  return `${user.firstName.charAt(0)}${user.lastName.charAt(0)}`.toUpperCase();
+};
+
 export function Navbar() {
+  const { signOut, openSignIn } = useClerk();
+  const { isSignedIn } = useAuth();
+  const { user } = useUser();
+  const pathname = usePathname();
+
   const [burgerMenuOpen, setBurgerMenuOpen] = useState(false);
   const [userMenuOpen, setUserMenuOpen] = useState(false);
+
+  const handleSignIn = () => openSignIn({ afterSignInUrl: pathname });
+
+  // Optional: redirect after sign out redirectUrl: allPaths.home.href
+  const handleSignOut = () => signOut();
 
   return (
     <nav className="bg-white border-gray-200 dark:bg-gray-900">
@@ -26,7 +43,7 @@ export function Navbar() {
               data-dropdown-placement="bottom">
               <span className="sr-only">burgerMenuO user menu</span>
               <div className="cursor-pointer relative inline-flex items-center justify-center w-10 h-10 overflow-hidden bg-gray-100 rounded-full dark:bg-gray-600">
-                <span className="font-medium text-gray-600 dark:text-gray-300">JO</span>
+                <span className="font-medium text-gray-600 dark:text-gray-300">{getUserInitials(user) ?? "AB"}</span>
               </div>
             </button>
 
@@ -38,26 +55,36 @@ export function Navbar() {
                   hidden: !userMenuOpen
                 }
               )}>
-              <div className="px-4 py-3">
-                <span className="block text-sm text-gray-900 dark:text-white">Bonnie Green</span>
-                <span className="block text-sm  text-gray-500 truncate dark:text-gray-400">name@flowbite.com</span>
-              </div>
-              {/* <ul className="py-2" aria-labelledby="user-menu-button">
-              <li>
-                <a
-                  href="#"
-                  className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white">
-                  Dashboard
-                </a>
-              </li>
-              <li>
-                <a
-                  href="#"
-                  className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white">
-                  Settings
-                </a>
-              </li>
-            </ul> */}
+              {user && (
+                <div className="px-4 py-3">
+                  <span className="block text-sm text-gray-900 dark:text-white">
+                    {user?.firstName} {user?.lastName}
+                  </span>
+                  <span className="block text-sm  text-gray-500 truncate dark:text-gray-400">
+                    {user?.emailAddresses[0].emailAddress}
+                  </span>
+                </div>
+              )}
+              <ul className="py-2" aria-labelledby="user-menu-button">
+                {!isSignedIn && (
+                  <li>
+                    <span
+                      className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white cursor-pointer"
+                      onClick={handleSignIn}>
+                      Login
+                    </span>
+                  </li>
+                )}
+                {isSignedIn && (
+                  <li>
+                    <span
+                      className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white cursor-pointer"
+                      onClick={handleSignOut}>
+                      Logout
+                    </span>
+                  </li>
+                )}
+              </ul>
             </div>
             <button
               type="button"
