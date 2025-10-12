@@ -1,6 +1,6 @@
 {
   "name": "learn-spanish",
-  "version": "1.4.3",
+  "version": "1.5.3",
   "private": true,
   "scripts": {
     "dev": "next dev --turbopack",
@@ -9,6 +9,7 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@clerk/nextjs": "^6.33.3",
     "@prisma/client": "^6.5.0",
     "clsx": "^2.1.1",
     "next": "15.2.3",

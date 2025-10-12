@@ -1,6 +1,6 @@
 import { Metrics } from "./Metrics";
 import { WordsTable } from "./WordsTable";
-import { Pagination } from "@/components";
+import { Navbar, Pagination } from "@/components";
 import { SearchWord } from "./SearchWord";
 import { getMetrics, getWords, searchWord } from "./actions";
 import { itemsPerPage } from "@/core/constants";
@@ -17,20 +17,21 @@ export default async function WordsPage({ searchParams }: HomeProps) {
   const showPagination = q ? searchedWords && searchedWords.length > itemsPerPage - 1 : true;
 
   return (
-    <main className="flex flex-col items-center min-h-screen p-5 gap-4">
-      <h1 className="text-2xl font-bold">📖 Spanish Vocabulary</h1>
-
-      <WordsTable
-        Header={
-          <>
-            <Metrics metrics={metrics} error={metricsError} />
-            <SearchWord q={q} />
-          </>
-        }
-        Footer={showPagination && metrics && <Pagination page={page} total={metrics?.totalWords} />}
-        words={q ? searchedWords : words}
-        error={error}
-      />
+    <main>
+      <Navbar />
+      <div className="flex flex-col items-center min-h-screen p-5 gap-4">
+        <WordsTable
+          Header={
+            <>
+              <Metrics metrics={metrics} error={metricsError} />
+              <SearchWord q={q} />
+            </>
+          }
+          Footer={showPagination && metrics && <Pagination page={page} total={metrics?.totalWords} />}
+          words={q ? searchedWords : words}
+          error={error}
+        />
+      </div>
     </main>
   );
 }

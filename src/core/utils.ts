@@ -1,3 +1,4 @@
+import { User } from "@clerk/nextjs/server";
 import { type ClassValue, clsx } from "clsx";
 import { twMerge } from "tailwind-merge";
 
@@ -22,4 +23,10 @@ function capitalizeFirstLetter(word: string) {
   return String(word).charAt(0).toUpperCase() + String(word).slice(1).toLocaleLowerCase();
 }
 
-export { capitalizeFirstLetter, cn, debounce, getUrlParams };
+function IsUserAdmin(user: User | null) {
+  return user?.primaryEmailAddress?.emailAddress
+    ? process.env.NEXT_PUBLIC_ADMIN_EMAIL === user.primaryEmailAddress.emailAddress
+    : false;
+}
+
+export { capitalizeFirstLetter, cn, debounce, getUrlParams, IsUserAdmin };
