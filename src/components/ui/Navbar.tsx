@@ -23,7 +23,7 @@ export function Navbar() {
 
   const handleSignIn = () => openSignIn({ afterSignInUrl: pathname });
 
-  // Optional: redirect after sign out redirectUrl: allPaths.home.href
+  // Optional: redirect after sign out redirectUrl: url you want to redirect to
   const handleSignOut = () => signOut();
 
   return (
