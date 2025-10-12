@@ -35,15 +35,34 @@ d. Create prisma migrations
 npx prisma migrate dev --name migration-name
 ```
 
-3. Seed the db with entries (optional)
-   Set prisma object on package.json and seed command and run
+e. in case there is an error regarding node_modules/@prisma/client/index.d.ts on other machines
+
+```
+pnpm dlx prisma generate
+```
+
+f. Seed the db with entries (optional)
+Set prisma object on package.json and seed command and run
 
 ```
 npx prisma db seed
+```
+
+3. Inluce in .env your clerk credentials
+
+```
+   NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY=...
+   CLERK_SECRET_KEY=...
 ```
 
 ### View the db locally (http://localhost:5555)
 
 ```
 npx prisma studio
+```
+
+4. Run the development server using only pnpm:
+
+```
+pnpm dev
 ```
