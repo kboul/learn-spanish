@@ -1,10 +1,12 @@
 "use server";
+
 import { Word } from "@prisma/client";
 import { revalidatePath } from "next/cache";
-import { auth } from "@clerk/nextjs/server";
+import { currentUser } from "@clerk/nextjs/server";
 
 import { prisma } from "@/core/prisma";
 import { itemsPerPage } from "@/core/constants";
+import { IsUserAdmin } from "@/core/utils";
 
 type WordResponse = { message?: string; error?: string };
 
@@ -28,9 +30,8 @@ async function addEditWord(formData: FormData, selectedClass = "", wordToEditId 
   if (!spanish || !english || !greek || !selectedClass)
     return { error: "Spanish english, greek words and class are required" };
 
-  // Get logged in user
-  const { userId } = await auth();
-  if (!userId) return { error: `${unauthorisedError} add or edit word` };
+  const user = await currentUser();
+  if (!IsUserAdmin(user)) return { error: `${unauthorisedError} add or edit word` };
 
   try {
     if (wordToEditId) {
@@ -77,8 +78,8 @@ async function getWords(page: number): Promise<{ words?: Word[]; error?: string 
 
 // Mark a word as learned
 async function markAsLearned(word: Word): Promise<WordResponse> {
-  const { userId } = await auth();
-  if (!userId) return { error: `${unauthorisedError} mark word as learned` };
+  const user = await currentUser();
+  if (!IsUserAdmin(user)) return { error: `${unauthorisedError} mark word as learned` };
 
   const newLearnedValue = !word.learned;
   try {
@@ -95,8 +96,8 @@ async function markAsLearned(word: Word): Promise<WordResponse> {
 }
 
 async function highlighWord(word: Word): Promise<WordResponse> {
-  const { userId } = await auth();
-  if (!userId) return { error: `${unauthorisedError} highlight word` };
+  const user = await currentUser();
+  if (!IsUserAdmin(user)) return { error: `${unauthorisedError} highlight word` };
 
   const newHighlightValue = !word.highlight;
   try {
@@ -114,8 +115,8 @@ async function highlighWord(word: Word): Promise<WordResponse> {
 
 // Delete a word
 async function deleteWord(id: string): Promise<WordResponse> {
-  const { userId } = await auth();
-  if (!userId) return { error: `${unauthorisedError} delete word` };
+  const user = await currentUser();
+  if (!IsUserAdmin(user)) return { error: `${unauthorisedError} delete word` };
 
   try {
     await prisma.word.delete({ where: { id } });
