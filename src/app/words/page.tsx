@@ -18,15 +18,10 @@ export default async function WordsPage({ searchParams }: HomeProps) {
 
   return (
     <main>
-      <Navbar />
+      <Navbar Metrics={<Metrics metrics={metrics} error={metricsError} />} />
       <div className="flex flex-col items-center min-h-screen p-5 gap-4">
         <WordsTable
-          Header={
-            <>
-              <Metrics metrics={metrics} error={metricsError} />
-              <SearchWord q={q} />
-            </>
-          }
+          Header={<SearchWord q={q} />}
           Footer={showPagination && metrics && <Pagination page={page} total={metrics?.totalWords} />}
           words={q ? searchedWords : words}
           error={error}
