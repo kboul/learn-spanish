@@ -2,7 +2,9 @@ import { Badge } from "@/components";
 
 import { type Metrics } from "./actions";
 
-export function Metrics({ metrics, error }: { metrics?: Metrics; error?: string }) {
+type MetricsProps = { metrics?: Metrics; error?: string };
+
+export function Metrics({ metrics, error }: MetricsProps) {
   if (error) return <div className="text-red-500">{error}</div>;
   if (metrics)
     return (

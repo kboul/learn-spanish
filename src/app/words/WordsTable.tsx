@@ -13,8 +13,9 @@ import { MdEdit } from "react-icons/md";
 
 import { Badge, Button, DropdownMenuIconButton, Modal, Table } from "@/components";
 import { AddIcon } from "@/icons";
-import { WordForm } from "./WordForm";
-import { deleteWord, highlighWord, markAsLearned, WordResponse } from "./actions";
+import { AddEditWord } from "./AddEditWord";
+import DeleteWord from "./DeleteWord";
+import { highlighWord, markAsLearned, WordResponse } from "./actions";
 import { cn, getUrlParams } from "@/core/utils";
 import { itemsPerPage } from "@/core/constants";
 
@@ -34,12 +35,13 @@ const getClassBadgeColor = (wordClass: Word["class"]) => {
   }[wordClass];
 };
 
-type ModalProps = "edit" | "add" | "";
+type AddEditModalProps = "edit" | "add" | "";
 type WordsTableProps = { Header?: ReactNode; Footer?: ReactNode; words?: Word[]; error?: WordResponse["error"] };
 
 export function WordsTable({ Header, Footer, words, error }: WordsTableProps) {
   const router = useRouter();
-  const [modal, setModal] = useState<ModalProps>("");
+  const [addEditModal, setAddEditModal] = useState<AddEditModalProps>("");
+  const [deleteWordId, setDeleteWordId] = useState("");
   const searchParams = useSearchParams();
 
   const [wordId, setWordId] = useState("");
@@ -49,7 +51,7 @@ export function WordsTable({ Header, Footer, words, error }: WordsTableProps) {
   const wordToEdit = editWordId ? words?.find((word) => word.id === editWordId) : undefined;
 
   useEffect(() => {
-    if (searchParams.has("editWordId")) setModal("edit");
+    if (searchParams.has("editWordId")) setAddEditModal("edit");
   }, [searchParams]);
 
   const handleWordMarkedAsLearned = async (word: Word) => {
@@ -70,23 +72,17 @@ export function WordsTable({ Header, Footer, words, error }: WordsTableProps) {
 
   const handleWordAdd = () => {
     deleteWordIdFromUrl();
-    setModal("add");
+    setAddEditModal("add");
   };
 
   const handleWordEdit = (word: Word) => {
     const params = getUrlParams();
     params.set("editWordId", word.id);
     router.push(`${window.location.pathname}?${params.toString()}`);
-    setTimeout(() => setModal("edit"), 1000);
+    setTimeout(() => setAddEditModal("edit"), 1000);
   };
 
-  const handleWordDelete = async (id: string) => {
-    const confirmed = window.confirm("Are you sure you want to delete this word?");
-    if (!confirmed) return;
-
-    const { message, error } = await deleteWord(id);
-    toast[error ? "error" : "success"](message || error);
-  };
+  const handleDeleteWordClose = () => setDeleteWordId("");
 
   const pageItemsSameAsWords = itemsPerPage === words?.length || 0;
 
@@ -150,7 +146,7 @@ export function WordsTable({ Header, Footer, words, error }: WordsTableProps) {
                         {
                           Icon: <IoTrashOutline />,
                           label: "Delete",
-                          callback: () => handleWordDelete(word.id),
+                          callback: () => setDeleteWordId(word.id),
                           hasDivider: true
                         }
                       ]}
@@ -162,16 +158,24 @@ export function WordsTable({ Header, Footer, words, error }: WordsTableProps) {
           }}
         />
       </div>
+
       {Footer}
-      {modal && (
+
+      {addEditModal && (
         <Modal
           onClose={() => {
-            setModal("");
+            setAddEditModal("");
             deleteWordIdFromUrl();
           }}
-          open={!!modal}
-          title={`${modal === "add" ? "Add" : "Edit"} Word`}>
-          <WordForm wordToEdit={wordToEdit} />
+          open={!!addEditModal}
+          title={`${addEditModal === "add" ? "Add" : "Edit"} Word`}>
+          <AddEditWord wordToEdit={wordToEdit} />
+        </Modal>
+      )}
+
+      {deleteWordId && (
+        <Modal onClose={handleDeleteWordClose} open={!!deleteWordId} title="Delete Word">
+          <DeleteWord id={deleteWordId} onClose={handleDeleteWordClose} />
         </Modal>
       )}
     </>

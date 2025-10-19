@@ -10,7 +10,7 @@ import { capitalizeFirstLetter } from "@/core/utils";
 
 const textInputClassName = "shadow-xs dark:bg-gray-600 dark:border-gray-500";
 
-export function WordForm({ wordToEdit }: { wordToEdit?: Word }) {
+export function AddEditWord({ wordToEdit }: { wordToEdit?: Word }) {
   const formRef = useRef<HTMLFormElement>(null);
   const [selectedClass, setSelectedClass] = useState<string | undefined>("");
 
@@ -23,14 +23,14 @@ export function WordForm({ wordToEdit }: { wordToEdit?: Word }) {
     setSelectedClass("");
   };
 
-  const clientAction = async (formData: FormData) => {
+  const addEditWordAction = async (formData: FormData) => {
     const { message, error } = await addEditWord(formData, selectedClass, wordToEdit?.id);
     toast[error ? "error" : "success"](message || error);
     if (!error && !wordToEdit) clearForm();
   };
 
   return (
-    <form action={clientAction} ref={formRef}>
+    <form action={addEditWordAction} ref={formRef}>
       <div className="p-6 space-y-6">
         <div className="grid grid-cols-6 gap-6">
           <div className="col-span-6 sm:col-span-3">
