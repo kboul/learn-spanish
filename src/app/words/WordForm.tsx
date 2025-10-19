@@ -79,9 +79,11 @@ export function WordForm({ wordToEdit }: { wordToEdit?: Word }) {
 
       <div className="flex items-center justify-end p-6 space-x-3 rtl:space-x-reverse border-t border-gray-200 rounded-b">
         <Button type="submit">{wordToEdit ? "Edit" : "Add"}</Button>
-        <Button color="red" onClick={clearForm} type="button">
-          Clear
-        </Button>
+        {!wordToEdit && (
+          <Button color="red" onClick={clearForm} type="button">
+            Clear
+          </Button>
+        )}
       </div>
     </form>
   );
