@@ -27,7 +27,7 @@ export function Navbar() {
   const handleSignOut = () => signOut();
 
   return (
-    <nav className="bg-white border-gray-200 dark:bg-gray-900">
+    <nav className="bg-gray-50 dark:bg-gray-800 dark:border-gray-700 border-gray-200">
       <div className="flex flex-wrap items-center justify-between mx-auto p-4">
         <div className="flex items-center space-x-3 rtl:space-x-reverse">
           <span className="self-center text-2xl font-semibold whitespace-nowrap dark:text-white">Learn Spanish</span>
