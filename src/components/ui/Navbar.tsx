@@ -12,7 +12,7 @@ const getUserInitials = (user: any) => {
   return `${user.firstName.charAt(0)}${user.lastName?.charAt(0) ?? ""}`.toUpperCase();
 };
 
-export function Navbar() {
+export function Navbar({ Metrics }: { Metrics: React.ReactNode }) {
   const { signOut, openSignIn } = useClerk();
   const { isSignedIn } = useAuth();
   const { user } = useUser();
@@ -34,7 +34,8 @@ export function Navbar() {
         </div>
         <div className="flex items-center gap-3">
           {/* User avatar menu */}
-          <div className="flex items-center md:order-2 space-x-3 md:space-x-0 rtl:space-x-reverse relative">
+          <div className="flex items-center md:order-2 space-x-3 gap-3 md:space-x-0 rtl:space-x-reverse relative">
+            {Metrics}
             <button
               type="button"
               className="flex text-sm bg-gray-800 rounded-full md:me-0 focus:ring-4 focus:ring-gray-300 dark:focus:ring-gray-600"
