@@ -90,9 +90,10 @@ export function WordsTable({ Header, Footer, words, error }: WordsTableProps) {
     <>
       <div className="w-full max-w-5xl">
         <div className="flex justify-between mb-2">
-          <Button color="light" iconBefore={<AddIcon />} size="sm" onClick={handleWordAdd}>
-            Add
+          <Button variant="outline" size="sm" onClick={handleWordAdd}>
+            <AddIcon /> Add
           </Button>
+
           {Header}
         </div>
         <Table
