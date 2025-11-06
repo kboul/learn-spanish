@@ -1,33 +1,18 @@
 "use client";
 
 import { useState } from "react";
-import { useAuth, useClerk, useUser } from "@clerk/nextjs";
-import { usePathname } from "next/navigation";
+import { useUser } from "@clerk/nextjs";
 
 import { cn } from "@/core/utils";
-
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
-const getUserInitials = (user: any) => {
-  if (!user) return null;
-  return `${user.firstName.charAt(0)}${user.lastName?.charAt(0) ?? ""}`.toUpperCase();
-};
+import UserAvatarDropdown from "./user-avatar-dropdown";
 
 export function Navbar({ Metrics }: { Metrics: React.ReactNode }) {
-  const { signOut, openSignIn } = useClerk();
-  const { isSignedIn } = useAuth();
   const { user } = useUser();
-  const pathname = usePathname();
 
   const [burgerMenuOpen, setBurgerMenuOpen] = useState(false);
-  const [userMenuOpen, setUserMenuOpen] = useState(false);
-
-  const handleSignIn = () => openSignIn({ afterSignInUrl: pathname });
-
-  // Optional: redirect after sign out redirectUrl: url you want to redirect to
-  const handleSignOut = () => signOut();
 
   return (
-    <nav className="bg-gray-50 dark:bg-gray-800 dark:border-gray-700 border-gray-200">
+    <nav>
       <div className="flex flex-wrap items-center justify-between mx-auto p-4">
         <div className="flex items-center space-x-3 rtl:space-x-reverse">
           <span className="self-center text-2xl font-semibold whitespace-nowrap dark:text-white">Learn Spanish</span>
@@ -36,79 +21,7 @@ export function Navbar({ Metrics }: { Metrics: React.ReactNode }) {
           {/* User avatar menu */}
           <div className="flex items-center md:order-2 space-x-3 gap-3 md:space-x-0 rtl:space-x-reverse relative">
             {Metrics}
-            <button
-              type="button"
-              className="flex text-sm bg-gray-800 rounded-full md:me-0 focus:ring-4 focus:ring-gray-300 dark:focus:ring-gray-600"
-              id="user-menu-button"
-              aria-expanded="false"
-              onClick={() => setUserMenuOpen((prevState) => !prevState)}
-              data-dropdown-placement="bottom">
-              <span className="sr-only">burgerMenuO user menu</span>
-              <div className="cursor-pointer relative inline-flex items-center justify-center w-10 h-10 overflow-hidden bg-gray-100 rounded-full dark:bg-gray-600">
-                <span className="font-medium text-gray-600 dark:text-gray-300">{getUserInitials(user) ?? "AB"}</span>
-              </div>
-            </button>
-
-            <div
-              className={cn(
-                "absolute top-8 right-0 z-50 my-4 text-base list-none bg-white divide-y divide-gray-100 rounded-lg shadow-sm dark:bg-gray-700 dark:divide-gray-600",
-                {
-                  block: userMenuOpen,
-                  hidden: !userMenuOpen
-                }
-              )}>
-              {user && (
-                <div className="px-4 py-3">
-                  <span className="block text-sm text-gray-900 dark:text-white">
-                    {user?.firstName} {user?.lastName}
-                  </span>
-                  <span className="block text-sm  text-gray-500 truncate dark:text-gray-400">
-                    {user?.emailAddresses[0].emailAddress}
-                  </span>
-                </div>
-              )}
-              <ul className="py-2" aria-labelledby="user-menu-button">
-                {!isSignedIn && (
-                  <li>
-                    <span
-                      className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white cursor-pointer"
-                      onClick={handleSignIn}>
-                      Login
-                    </span>
-                  </li>
-                )}
-                {isSignedIn && (
-                  <li>
-                    <span
-                      className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white cursor-pointer"
-                      onClick={handleSignOut}>
-                      Logout
-                    </span>
-                  </li>
-                )}
-              </ul>
-            </div>
-            <button
-              type="button"
-              className="cursor-pointer inline-flex items-center p-2 w-10 h-10 justify-center text-sm text-gray-500 rounded-lg md:hidden hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200 dark:text-gray-400 dark:hover:bg-gray-700 dark:focus:ring-gray-600"
-              aria-expanded="false"
-              onClick={() => setBurgerMenuOpen((prevState) => !prevState)}>
-              <span className="sr-only">Open main menu</span>
-              <svg
-                className="w-5 h-5"
-                aria-hidden="true"
-                xmlns="http://www.w3.org/2000/svg"
-                fill="none"
-                viewBox="0 0 17 14">
-                <path
-                  stroke="currentColor"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth="2"
-                  d="M1 1h15M1 7h15M1 13h15"
-                />
-              </svg>
-            </button>
+            <UserAvatarDropdown user={user} />
           </div>
 
           {/* Burger menu */}

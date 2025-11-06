@@ -1,4 +1,5 @@
 export * from "./ui/badge";
+export * from "./ui/user-avatar-dropdown";
 export * from "./ui/Button";
 export * from "./ui/Dropdown";
 export * from "./ui/DropdownMenuIconButton";
