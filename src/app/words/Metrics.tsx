@@ -9,13 +9,13 @@ export function Metrics({ metrics, error }: MetricsProps) {
   if (metrics)
     return (
       <div className="flex gap-2 items-center">
-        <Badge className="!text-white !bg-gray-800" size="sm" title="Total words">
+        <Badge className="!text-white !bg-gray-800" title="Total words">
           {metrics.totalWords}
         </Badge>
-        <Badge className="learned" size="sm" title="Learned words">
+        <Badge className="learned" title="Learned words">
           {metrics.learnedWords}
         </Badge>
-        <Badge className="highlight" size="sm" title="Highlighted words">
+        <Badge className="highlight" title="Highlighted words">
           {metrics.highlightedWords}
         </Badge>
       </div>

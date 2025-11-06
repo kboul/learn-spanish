@@ -1,4 +1,4 @@
-export * from "./ui/Badge";
+export * from "./ui/badge";
 export * from "./ui/Button";
 export * from "./ui/Dropdown";
 export * from "./ui/DropdownMenuIconButton";
