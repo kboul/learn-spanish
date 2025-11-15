@@ -1,6 +1,6 @@
 "use client";
 
-import { ReactNode, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
 import { toast } from "react-toastify";
 import { Word } from "@prisma/client";
@@ -15,12 +15,12 @@ import { Badge, Button, DataTable, DropdownMenuIconButton, Modal, LegacyTable } 
 import { AddIcon } from "@/icons";
 import { AddEditWord } from "../AddEditWord";
 import DeleteWord from "../DeleteWord";
-import { highlighWord, markAsLearned, WordResponse } from "../actions";
+import { highlighWord, markAsLearned } from "../actions";
 import { cn, getUrlParams } from "@/core/utils";
 import { itemsPerPage } from "@/core/constants";
 import { getBadgeVariant } from "./utils";
 import { AddEditModalProps, WordsTableProps } from "./types";
-import { headers, columns } from "./constants";
+import { headers, columns } from "./columns";
 
 export function WordsTable({ Header, Footer, words, error }: WordsTableProps) {
   const router = useRouter();

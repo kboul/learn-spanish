@@ -1,8 +1,9 @@
 import { Word } from "@prisma/client";
 import { ColumnDef } from "@tanstack/react-table";
 
-import { getBadgeVariant } from "./utils";
+import { WordActions } from "./WordActions";
 import { Badge } from "@/components";
+import { getBadgeVariant } from "./utils";
 
 const headers = [{ name: "🇪🇸 Spanish" }, { name: "🇬🇧 English" }, { name: "🇬🇷 Greek" }, { name: "Class" }, { name: "" }];
 
@@ -14,6 +15,10 @@ const columns: ColumnDef<Word>[] = [
     accessorKey: "class",
     header: "Class",
     cell: ({ row }) => <Badge variant={getBadgeVariant(row.original.class)}>{row.original.class}</Badge>
+  },
+  {
+    id: "actions",
+    cell: ({ row }) => <WordActions row={row.original} />
   }
 ];
 
