@@ -1,5 +1,5 @@
 import { Metrics } from "./Metrics";
-import { WordsTable } from "./WordsTable";
+import { WordsTable } from "./WordsTable/WordsTable";
 import { Navbar, Pagination } from "@/components";
 import { SearchWord } from "./SearchWord";
 import { getMetrics, getWords, searchWord } from "./actions";

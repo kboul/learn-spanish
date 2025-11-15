@@ -11,33 +11,16 @@ import { MdFlashlightOff } from "react-icons/md";
 import { MdClear } from "react-icons/md";
 import { MdEdit } from "react-icons/md";
 
-import { Badge, BadgeVariant, badgeVariants, Button, DropdownMenuIconButton, Modal, Table } from "@/components";
+import { Badge, Button, DataTable, DropdownMenuIconButton, Modal, LegacyTable } from "@/components";
 import { AddIcon } from "@/icons";
-import { AddEditWord } from "./AddEditWord";
-import DeleteWord from "./DeleteWord";
-import { highlighWord, markAsLearned, WordResponse } from "./actions";
+import { AddEditWord } from "../AddEditWord";
+import DeleteWord from "../DeleteWord";
+import { highlighWord, markAsLearned, WordResponse } from "../actions";
 import { cn, getUrlParams } from "@/core/utils";
 import { itemsPerPage } from "@/core/constants";
-
-const headers = [{ name: "🇪🇸 Spanish" }, { name: "🇬🇧 English" }, { name: "🇬🇷 Greek" }, { name: "Class" }, { name: "" }];
-
-const getClassBadgeColor = (wordClass: Word["class"]): BadgeVariant["variant"] => {
-  const mapping = {
-    NOUN: "blue",
-    VERB: "green",
-    ADJECTIVE: "lime",
-    ADVERB: "amber",
-    PHRASE: "purple",
-    PRONOUN: "red",
-    PREPOSITION: "purple",
-    CONJUNCTION: "emerald",
-    INTERJECTION: "default"
-  } as const;
-  return mapping[wordClass];
-};
-
-type AddEditModalProps = "edit" | "add" | "";
-type WordsTableProps = { Header?: ReactNode; Footer?: ReactNode; words?: Word[]; error?: WordResponse["error"] };
+import { getBadgeVariant } from "./utils";
+import { AddEditModalProps, WordsTableProps } from "./types";
+import { headers, columns } from "./constants";
 
 export function WordsTable({ Header, Footer, words, error }: WordsTableProps) {
   const router = useRouter();
@@ -87,6 +70,8 @@ export function WordsTable({ Header, Footer, words, error }: WordsTableProps) {
 
   const pageItemsSameAsWords = itemsPerPage === words?.length || 0;
 
+  console.log(words);
+
   return (
     <>
       <div className="w-full max-w-5xl">
@@ -97,7 +82,7 @@ export function WordsTable({ Header, Footer, words, error }: WordsTableProps) {
 
           {Header}
         </div>
-        <Table
+        <LegacyTable
           data={words}
           errorMsg={error}
           headers={headers}
@@ -116,7 +101,7 @@ export function WordsTable({ Header, Footer, words, error }: WordsTableProps) {
                 <td className="px-6 py-3">{word.english}</td>
                 <td className="px-6 py-3">{word.greek}</td>
                 <td className="px-6 py-3">
-                  <Badge variant={getClassBadgeColor(word.class)}>{word.class}</Badge>
+                  <Badge variant={getBadgeVariant(word.class)}>{word.class}</Badge>
                 </td>
                 <td className="px-6 py-3">
                   <div className="flex justify-end space-x-2 items-center">
@@ -159,6 +144,9 @@ export function WordsTable({ Header, Footer, words, error }: WordsTableProps) {
             );
           }}
         />
+        <div className="container mx-auto py-10">
+          <DataTable columns={columns} data={words || []} />
+        </div>
       </div>
 
       {Footer}
