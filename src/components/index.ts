@@ -3,7 +3,7 @@ export * from "./ui/button";
 export * from "./ui/user-avatar-dropdown";
 export * from "./ui/Dropdown";
 export * from "./ui/DropdownMenuIconButton";
-export * from "./ui/Input";
+export * from "./ui/input";
 export * from "./ui/Label";
 export * from "./ui/modal";
 export * from "./ui/Navbar";
