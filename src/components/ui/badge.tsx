@@ -13,7 +13,15 @@ const badgeVariants = cva(
         secondary: "border-transparent bg-secondary text-secondary-foreground [a&]:hover:bg-secondary/90",
         destructive:
           "border-transparent bg-destructive text-white [a&]:hover:bg-destructive/90 focus-visible:ring-destructive/20 dark:focus-visible:ring-destructive/40 dark:bg-destructive/60",
-        outline: "text-foreground [a&]:hover:bg-accent [a&]:hover:text-accent-foreground"
+        outline: "text-foreground [a&]:hover:bg-accent [a&]:hover:text-accent-foreground",
+        orange: "border-transparent bg-yellow-500 text-black hover:bg-orange-600 focus-visible:ring-yellow-400",
+        green: "border-transparent bg-green-500 text-black hover:bg-green-600 focus-visible:ring-yellow-400",
+        purple: "border-transparent bg-purple-500 text-white hover:bg-purple-600 focus-visible:ring-yellow-400",
+        red: "border-transparent bg-red-500 text-white hover:bg-red-600 focus-visible:ring-yellow-400",
+        blue: "border-transparent bg-blue-500 text-white hover:bg-blue-600 focus-visible:ring-yellow-400",
+        amber: "border-transparent bg-amber-500 text-white hover:bg-amber-600 focus-visible:ring-yellow-400",
+        lime: "border-transparent bg-lime-500 text-white hover:bg-lime-600 focus-visible:ring-yellow-400",
+        emerald: "border-transparent bg-emerald-500 text-white hover:bg-emerald-600 focus-visible:ring-yellow-400"
       }
     },
     defaultVariants: {
@@ -22,12 +30,14 @@ const badgeVariants = cva(
   }
 );
 
+export type BadgeVariant = VariantProps<typeof badgeVariants>;
+
 function Badge({
   className,
   variant,
   asChild = false,
   ...props
-}: React.ComponentProps<"span"> & VariantProps<typeof badgeVariants> & { asChild?: boolean }) {
+}: React.ComponentProps<"span"> & BadgeVariant & { asChild?: boolean }) {
   const Comp = asChild ? Slot : "span";
 
   return <Comp data-slot="badge" className={cn(badgeVariants({ variant }), className)} {...props} />;

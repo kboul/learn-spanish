@@ -11,7 +11,7 @@ import { MdFlashlightOff } from "react-icons/md";
 import { MdClear } from "react-icons/md";
 import { MdEdit } from "react-icons/md";
 
-import { Badge, Button, DropdownMenuIconButton, Modal, Table } from "@/components";
+import { Badge, BadgeVariant, badgeVariants, Button, DropdownMenuIconButton, Modal, Table } from "@/components";
 import { AddIcon } from "@/icons";
 import { AddEditWord } from "./AddEditWord";
 import DeleteWord from "./DeleteWord";
@@ -21,18 +21,19 @@ import { itemsPerPage } from "@/core/constants";
 
 const headers = [{ name: "🇪🇸 Spanish" }, { name: "🇬🇧 English" }, { name: "🇬🇷 Greek" }, { name: "Class" }, { name: "" }];
 
-const getClassBadgeColor = (wordClass: Word["class"]) => {
-  return {
-    NOUN: "default",
+const getClassBadgeColor = (wordClass: Word["class"]): BadgeVariant["variant"] => {
+  const mapping = {
+    NOUN: "blue",
     VERB: "green",
-    ADJECTIVE: "red",
-    ADVERB: "yellow",
-    PHRASE: "indigo",
-    PRONOUN: "purple",
+    ADJECTIVE: "lime",
+    ADVERB: "amber",
+    PHRASE: "purple",
+    PRONOUN: "red",
     PREPOSITION: "purple",
-    CONJUNCTION: "pink",
-    INTERJECTION: "dark"
-  }[wordClass];
+    CONJUNCTION: "emerald",
+    INTERJECTION: "default"
+  } as const;
+  return mapping[wordClass];
 };
 
 type AddEditModalProps = "edit" | "add" | "";
@@ -115,7 +116,7 @@ export function WordsTable({ Header, Footer, words, error }: WordsTableProps) {
                 <td className="px-6 py-3">{word.english}</td>
                 <td className="px-6 py-3">{word.greek}</td>
                 <td className="px-6 py-3">
-                  <Badge color={getClassBadgeColor(word.class)}>{word.class}</Badge>
+                  <Badge variant={getClassBadgeColor(word.class)}>{word.class}</Badge>
                 </td>
                 <td className="px-6 py-3">
                   <div className="flex justify-end space-x-2 items-center">
