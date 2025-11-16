@@ -20,7 +20,6 @@ import { getUrlParams } from "@/core/utils";
 export function WordActions({ row }: { row: Word }) {
   const router = useRouter();
   const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
-  const [editWord, setEditWord] = useState<Word | null>(null);
 
   const closeDeleteModal = () => setIsDeleteModalOpen(false);
 

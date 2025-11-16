@@ -7,11 +7,10 @@ import { Button, DataTable, Modal } from "@/components";
 import { AddIcon } from "@/icons";
 import { AddEditWord } from "../AddEditWord";
 import { cn, getUrlParams } from "@/core/utils";
-import { itemsPerPage } from "@/core/constants";
 import { AddEditModalProps, WordsTableProps } from "./types";
 import { columns } from "./columns";
 
-export function WordsTable({ Header, Footer, words, error }: WordsTableProps) {
+export function WordsTable({ Header, Footer, words }: WordsTableProps) {
   const router = useRouter();
   const [addEditModal, setAddEditModal] = useState<AddEditModalProps>("");
   const searchParams = useSearchParams();
@@ -46,7 +45,7 @@ export function WordsTable({ Header, Footer, words, error }: WordsTableProps) {
 
           {Header}
         </div>
-        <div className="container mx-auto py-3">
+        <div className="container mx-auto py-5">
           <DataTable
             columns={columns}
             data={words || []}
