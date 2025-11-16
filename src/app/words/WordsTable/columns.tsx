@@ -5,8 +5,6 @@ import { WordActions } from "./WordActions";
 import { Badge } from "@/components";
 import { getBadgeVariant } from "./utils";
 
-const headers = [{ name: "🇪🇸 Spanish" }, { name: "🇬🇧 English" }, { name: "🇬🇷 Greek" }, { name: "Class" }, { name: "" }];
-
 const columns: ColumnDef<Word>[] = [
   { accessorKey: "spanish", header: "🇪🇸 Spanish" },
   { accessorKey: "english", header: "🇬🇧 English" },
@@ -22,4 +20,4 @@ const columns: ColumnDef<Word>[] = [
   }
 ];
 
-export { headers, columns };
+export { columns };

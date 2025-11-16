@@ -15,10 +15,13 @@ import {
 } from "@/components";
 import DeleteWord from "../DeleteWord";
 import { highlighWord, markAsLearned } from "../actions";
+import { getUrlParams } from "@/core/utils";
+import { AddEditWord } from "../AddEditWord";
 
 export function WordActions({ row }: { row: Word }) {
   const router = useRouter();
   const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
+  const [editWord, setEditWord] = useState<Word | null>(null);
 
   const closeDeleteModal = () => setIsDeleteModalOpen(false);
 
@@ -30,6 +33,13 @@ export function WordActions({ row }: { row: Word }) {
   const handleWordHighlight = async (word: Word) => {
     const { message, error } = await highlighWord(word);
     toast[error ? "error" : "success"](message || error);
+  };
+
+  const handleWordEdit = (word: Word) => {
+    const params = getUrlParams();
+    params.set("editWordId", word.id);
+    router.push(`${window.location.pathname}?${params.toString()}`);
+    // setTimeout(() => setAddEditModal("edit"), 1000);
   };
 
   return (
@@ -51,7 +61,7 @@ export function WordActions({ row }: { row: Word }) {
             </DropdownMenuItem>
           )}
 
-          <DropdownMenuItem>
+          <DropdownMenuItem onClick={() => handleWordEdit(row)}>
             <Pencil /> Edit
           </DropdownMenuItem>
           <DropdownMenuSeparator />
@@ -65,9 +75,15 @@ export function WordActions({ row }: { row: Word }) {
         </DropdownMenuContent>
       </DropdownMenu>
 
+      {editWord && (
+        <Modal title="Edit Word" open={!!editWord} onClose={() => setEditWord(null)}>
+          <AddEditWord wordToEdit={editWord} onModalClose={() => setEditWord(null)} />
+        </Modal>
+      )}
+
       {isDeleteModalOpen && (
         <Modal title="Delete Word" open={isDeleteModalOpen} onClose={closeDeleteModal}>
-          <DeleteWord id={row.id} onClose={closeDeleteModal} />
+          <DeleteWord id={row.id} onModalClose={closeDeleteModal} />
         </Modal>
       )}
     </div>

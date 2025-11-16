@@ -10,7 +10,7 @@ import { capitalizeFirstLetter } from "@/core/utils";
 
 const textInputClassName = "shadow-xs dark:bg-gray-600 dark:border-gray-500";
 
-export function AddEditWord({ wordToEdit }: { wordToEdit?: Word }) {
+export function AddEditWord({ wordToEdit, onModalClose }: { wordToEdit?: Word; onModalClose?: () => void }) {
   const formRef = useRef<HTMLFormElement>(null);
   const [selectedClass, setSelectedClass] = useState<string | undefined>("");
 
@@ -25,6 +25,7 @@ export function AddEditWord({ wordToEdit }: { wordToEdit?: Word }) {
 
   const addEditWordAction = async (formData: FormData) => {
     const { message, error } = await addEditWord(formData, selectedClass, wordToEdit?.id);
+    if (message) onModalClose?.();
     toast[error ? "error" : "success"](message || error);
     if (!error && !wordToEdit) clearForm();
   };

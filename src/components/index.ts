@@ -8,7 +8,6 @@ export * from "./ui/Label";
 export * from "./ui/modal";
 export * from "./ui/Navbar";
 export * from "./ui/Pagination";
-export * from "./ui/LegacyTable";
 export * from "./ui/TableSkeleton";
 export * from "./ui/data-table";
 export * from "./ui/dropdown-menu";

@@ -5,13 +5,13 @@ import { toast } from "react-toastify";
 import { Button } from "@/components";
 import { deleteWord } from "./actions";
 
-type DeleteWordProps = { id: string; onClose?: () => void };
+type DeleteWordProps = { id: string; onModalClose?: () => void };
 
-export default function DeleteWord({ id, onClose }: DeleteWordProps) {
+export default function DeleteWord({ id, onModalClose }: DeleteWordProps) {
   const deleteWordAction = async () => {
     const { message, error } = await deleteWord(id);
     toast[error ? "error" : "success"](message || error);
-    onClose?.();
+    onModalClose?.();
   };
 
   return (
@@ -20,7 +20,7 @@ export default function DeleteWord({ id, onClose }: DeleteWordProps) {
         Are you sure you want to delete this word?
         <div className="flex items-center justify-end gap-2">
           <Button type="submit">Delete</Button>
-          <Button color="light" type="button" onClick={onClose}>
+          <Button color="light" type="button" onClick={onModalClose}>
             Cancel
           </Button>
         </div>
