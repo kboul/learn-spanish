@@ -39,7 +39,7 @@ export function WordsTable({ Header, Footer, words, error }: WordsTableProps) {
   return (
     <>
       <div className="w-full max-w-5xl">
-        <div className="flex justify-between mb-2">
+        <div className="flex justify-between">
           <Button variant="outline" size="sm" onClick={handleWordAdd}>
             <AddIcon /> Add
           </Button>
