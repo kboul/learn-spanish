@@ -1,7 +1,7 @@
 "use client";
 
 import { useUser } from "@clerk/nextjs";
-import UserAvatarDropdown from "../ui/user-avatar-dropdown";
+import UserAvatarDropdown from "./user-avatar-dropdown";
 
 export function Navbar({ Metrics }: { Metrics: React.ReactNode }) {
   const { user } = useUser();

@@ -7,8 +7,8 @@ export * from "./ui/input";
 export * from "./ui/label";
 export * from "./ui/modal";
 export * from "./ui/select";
-export * from "./ui/user-avatar-dropdown";
 
-export * from "./custom/Navbar";
-export * from "./custom/Pagination";
-export * from "./custom/TableSkeleton";
+export * from "./custom/navbar";
+export * from "./custom/pagination";
+export * from "./custom/tableSkeleton";
+export * from "./custom/user-avatar-dropdown";

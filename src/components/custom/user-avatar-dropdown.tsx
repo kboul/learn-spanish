@@ -12,6 +12,7 @@ import { useAuth, useClerk } from "@clerk/nextjs";
 import { Avatar, AvatarFallback } from "@radix-ui/react-avatar";
 import { usePathname } from "next/navigation";
 
+/* eslint-disable  @typescript-eslint/no-explicit-any */
 const getUserInitials = (user: any) => {
   if (user?.firstName && user?.lastName)
     return `${user.firstName.charAt(0)}${user.lastName?.charAt(0) ?? ""}`.toUpperCase();
