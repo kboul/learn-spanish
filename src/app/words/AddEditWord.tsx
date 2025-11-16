@@ -15,10 +15,19 @@ const selectItems = [
   { value: "Noun", label: "Noun" },
   { value: "Adverb", label: "Adverb" },
   { value: "Adjective", label: "Adjective" },
-  { value: "Phrase", label: "Phrase" }
+  { value: "Phrase", label: "Phrase" },
+  { value: "Pronoun", label: "Pronoun" },
+  { value: "Preposition", label: "Preposition" },
+  { value: "Conjunction", label: "Conjunction" },
+  { value: "Interjection", label: "Interjection" }
 ];
 
-export function AddEditWord({ wordToEdit, onModalClose }: { wordToEdit?: Word; onModalClose?: () => void }) {
+type AddEditWordProps = {
+  wordToEdit?: Word;
+  onModalClose?: () => void;
+};
+
+export function AddEditWord({ wordToEdit, onModalClose }: AddEditWordProps) {
   const formRef = useRef<HTMLFormElement>(null);
   const [selectedClass, setSelectedClass] = useState<string | undefined>("");
 
@@ -77,8 +86,9 @@ export function AddEditWord({ wordToEdit, onModalClose }: { wordToEdit?: Word; o
           <Field className="col-span-6 sm:col-span-3">
             <FieldLabel>Class</FieldLabel>
             <AppSelect
+              key={`select-${wordToEdit?.id || "new"}-${selectedClass}`}
               placeholder="Select a class"
-              onValueChange={(value) => setSelectedClass(value)}
+              onValueChange={setSelectedClass}
               items={selectItems}
               value={selectedClass}
             />

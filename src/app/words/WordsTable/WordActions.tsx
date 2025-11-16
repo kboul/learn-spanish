@@ -39,7 +39,6 @@ export function WordActions({ row }: { row: Word }) {
     const params = getUrlParams();
     params.set("editWordId", word.id);
     router.push(`${window.location.pathname}?${params.toString()}`);
-    // setTimeout(() => setAddEditModal("edit"), 1000);
   };
 
   return (
