@@ -40,13 +40,13 @@ export function WordsTable({ Header, Footer, words, error }: WordsTableProps) {
     <>
       <div className="w-full max-w-5xl">
         <div className="flex justify-between">
-          <Button variant="outline" size="sm" onClick={handleWordAdd}>
+          <Button variant="outline" onClick={handleWordAdd}>
             <AddIcon /> Add
           </Button>
 
           {Header}
         </div>
-        <div className="container mx-auto py-10">
+        <div className="container mx-auto py-3">
           <DataTable
             columns={columns}
             data={words || []}
