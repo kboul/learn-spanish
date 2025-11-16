@@ -16,7 +16,6 @@ import {
 import DeleteWord from "../DeleteWord";
 import { highlighWord, markAsLearned } from "../actions";
 import { getUrlParams } from "@/core/utils";
-import { AddEditWord } from "../AddEditWord";
 
 export function WordActions({ row }: { row: Word }) {
   const router = useRouter();
@@ -73,12 +72,6 @@ export function WordActions({ row }: { row: Word }) {
           </DropdownMenuItem>
         </DropdownMenuContent>
       </DropdownMenu>
-
-      {editWord && (
-        <Modal title="Edit Word" open={!!editWord} onClose={() => setEditWord(null)}>
-          <AddEditWord wordToEdit={editWord} onModalClose={() => setEditWord(null)} />
-        </Modal>
-      )}
 
       {isDeleteModalOpen && (
         <Modal title="Delete Word" open={isDeleteModalOpen} onClose={closeDeleteModal}>

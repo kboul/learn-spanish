@@ -34,7 +34,7 @@ export function WordsTable({ Header, Footer, words, error }: WordsTableProps) {
     setAddEditModal("add");
   };
 
-  const pageItemsSameAsWords = itemsPerPage === words?.length || 0;
+  const closeModal = () => setAddEditModal("");
 
   return (
     <>
@@ -60,12 +60,12 @@ export function WordsTable({ Header, Footer, words, error }: WordsTableProps) {
       {addEditModal && (
         <Modal
           onClose={() => {
-            setAddEditModal("");
+            closeModal();
             deleteWordIdFromUrl();
           }}
           open={!!addEditModal}
           title={`${addEditModal === "add" ? "Add" : "Edit"} Word`}>
-          <AddEditWord wordToEdit={wordToEdit} />
+          <AddEditWord wordToEdit={wordToEdit} onModalClose={closeModal} />
         </Modal>
       )}
     </>
