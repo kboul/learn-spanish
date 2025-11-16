@@ -5,13 +5,13 @@ import { toast } from "react-toastify";
 import { Button } from "@/components";
 import { deleteWord } from "./actions";
 
-type DeleteWordProps = { id: string; onClose: () => void };
+type DeleteWordProps = { id: string; onClose?: () => void };
 
 export default function DeleteWord({ id, onClose }: DeleteWordProps) {
   const deleteWordAction = async () => {
     const { message, error } = await deleteWord(id);
     toast[error ? "error" : "success"](message || error);
-    onClose();
+    onClose?.();
   };
 
   return (
