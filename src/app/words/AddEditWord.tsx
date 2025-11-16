@@ -2,15 +2,32 @@
 
 import { useEffect, useRef, useState } from "react";
 import { toast } from "react-toastify";
-
-import { Button, Dropdown, Input, Label } from "@/components";
-import { addEditWord } from "./actions";
 import { Word } from "@prisma/client";
+
+import { Button, Field, FieldLabel, Input, FieldSeparator, AppSelect } from "@/components";
+import { addEditWord } from "./actions";
 import { capitalizeFirstLetter } from "@/core/utils";
 
 const textInputClassName = "shadow-xs dark:bg-gray-600 dark:border-gray-500";
 
-export function AddEditWord({ wordToEdit }: { wordToEdit?: Word }) {
+const selectItems = [
+  { value: "Verb", label: "Verb" },
+  { value: "Noun", label: "Noun" },
+  { value: "Adverb", label: "Adverb" },
+  { value: "Adjective", label: "Adjective" },
+  { value: "Phrase", label: "Phrase" },
+  { value: "Pronoun", label: "Pronoun" },
+  { value: "Preposition", label: "Preposition" },
+  { value: "Conjunction", label: "Conjunction" },
+  { value: "Interjection", label: "Interjection" }
+];
+
+type AddEditWordProps = {
+  wordToEdit?: Word;
+  onModalClose?: () => void;
+};
+
+export function AddEditWord({ wordToEdit, onModalClose }: AddEditWordProps) {
   const formRef = useRef<HTMLFormElement>(null);
   const [selectedClass, setSelectedClass] = useState<string | undefined>("");
 
@@ -25,6 +42,7 @@ export function AddEditWord({ wordToEdit }: { wordToEdit?: Word }) {
 
   const addEditWordAction = async (formData: FormData) => {
     const { message, error } = await addEditWord(formData, selectedClass, wordToEdit?.id);
+    if (message) onModalClose?.();
     toast[error ? "error" : "success"](message || error);
     if (!error && !wordToEdit) clearForm();
   };
@@ -33,58 +51,60 @@ export function AddEditWord({ wordToEdit }: { wordToEdit?: Word }) {
     <form action={addEditWordAction} ref={formRef}>
       <div className="p-6 space-y-6">
         <div className="grid grid-cols-6 gap-6">
-          <div className="col-span-6 sm:col-span-3">
-            <Label>Spanish</Label>
+          <Field className="col-span-6 sm:col-span-3">
+            <FieldLabel>Name on Card</FieldLabel>
             <Input
               className={textInputClassName}
               defaultValue={wordToEdit?.spanish ?? ""}
               name="spanish"
               placeholder="Spanish"
             />
-          </div>
-          <div className="col-span-6 sm:col-span-3">
-            <Label>English</Label>
+          </Field>
+          <Field className="col-span-6 sm:col-span-3">
+            <FieldLabel>English</FieldLabel>
             <Input
               className={textInputClassName}
               defaultValue={wordToEdit?.english ?? ""}
               name="english"
               placeholder="English"
             />
-          </div>
-          <div className="col-span-6 sm:col-span-3">
-            <Label>Greek</Label>
+          </Field>
+          <Field className="col-span-6 sm:col-span-3">
+            <FieldLabel htmlFor="checkout-7j9-card-number-uw1">Greek</FieldLabel>
             <Input className={textInputClassName} defaultValue={wordToEdit?.greek} name="greek" placeholder="Greek" />
-          </div>
+          </Field>
           <div className="flex gap-2 mt-6">
             <div className="flex items-center">
               <Input defaultChecked={wordToEdit?.learned} name="learned" placeholder="Learned" type="checkbox" />
-              <Label className="m-2">Learned</Label>
+              <FieldLabel className="m-2">Learned</FieldLabel>
             </div>
             <div className="flex items-center">
               <Input defaultChecked={wordToEdit?.highlight} name="highlight" placeholder="Highlight" type="checkbox" />
-              <Label className="m-2">Highlight</Label>
+              <FieldLabel className="m-2">Highlight</FieldLabel>
             </div>
           </div>
-          <div className="col-span-6 sm:col-span-3">
-            <Label>Class</Label>
-            <Dropdown
+          <Field className="col-span-6 sm:col-span-3">
+            <FieldLabel>Class</FieldLabel>
+            <AppSelect
+              key={`select-${wordToEdit?.id || "new"}-${selectedClass}`}
               placeholder="Select a class"
-              onChange={(value) => setSelectedClass(value)}
-              options={["Verb", "Noun", "Adverb", "Adjective", "Phrase"]}
+              onValueChange={setSelectedClass}
+              items={selectItems}
               value={selectedClass}
             />
-          </div>
+          </Field>
         </div>
       </div>
 
-      <div className="flex items-center justify-end p-6 space-x-3 rtl:space-x-reverse border-t border-gray-200 rounded-b">
+      <FieldSeparator />
+      <Field className="flex items-center justify-end p-2" orientation="horizontal">
         <Button type="submit">{wordToEdit ? "Edit" : "Add"}</Button>
         {!wordToEdit && (
           <Button color="red" onClick={clearForm} type="button">
             Clear
           </Button>
         )}
-      </div>
+      </Field>
     </form>
   );
 }
