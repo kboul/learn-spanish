@@ -145,7 +145,11 @@ export function WordsTable({ Header, Footer, words, error }: WordsTableProps) {
           }}
         />
         <div className="container mx-auto py-10">
-          <DataTable columns={columns} data={words || []} />
+          <DataTable
+            columns={columns}
+            data={words || []}
+            getRowClassName={(word) => cn(word.highlight && "highlight", word.learned && "learned")}
+          />
         </div>
       </div>
 
