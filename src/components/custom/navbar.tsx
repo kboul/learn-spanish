@@ -13,7 +13,7 @@ export function Navbar({ Metrics }: { Metrics: React.ReactNode }) {
         </div>
         <div className="flex items-center gap-3">
           {/* User avatar menu */}
-          <div className="flex items-center md:order-2 space-x-3 gap-3 md:space-x-0 rtl:space-x-reverse relative">
+          <div className="flex items-center md:order-2 space-x-0 gap-1 md:space-x-3 md:gap-3 rtl:space-x-reverse relative">
             {Metrics}
             <UserAvatarDropdown user={user} />
           </div>
