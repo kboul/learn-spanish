@@ -1,6 +1,6 @@
 import { Metrics } from "./Metrics";
 import { WordsTable } from "./WordsTable/WordsTable";
-import { Navbar, Pagination } from "@/components";
+import { Navbar, PaginationWithLinks } from "@/components";
 import { SearchWord } from "./SearchWord";
 import { getMetrics, getWords, searchWord } from "./actions";
 import { itemsPerPage } from "@/core/constants";
@@ -22,7 +22,10 @@ export default async function WordsPage({ searchParams }: HomeProps) {
       <div className="flex flex-col items-center min-h-screen p-5 gap-4">
         <WordsTable
           Header={<SearchWord q={q} />}
-          Footer={showPagination && metrics && <Pagination page={page} total={metrics?.totalWords} />}
+          Footer={
+            showPagination &&
+            metrics && <PaginationWithLinks page={page} pageSize={itemsPerPage} totalCount={metrics?.totalWords} />
+          }
           words={q ? searchedWords : words}
           error={error}
         />
