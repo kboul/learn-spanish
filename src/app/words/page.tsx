@@ -24,7 +24,14 @@ export default async function WordsPage({ searchParams }: HomeProps) {
           Header={<SearchWord q={q} />}
           Footer={
             showPagination &&
-            metrics && <PaginationWithLinks page={page} pageSize={itemsPerPage} totalCount={metrics?.totalWords} />
+            metrics && (
+              <PaginationWithLinks
+                page={page}
+                pageSize={itemsPerPage}
+                totalCount={metrics?.totalWords}
+                navigationMode="router"
+              />
+            )
           }
           words={q ? searchedWords : words}
           error={error}
